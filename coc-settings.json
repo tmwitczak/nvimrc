@@ -1,0 +1,11 @@
+{
+  "clangd.semanticHighlighting": true,
+  "python.formatting.provider": "black",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "cpp",
+    "json",
+    "python",
+    "yaml",
+    "md"
+  ]
+}

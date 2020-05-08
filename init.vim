@@ -1,4 +1,4 @@
-let g:python3_host_prog = "C:/Users/Tomek/AppData/Local/Programs/Python/Python38/python"
+let g:python3_host_prog = "C:/Program Files/Python38/python.exe"
 
 language en
 "set langmenu=en_US.UTF-8
@@ -6,104 +6,204 @@ language en
 "source $VIMRUNTIME/delmenu.vim
 "source $VIMRUNTIME/menu.vim
 
-inoremap kj <Esc>
+"inoremap <silent> kj <Esc>
 "set termguicolors
 set lazyredraw
 syntax enable
+set cursorline
+set noshowmode
+set ignorecase
+set smartcase
+
+set inccommand=nosplit
+set incsearch
+
+
+set exrc
+set secure
 
 set relativenumber number
+set linebreak
 
-nnoremap j gj
-nnoremap k gk
+set autoread
+
+nnoremap <silent> j gj
+nnoremap <silent> k gk
+
 
 let mapleader = "\<space>"
+nmap <silent> <leader>gh :GitGutterLineHighlightsToggle<cr>
+
+"easymotion
+"map , <Plug>(easymotion-prefix)
+let g:EasyMotion_do_mapping = 0
+"nmap , <Plug>(easymotion-overwin-f)
+map <space>j <Plug>(easymotion-overwin-f)
+let g:EasyMotion_smartcase = 1
+
+set clipboard=unnamed
 
 set showcmd
-nnoremap <leader>bh :bp<cr>
-nnoremap <leader>bl :bn<cr>
-nnoremap <leader>tn :tabnew<cr>
-nnoremap <leader>th :tabp<cr>
-nnoremap <leader>tl :tabn<cr>
-nnoremap <leader>wj <c-w>j<cr>
-nnoremap <leader>wk <c-w>k<cr>
-nnoremap <leader>wh <c-w>h<cr>
-nnoremap <leader>wl <c-w>l<cr>
-nnoremap <leader>sj :split<cr><c-w>j<cr>
-nnoremap <leader>sk :split<cr>
-nnoremap <leader>sh :vsplit<cr>
-nnoremap <leader>sl :vsplit<cr><c-w>l<cr>
+
+nnoremap <leader>` i~<esc>
+
+nnoremap <silent> <leader>v :e C:/Users/Tomek/AppData/Local/nvim/init.vim<cr>
+nnoremap <silent> <leader>g :e C:/Users/Tomek/AppData/Local/nvim/ginit.vim<cr>
+
+nnoremap <silent> <leader>bh :bp<cr>
+nnoremap <silent> <leader>bl :bn<cr>
+nnoremap <silent> <leader>bd :bd<cr>
+nnoremap <silent> <leader>bf :Format<cr>
+
+nnoremap <silent> <leader>tn :tabnew<cr>
+nnoremap <silent> <leader>th :tabp<cr>
+nnoremap <silent> <leader>tl :tabn<cr>
+
+nnoremap <silent> <leader>w_ <c-w>_<cr>
+nnoremap <silent> <leader>w<bar> <c-w><bar><cr>
+nnoremap <silent> <leader>w= <c-w>=<cr>
+nnoremap <silent> <leader>wj <c-w>j<cr>
+nnoremap <silent> <leader>wk <c-w>k<cr>
+nnoremap <silent> <leader>wh <c-w>h<cr>
+nnoremap <silent> <leader>wl <c-w>l<cr>
+nnoremap <silent> <leader>sj :split<cr><c-w>j<cr>
+nnoremap <silent> <leader>sk :split<cr>
+nnoremap <silent> <leader>sh :vsplit<cr>
+nnoremap <silent> <leader>sl :vsplit<cr><c-w>l<cr>
+
+nnoremap <silent> <leader><leader> :Goyo<cr>
+let g:goyo_width=100
+let g:goyo_height='100%'
+let g:goyo_linenr=1
+
+set incsearch
+
 
 " " //////////////////////////////////////////////////////////////////////////////
 " set colorcolumn=81
-" 
-" 
-" " //////////////////////////////////////////////////////////////////////////////
+"
+"
+" //////////////////////////////////////////////////////////////////// Plugins "
 call plug#begin('~/.local/share/nvim/plugged')
- 
+
+" Sessions
+Plug 'mhinz/vim-startify'
+
+" Color schemes
+Plug 'cocopon/iceberg.vim'
+Plug 'mechatroner/rainbow_csv'
+Plug 'junegunn/seoul256.vim'
+Plug 'ayu-theme/ayu-vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', { 'as': 'dracula' }
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+Plug 'airblade/vim-gitgutter'
+
+" Utilities
+Plug 'lambdalisue/vim-fullscreen'
+Plug 'easymotion/vim-easymotion'
+"Plug 'tpope/vim-vinegar'
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'bfrg/vim-cpp-modern'
+
+
 "Plug 'altercation/vim-colors-solarized'
-Plug 'morhetz/gruvbox'
+"Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'psliwka/vim-smoothie'
+"Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+Plug 'liuchengxu/vista.vim'
+" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+Plug 'Iron-E/vim-libmodal'
 
 "Plug 'nathanaelkane/vim-indent-guides'
 
-"Plug 'tpope/vim-fugitive'
 
 "    Plug 'scrooloose/syntastic'
 
-"    Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/nerdtree'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+" Plug 'ludovicchabant/vim-gutentags'
+Plug 'yuki-ycino/fzf-preview.vim'
+"
+Plug 'ryanoasis/vim-devicons' " Always load the vim-devicons as the very last one
+
 
 call plug#end()
 
+"set renderoptions=type:directx
+
+
 " " //////////////////////////////////////////////////////////////////////////////
+"let g:startify_custom_header = 'startify#center(startify#fortune#cowsay())'
+let g:startify_update_oldfiles     = 1
+let g:startify_session_autoload    = 1
+let g:startify_relative_path       = 1
+let g:startify_session_persistence = 1
+let g:startify_change_to_dir       = 1
+let g:startify_change_to_vcs_root  = 1
+
 set background=dark
 "colorscheme gruvbox
+let g:airline#extensions#coc#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
+let g:airline_powerline_fonts = 1
+"let g:airline_left_sep=' '
+"let g:airline_left_alt_sep='|'
 "AirlineTheme gruvbox
 "colorscheme gruvbox
 
-let g:goyo_width=80
+" let g:goyo_width=80
 " let g:airline#extensions#tabline#enabled=1
 "let g:limelight_conceal_ctermfg='gray'
-" 
+"
 " "set background=dark
 " let g:airline_theme='gruvbox'
-" 
+"
 " let g:indent_guides_enable_on_vim_startup=1
 " let g:indent_guides_start_level=2
 " let g:indent_guides_guide_size=1
-" 
-" 
-" 
-" 
+"
+"
+"
+"
 " filetype plugin indent on
-" set tabstop=4
-" set shiftwidth=4
-" set softtabstop=4
-" set expandtab
-" set ts=4 sw=4 et
-" 
-" 
-" 
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set ts=4 sw=4 et
+"
+"
+"
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
-" 
+"
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
-" 
+"
 " " autocmd vimenter * NERDTree
-" 
+"
 " " //////////////////////////////////////////////////////////////////////////////
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -113,7 +213,8 @@ set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
-set cmdheight=2
+"set cmdheight=2
+set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -236,12 +337,98 @@ nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>o  :<C-u>Vista finder coc<cr>
 " Search workspace symbols.
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+"nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+
+
+
+
+
+let g:netrw_liststyle=3
+"""""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> <leader>bf :Format<cr>
+
+let g:startify_custom_header = 'startify#pad(startify#fortune#boxed())'
+
+" nerdtree
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeWinSize = 40
+nnoremap <silent> ` :NERDTreeToggle<cr>
+
+
+
+"""""""""""""""""""""""""""""""""""""""""
+"Per project settings
+nnoremap <leader>; :!msbuild<cr>
+nnoremap <silent> <leader>' :!e:\pbl\game\PBL_Engine\Debug\PBL_Engine.exe<cr>
+set colorcolumn=81
+set foldmethod=syntax
+
+
+
+" gitcommit
+filetype indent plugin on
+au FileType gitcommit setlocal textwidth=72
+au FileType gitcommit setlocal colorcolumn=50,72
+au FileType gitcommit setlocal spell
+
+
+nnoremap <silent> <leader>lf :Files<cr>
+nnoremap <silent> <leader>lb :Buffers<cr>
+nnoremap <silent> <leader>lr :Rg<cr>
+nnoremap <silent> <leader>ll :Lines<cr>
+nnoremap <silent> <leader>lc :Commits<cr>
+nnoremap <silent> <leader>lm :Marks<cr>
+nnoremap <silent> <leader>lw :Windows<cr>
+nnoremap <silent> <leader>lhc :History:<cr>
+nnoremap <silent> <leader>lhs :History/<cr>
+
+let g:fzf_preview_window = 'right:60%'
+let g:fzf_layout = { 'window': {'width': 0.9, 'height': 0.6} }
+
+let g:LanguageClient_semanticHighlightMaps = {}
+let g:LanguageClient_semanticHighlightMaps['cpp'] = {
+      \ '^entity.name.function.cpp': 'Function',
+      \ '^entity.name.function.method.cpp': 'Function',
+      \ '^entity.name.function.preprocessor.cpp': 'PreProc',
+      \ '^entity.name.namespace.cpp': 'Type',
+      \ '^entity.name.type.class.cpp': 'Type',
+      \ '^entity.name.type.enum.cpp': 'Type',
+      \ '^entity.name.type.template.cpp': 'Type',
+      \ '^meta.disabled': 'Comment',
+      \ '^variable.other.cpp': 'Variable',
+      \ '^variable.other.enummember.cpp': 'Constant',
+      \ '^variable.other.field.cpp': 'Variable',
+      \ }
+let g:LanguageClient_semanticHighlightMaps['c'] = {
+      \ '^entity.name.function.cpp': 'Function',
+      \ '^entity.name.function.method.cpp': 'Function',
+      \ '^entity.name.function.preprocessor.cpp': 'PreProc',
+      \ '^entity.name.namespace.cpp': 'Type',
+      \ '^entity.name.type.class.cpp': 'Type',
+      \ '^entity.name.type.enum.cpp': 'Type',
+      \ '^entity.name.type.template.cpp': 'Type',
+      \ '^meta.disabled': 'Comment',
+      \ '^variable.other.cpp': 'Variable',
+      \ '^variable.other.enummember.cpp': 'Constant',
+      \ '^variable.other.field.cpp': 'Variable',
+      \ }
+
+" WHITESPACE
+set list listchars=tab:»·,trail:·
+
+"""""""""""""""""""""""""""""""""""""""""
+" source C:\\Users\\Tomek\\.local\\share\\nvim\\winmode\\winmode.vim
+"""""""""""""""""""""""""""""""""""""""""
+autocmd BufWritePost CMakeLists.txt silent exe "!cmake-format -i \<afile>" | exe "e"
+
