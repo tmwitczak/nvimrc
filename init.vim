@@ -15,6 +15,7 @@ set noshowmode
 set ignorecase
 set smartcase
 
+
 set inccommand=nosplit
 set incsearch
 
@@ -27,19 +28,18 @@ set linebreak
 
 set autoread
 
+au FocusGained,BufEnter * :checktime
+
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 
 
-let mapleader = "\<space>"
-nmap <silent> <leader>gh :GitGutterLineHighlightsToggle<cr>
 
-"easymotion
-"map , <Plug>(easymotion-prefix)
-let g:EasyMotion_do_mapping = 0
-"nmap , <Plug>(easymotion-overwin-f)
-map <space>j <Plug>(easymotion-overwin-f)
-let g:EasyMotion_smartcase = 1
+" tnoremap <Esc> <C-\><C-n>
+
+
+let mapleader = "\<space>"
+nmap <silent> <leader>gg :GitGutterLineHighlightsToggle<cr>
 
 set clipboard=unnamed
 
@@ -47,17 +47,34 @@ set showcmd
 
 nnoremap <leader>` i~<esc>
 
-nnoremap <silent> <leader>v :e C:/Users/Tomek/AppData/Local/nvim/init.vim<cr>
-nnoremap <silent> <leader>g :e C:/Users/Tomek/AppData/Local/nvim/ginit.vim<cr>
+function! s:openInitVim()
+    execute "tabnew"
+    execute "edit C:/Users/Tomek/AppData/Local/nvim/ginit.vim"
+    execute "vsplit"
+    execute "edit C:/Users/Tomek/AppData/Local/nvim/init.vim"
+endfunction
+command! OpenInitVim call <SID>openInitVim()
+nnoremap <silent> <leader>vv :OpenInitVim<cr>
+nnoremap <silent> <leader>vs
+            \ :source C:/Users/Tomek/AppData/Local/nvim/init.vim<cr>
+            \ :source C:/Users/Tomek/AppData/Local/nvim/ginit.vim<cr>
 
-nnoremap <silent> <leader>bh :bp<cr>
-nnoremap <silent> <leader>bl :bn<cr>
-nnoremap <silent> <leader>bd :bd<cr>
+nmap <silent> <leader>gs :tab G<cr>gg<c-n>
+nmap <silent> <leader>gh :diffget //2<cr>
+nmap <silent> <leader>gl :diffget //3<cr>
+
+
+nnoremap <silent> [e :cp<cr>
+nnoremap <silent> ]e :cn<cr>
+
+" nnoremap <silent> <leader>bh :bp<cr>
+" nnoremap <silent> <leader>bl :bn<cr>
+nnoremap <silent> <leader>bd :BD<cr>
 nnoremap <silent> <leader>bf :Format<cr>
 
 nnoremap <silent> <leader>tn :tabnew<cr>
-nnoremap <silent> <leader>th :tabp<cr>
-nnoremap <silent> <leader>tl :tabn<cr>
+" nnoremap <silent> <leader>th :tabp<cr>
+" nnoremap <silent> <leader>tl :tabn<cr>
 
 nnoremap <silent> <leader>w_ <c-w>_<cr>
 nnoremap <silent> <leader>w<bar> <c-w><bar><cr>
@@ -84,7 +101,30 @@ set incsearch
 "
 "
 " //////////////////////////////////////////////////////////////////// Plugins "
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin(stdpath('data') . '/plugged')
+"call plug#begin('~/.local/share/nvim/plugged')
+
+Plug 'junegunn/vim-plug'
+Plug 'enricobacis/vim-airline-clock'
+" let g:airline#extensions#clock#format = '%H:%M:%S'
+
+Plug 'machakann/vim-highlightedyank'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+Plug 'ThePrimeagen/vim-be-good'
+
+Plug 'liuchengxu/vim-which-key'
+" call which_key#register('<Space>', "g:which_key_map")
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+let g:mapleader = "\<Space>"
+let g:vista_cursor_delay = 0
+let g:which_key_map =  {}
+let g:which_key_map.l = {
+      \ 'name' : '+list',
+      \ 'f' : 'files'    ,
+      \ }
 
 " Sessions
 Plug 'mhinz/vim-startify'
@@ -96,6 +136,10 @@ Plug 'junegunn/seoul256.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
+Plug 'sainnhe/sonokai'
+Plug 'sainnhe/edge'
+Plug 'sainnhe/forest-night'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Git
@@ -103,18 +147,38 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 
+" LSP
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " Utilities
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'qpkorr/vim-bufkill'
+Plug 'jbgutierrez/vim-better-comments'
 Plug 'lambdalisue/vim-fullscreen'
+
 Plug 'easymotion/vim-easymotion'
+    " map , <Plug>(easymotion-prefix)
+    let g:EasyMotion_do_mapping = 0
+    let g:EasyMotion_use_upper = 0
+    let g:EasyMotion_keys = "ls;ahg'urieowpqyt[]vcxbnm,.\/094jfkd"
+    "nmap , <Plug>(easymotion-overwin-f)
+    map  <space>j <Plug>(easymotion-bd-f)
+    nmap <space>j <Plug>(easymotion-overwin-f)
+    " omap <space>j <Plug>(easymotion-tn)
+    let g:EasyMotion_smartcase = 1
+
+Plug 'tpope/vim-surround'
 "Plug 'tpope/vim-vinegar'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 Plug 'bfrg/vim-cpp-modern'
+Plug 'tpope/vim-abolish'
+Plug 'sheerun/vim-polyglot'
+
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 
 "Plug 'altercation/vim-colors-solarized'
@@ -123,22 +187,35 @@ Plug 'tpope/vim-commentary'
 Plug 'psliwka/vim-smoothie'
 "Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'amix/vim-zenroom2'
 Plug 'junegunn/limelight.vim'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'liuchengxu/vista.vim'
+let g:vista_sidebar_width = 60
+let g:vista_echo_cursor_strategy = 'floating_win'
+let g:vista_default_executive = 'coc'
+nnoremap <space>k :Vista!!<cr>kj
+
+Plug 'beyondmarc/hlsl.vim'
 " Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'Iron-E/vim-libmodal'
 
-"Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
+
+" Plug 'nathanaelkane/vim-indent-guides'
 
 
 "    Plug 'scrooloose/syntastic'
 
-    Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() }, 'tag': '0.21.1' }
+" Plug 'junegunn/fzf.vim', {'commit': '4cf475'}
+"
 " Plug 'ludovicchabant/vim-gutentags'
-Plug 'yuki-ycino/fzf-preview.vim'
+"Plug 'yuki-ycino/fzf-preview.vim'
+"
 "
 Plug 'ryanoasis/vim-devicons' " Always load the vim-devicons as the very last one
 
@@ -344,7 +421,7 @@ nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 "nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+"nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
@@ -379,22 +456,25 @@ set foldmethod=syntax
 " gitcommit
 filetype indent plugin on
 au FileType gitcommit setlocal textwidth=72
-au FileType gitcommit setlocal colorcolumn=50,72
+au FileType gitcommit setlocal colorcolumn=51,73
 au FileType gitcommit setlocal spell
 
 
 nnoremap <silent> <leader>lf :Files<cr>
+nnoremap <silent> <leader>lg :GFiles<cr>
 nnoremap <silent> <leader>lb :Buffers<cr>
 nnoremap <silent> <leader>lr :Rg<cr>
-nnoremap <silent> <leader>ll :Lines<cr>
+nnoremap <silent> <leader>ll :BLines<cr>
 nnoremap <silent> <leader>lc :Commits<cr>
 nnoremap <silent> <leader>lm :Marks<cr>
 nnoremap <silent> <leader>lw :Windows<cr>
 nnoremap <silent> <leader>lhc :History:<cr>
 nnoremap <silent> <leader>lhs :History/<cr>
 
-let g:fzf_preview_window = 'right:60%'
-let g:fzf_layout = { 'window': {'width': 0.9, 'height': 0.6} }
+set winblend=5
+
+let g:fzf_preview_window = 'right:50%'
+let g:fzf_layout = { 'window': {'width': 0.9, 'height': 0.9, 'border': 'rounded'} }
 
 let g:LanguageClient_semanticHighlightMaps = {}
 let g:LanguageClient_semanticHighlightMaps['cpp'] = {
@@ -431,4 +511,56 @@ set list listchars=tab:»·,trail:·
 " source C:\\Users\\Tomek\\.local\\share\\nvim\\winmode\\winmode.vim
 """""""""""""""""""""""""""""""""""""""""
 autocmd BufWritePost CMakeLists.txt silent exe "!cmake-format -i \<afile>" | exe "e"
+
+nnoremap ]b :bnext<cr>
+nnoremap [b :bprev<cr>
+nnoremap ]t :tabn<cr>
+nnoremap [t :tabp<cr>
+nnoremap <tab>   <c-w>w
+nnoremap <S-tab> <c-w>W
+
+" ----------------------------------------------------------------------------
+" Help in new tabs
+" ----------------------------------------------------------------------------
+function! s:helptab()
+  if &buftype == 'help'
+    wincmd T
+    nnoremap <buffer> q :q<cr>
+  endif
+endfunction
+autocmd BufEnter *.txt call s:helptab()
+
+" function! MyFoldText() " {{{
+"    let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+"     let lines_count = v:foldend - v:foldstart + 1
+"     let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+"     let foldchar = matchstr(&fillchars, 'fold:\zs.')
+"     let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+"     let foldtextend = lines_count_text . repeat(foldchar, 8)
+"     let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+"     return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+" endfunction " }}}
+" set foldtext=MyFoldText()
+"
+
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+" if has('nvim') && !exists('g:fzf_layout')
+"   autocmd! FileType fzf
+"   autocmd  FileType fzf set laststatus=0 noshowmode noruler
+"     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+" endif
+"
+let g:indentLine_char = '¦'
+let g:indent_blankline_char = '¦'
+
+set conceallevel=0
 

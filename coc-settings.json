@@ -1,11 +1,13 @@
 {
   "clangd.semanticHighlighting": true,
   "python.formatting.provider": "black",
+  "python.pythonPath": "C:/Program Files/Python38/python.exe",
   "coc.preferences.formatOnSaveFiletypes": [
     "cpp",
     "json",
     "python",
     "yaml",
-    "md"
+    "md",
+    "js"
   ]
 }
