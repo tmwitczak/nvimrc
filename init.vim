@@ -95,6 +95,7 @@ let g:goyo_linenr=1
 
 set incsearch
 
+set spelllang=en,pl
 
 " " //////////////////////////////////////////////////////////////////////////////
 " set colorcolumn=81
@@ -439,7 +440,7 @@ let g:startify_custom_header = 'startify#pad(startify#fortune#boxed())'
 " nerdtree
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-let NERDTreeWinSize = 40
+let NERDTreeWinSize = 39
 nnoremap <silent> ` :NERDTreeToggle<cr>
 
 
