@@ -108,13 +108,17 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'junegunn/vim-plug'
 Plug 'enricobacis/vim-airline-clock'
 " let g:airline#extensions#clock#format = '%H:%M:%S'
+"
+"Plug 'nvim-treesitter/nvim-treesitter'
 
 Plug 'machakann/vim-highlightedyank'
+
+Plug 'nvim-treesitter/nvim-treesitter'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'ThePrimeagen/vim-be-good'
+Plug 'ThePrimeagen/vim-be-good', {'do': '.\install.sh'}
 
 Plug 'liuchengxu/vim-which-key'
 " call which_key#register('<Space>', "g:which_key_map")
@@ -137,10 +141,10 @@ Plug 'junegunn/seoul256.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'morhetz/gruvbox'
-Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/edge'
 Plug 'sainnhe/forest-night'
+Plug 'sainnhe/gruvbox-material'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Git
@@ -190,7 +194,7 @@ Plug 'psliwka/vim-smoothie'
 Plug 'junegunn/goyo.vim'
 Plug 'amix/vim-zenroom2'
 Plug 'junegunn/limelight.vim'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'liuchengxu/vista.vim'
 let g:vista_sidebar_width = 60
 let g:vista_echo_cursor_strategy = 'floating_win'
@@ -565,3 +569,13 @@ let g:indent_blankline_char = '¦'
 
 set conceallevel=0
 
+" Treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+  },
+}
+EOF
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()

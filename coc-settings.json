@@ -4,10 +4,17 @@
   "python.pythonPath": "C:/Program Files/Python38/python.exe",
   "coc.preferences.formatOnSaveFiletypes": [
     "cpp",
+    "hpp",
+    "c",
+    "h",
+    "cu",
+    "cuh",
     "json",
     "python",
     "yaml",
     "md",
-    "js"
+    "js",
+    "html",
+    "css"
   ]
 }
