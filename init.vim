@@ -47,17 +47,15 @@ set showcmd
 
 nnoremap <leader>` i~<esc>
 
-function! s:openInitVim()
-    execute "tabnew"
-    execute "edit C:/Users/Tomek/AppData/Local/nvim/ginit.vim"
-    execute "vsplit"
-    execute "edit C:/Users/Tomek/AppData/Local/nvim/init.vim"
-endfunction
-command! OpenInitVim call <SID>openInitVim()
-nnoremap <silent> <leader>vv :OpenInitVim<cr>
+nnoremap <silent> <leader>vv
+        \ :tabnew<bar>
+        \ :execute "edit ".stdpath("config")."\\ginit.vim"<bar>
+        \ :vsplit<bar>
+        \ :execute "edit ".stdpath("config")."\\init.vim"<bar>
+        \ :TabooRename "Configuration"<cr>
 nnoremap <silent> <leader>vs
-            \ :source C:/Users/Tomek/AppData/Local/nvim/init.vim<cr>
-            \ :source C:/Users/Tomek/AppData/Local/nvim/ginit.vim<cr>
+        \ :execute "source ".stdpath("config")."\\init.vim"<bar>
+        \ :execute "source ".stdpath("config")."\\ginit.vim"<cr>
 
 nmap <silent> <leader>gs :tab G<cr>gg<c-n>
 nmap <silent> <leader>gh :diffget //2<cr>
@@ -101,12 +99,21 @@ set spelllang=en,pl
 " set colorcolumn=81
 "
 "
-" //////////////////////////////////////////////////////////////////// Plugins "
+" -------------------------------------------------------------------- Plugins "
 call plug#begin(stdpath('data') . '/plugged')
 "call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'junegunn/vim-plug'
 Plug 'enricobacis/vim-airline-clock'
+
+Plug 'Konfekt/vim-alias'
+
+Plug 'justinmk/vim-sneak'
+" let g:sneak#label = 1
+
+Plug 'gcmt/taboo.vim'
+
+" Plug 'Xuyuanp/scrollbar.nvim'
 " let g:airline#extensions#clock#format = '%H:%M:%S'
 "
 "Plug 'nvim-treesitter/nvim-treesitter'
@@ -114,6 +121,8 @@ Plug 'enricobacis/vim-airline-clock'
 Plug 'machakann/vim-highlightedyank'
 
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -121,15 +130,14 @@ Plug 'junegunn/fzf.vim'
 Plug 'ThePrimeagen/vim-be-good', {'do': '.\install.sh'}
 
 Plug 'liuchengxu/vim-which-key'
-" call which_key#register('<Space>', "g:which_key_map")
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-let g:mapleader = "\<Space>"
-let g:vista_cursor_delay = 0
-let g:which_key_map =  {}
-let g:which_key_map.l = {
-      \ 'name' : '+list',
-      \ 'f' : 'files'    ,
-      \ }
+
+    let g:mapleader = "\<Space>"
+    let g:vista_cursor_delay = 0
+
+
+Plug 'junegunn/vim-easy-align'
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " Sessions
 Plug 'mhinz/vim-startify'
@@ -157,7 +165,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Utilities
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'qpkorr/vim-bufkill'
+" Plug 'qpkorr/vim-bufkill'
 Plug 'jbgutierrez/vim-better-comments'
 Plug 'lambdalisue/vim-fullscreen'
 
@@ -165,14 +173,18 @@ Plug 'easymotion/vim-easymotion'
     " map , <Plug>(easymotion-prefix)
     let g:EasyMotion_do_mapping = 0
     let g:EasyMotion_use_upper = 0
-    let g:EasyMotion_keys = "ls;ahg'urieowpqyt[]vcxbnm,.\/094jfkd"
+    " let g:EasyMotion_keys = "ls;ahg'urieowpqyt[]vcxbnm,.\/094jfkd"
+    " let g:EasyMotion_keys = "asdghklqwertyuiopzxcvbnmfj;"
+    let g:EasyMotion_keys = "aoeidtn',.pyfgcrl;qjkxbmuhs"
     "nmap , <Plug>(easymotion-overwin-f)
-    map  <space>j <Plug>(easymotion-bd-f)
-    nmap <space>j <Plug>(easymotion-overwin-f)
+    " map  <space>j <Plug>(easymotion-bd-f)
+    map <silent> s <Plug>(easymotion-overwin-f2)
+    " nmap <space>j <Plug>(easymotion-overwin-f)
     " omap <space>j <Plug>(easymotion-tn)
     let g:EasyMotion_smartcase = 1
 
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 "Plug 'tpope/vim-vinegar'
 
 
@@ -183,7 +195,7 @@ Plug 'bfrg/vim-cpp-modern'
 Plug 'tpope/vim-abolish'
 Plug 'sheerun/vim-polyglot'
 
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+" Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 
 "Plug 'altercation/vim-colors-solarized'
@@ -203,7 +215,7 @@ nnoremap <space>k :Vista!!<cr>kj
 
 Plug 'beyondmarc/hlsl.vim'
 " Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-Plug 'Iron-E/vim-libmodal'
+" Plug 'Iron-E/vim-libmodal'
 
 Plug 'Yggdroot/indentLine'
 Plug 'lukas-reineke/indent-blankline.nvim'
@@ -286,7 +298,7 @@ set ts=4 sw=4 et
 "
 " " autocmd vimenter * NERDTree
 "
-" " //////////////////////////////////////////////////////////////////////////////
+"" " //////////////////////////////////////////////////////////////////////////////
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -363,8 +375,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -386,10 +398,10 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Introduce function text object
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
+" xmap if <Plug>(coc-funcobj-i)
+" xmap af <Plug>(coc-funcobj-a)
+" omap if <Plug>(coc-funcobj-i)
+" omap af <Plug>(coc-funcobj-a)
 
 " Use <TAB> for selections ranges.
 " NOTE: Requires 'textDocument/selectionRange' support from the language server.
@@ -420,7 +432,7 @@ nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 " nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-nnoremap <silent> <space>o  :<C-u>Vista finder coc<cr>
+nnoremap <silent> <space>ls  :<C-u>Vista finder coc<cr>
 " Search workspace symbols.
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
@@ -453,7 +465,8 @@ nnoremap <silent> ` :NERDTreeToggle<cr>
 "Per project settings
 nnoremap <leader>; :!msbuild<cr>
 nnoremap <silent> <leader>' :!e:\pbl\game\PBL_Engine\Debug\PBL_Engine.exe<cr>
-set colorcolumn=81
+" set colorcolumn=81
+let &colorcolumn=join(range(81,999),",")
 set foldmethod=syntax
 
 
@@ -463,6 +476,7 @@ filetype indent plugin on
 au FileType gitcommit setlocal textwidth=72
 au FileType gitcommit setlocal colorcolumn=51,73
 au FileType gitcommit setlocal spell
+au FileType gitcommit autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 
 nnoremap <silent> <leader>lf :Files<cr>
@@ -529,7 +543,7 @@ nnoremap <S-tab> <c-w>W
 " ----------------------------------------------------------------------------
 function! s:helptab()
   if &buftype == 'help'
-    wincmd T
+    " wincmd T
     nnoremap <buffer> q :q<cr>
   endif
 endfunction
@@ -575,7 +589,80 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
   },
+  refactor = {
+    highlight_definitions = { enable = true },
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      keymaps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      },
+    },
+  },
 }
 EOF
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+
+" set completeopt=menuone,noinsert,noselect
+" let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+
+" lua require'nvim_lsp'.clangd.setup{on_attach=require'completion'.on_attach}
+" nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+"
+
+" augroup ScrollbarInit
+"   autocmd!
+"   autocmd WinEnter,FocusGained,CursorMoved,VimResized * silent! lua require('scrollbar').show()
+"   autocmd WinLeave,FocusLost                          * silent! lua require('scrollbar').clear()
+" augroup end
+
+
+map <silent> <leader>bo :%bd\|e#\|bd#<cr>
+map <silent> <leader>ba :%bd<cr>
+map <silent> <leader>bd :bd<cr>
+
+nnoremap Q @q
+
+" map f <Plug>Sneak_f
+" map F <Plug>Sneak_F
+" map t <Plug>Sneak_t
+" map T <Plug>Sneak_T
+
+" nnoremap <silent> s :<C-U>call sneak#wrap('',           2, 0, 2, 1)<CR>
+
+autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
+
+nmap Y y$
+
+" WhichKey ------------------------------------------------------------------- "
+call which_key#register('<Space>', "g:which_key_map")
+
+nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
+
+let g:which_key_map = {}
+let g:which_key_map.l = {
+      \ 'name': '+list',
+      \ 'f':    'files',
+      \ }
+let g:which_key_map.v = {
+      \ 'name': '+configuration',
+      \ 'j':    'increase-font-size',
+      \ 'k':    'decrease-font-size',
+      \ 'v':    'open-configuration',
+      \ 's':    'source-configuration',
+      \ }
+
+let g:which_key_flatten = 0
+let g:which_key_position = 'topleft'
+
+" autocmd! FileType which_key
+" autocmd  FileType which_key set laststatus=0 noshowmode noruler
+"   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
