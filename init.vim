@@ -1,3 +1,113 @@
+" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ Plugins "
+call plug#begin(stdpath('data') . '/plugged')
+
+    " ................................................... Plugin management .. "
+    Plug 'junegunn/vim-plug'
+
+    " .................................................... Syntax highlight .. "
+    Plug 'nvim-treesitter/nvim-treesitter'
+
+    " ......................................................... Status line .. "
+    " Plug 'enricobacis/vim-airline-clock' " Breaks Goyo, disabled for now
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+
+    " ............................................................ Movement .. "
+    Plug 'justinmk/vim-sneak'
+
+    " ............................................................ Mappings .. "
+    Plug 'Konfekt/vim-alias'
+    Plug 'liuchengxu/vim-which-key'
+
+    " ................................................................ Tabs .. "
+    Plug 'gcmt/taboo.vim'
+
+    " ........................................................ Fuzzy search .. "
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+
+    " ............................................................ Practice .. "
+    Plug 'ThePrimeagen/vim-be-good', {'do': '.\install.sh'}
+
+    " ................................................................. LSP .. "
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'nvim-lua/completion-nvim'
+
+    " ............................................................ Sessions .. "
+    Plug 'mhinz/vim-startify'
+
+    " ....................................................... Color schemes .. "
+    Plug 'sainnhe/gruvbox-material'
+
+    " ................................................................. Git .. "
+    Plug 'airblade/vim-gitgutter'
+    Plug 'junegunn/gv.vim'
+    Plug 'tpope/vim-fugitive'
+
+    " ............................................................ Markdown .. "
+    Plug 'iamcco/markdown-preview.nvim', {
+                \ 'do': { -> mkdp#util#install() },
+                \ 'for': ['markdown', 'vim-plug']}
+
+    " ........................................................... Utilities .. "
+    Plug 'Yggdroot/indentLine'
+    Plug 'amix/vim-zenroom2'
+    Plug 'beyondmarc/hlsl.vim'
+    Plug 'bfrg/vim-cpp-modern'
+    Plug 'easymotion/vim-easymotion'
+    Plug 'jbgutierrez/vim-better-comments'
+    Plug 'junegunn/goyo.vim'
+    Plug 'junegunn/limelight.vim'
+    Plug 'junegunn/vim-easy-align'
+    Plug 'kien/rainbow_parentheses.vim'
+    Plug 'lambdalisue/vim-fullscreen'
+    Plug 'liuchengxu/vista.vim'
+    Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+    Plug 'psliwka/vim-smoothie' " Smooth scrolling
+    Plug 'scrooloose/nerdtree' " Filesystem tree
+    Plug 'sheerun/vim-polyglot' " Syntax files
+    Plug 'tpope/vim-abolish'    " Coercions
+    Plug 'tpope/vim-commentary' " Comments
+    Plug 'tpope/vim-repeat'     " Repeat some plugins with '.'
+    Plug 'tpope/vim-surround'   " Surroundings
+
+    " ............................................................ Not-used .. "
+    " Plug 'Iron-E/vim-libmodal'
+    " Plug 'Xuyuanp/scrollbar.nvim'
+    " Plug 'altercation/vim-colors-solarized'
+    " Plug 'arcticicestudio/nord-vim'
+    " Plug 'ayu-theme/ayu-vim'
+    " Plug 'cocopon/iceberg.vim'
+    " Plug 'dracula/vim', { 'as': 'dracula' }
+    " Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+    " Plug 'itchyny/lightline.vim'
+    " Plug 'jackguo380/vim-lsp-cxx-highlight'
+    " Plug 'junegunn/fzf', { 'do': { -> fzf#install() }, 'tag': '0.21.1' }
+    " Plug 'junegunn/fzf.vim', {'commit': '4cf475'}
+    " Plug 'junegunn/seoul256.vim'
+    " Plug 'ludovicchabant/vim-gutentags'
+    " Plug 'mechatroner/rainbow_csv'
+    " Plug 'morhetz/gruvbox'
+    " Plug 'nathanaelkane/vim-indent-guides'
+    " Plug 'qpkorr/vim-bufkill'
+    " Plug 'sainnhe/edge'
+    " Plug 'sainnhe/forest-night'
+    " Plug 'sainnhe/sonokai'
+    " Plug 'scrooloose/syntastic'
+    " Plug 'tpope/vim-surround'
+    " Plug 'tpope/vim-vinegar'
+    " Plug 'yuki-ycino/fzf-preview.vim'
+
+    " ............................................................... Icons .. "
+    Plug 'ryanoasis/vim-devicons' " Always load the plugin as the very last one
+
+call plug#end()
+" ---------------------------------------------------------------------------- "
+"
+"
+"
 let g:python3_host_prog = "C:/Program Files/Python38/python.exe"
 
 language en
@@ -28,7 +138,7 @@ set linebreak
 
 set autoread
 
-au FocusGained,BufEnter * :checktime
+autocmd FocusGained,BufEnter * :checktime
 
 nnoremap <silent> j gj
 nnoremap <silent> k gk
@@ -99,145 +209,6 @@ set spelllang=en,pl
 " set colorcolumn=81
 "
 "
-" -------------------------------------------------------------------- Plugins "
-call plug#begin(stdpath('data') . '/plugged')
-"call plug#begin('~/.local/share/nvim/plugged')
-
-Plug 'junegunn/vim-plug'
-Plug 'enricobacis/vim-airline-clock'
-
-Plug 'Konfekt/vim-alias'
-
-Plug 'justinmk/vim-sneak'
-" let g:sneak#label = 1
-
-Plug 'gcmt/taboo.vim'
-
-" Plug 'Xuyuanp/scrollbar.nvim'
-" let g:airline#extensions#clock#format = '%H:%M:%S'
-"
-"Plug 'nvim-treesitter/nvim-treesitter'
-
-Plug 'machakann/vim-highlightedyank'
-
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
-
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-Plug 'ThePrimeagen/vim-be-good', {'do': '.\install.sh'}
-
-Plug 'liuchengxu/vim-which-key'
-
-    let g:mapleader = "\<Space>"
-    let g:vista_cursor_delay = 0
-
-
-Plug 'junegunn/vim-easy-align'
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-
-" Sessions
-Plug 'mhinz/vim-startify'
-
-" Color schemes
-Plug 'cocopon/iceberg.vim'
-Plug 'mechatroner/rainbow_csv'
-Plug 'junegunn/seoul256.vim'
-Plug 'ayu-theme/ayu-vim'
-Plug 'arcticicestudio/nord-vim'
-Plug 'morhetz/gruvbox'
-Plug 'sainnhe/sonokai'
-Plug 'sainnhe/edge'
-Plug 'sainnhe/forest-night'
-Plug 'sainnhe/gruvbox-material'
-Plug 'dracula/vim', { 'as': 'dracula' }
-
-" Git
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
-Plug 'airblade/vim-gitgutter'
-
-" LSP
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Utilities
-Plug 'kien/rainbow_parentheses.vim'
-" Plug 'qpkorr/vim-bufkill'
-Plug 'jbgutierrez/vim-better-comments'
-Plug 'lambdalisue/vim-fullscreen'
-
-Plug 'easymotion/vim-easymotion'
-    " map , <Plug>(easymotion-prefix)
-    let g:EasyMotion_do_mapping = 0
-    let g:EasyMotion_use_upper = 0
-    " let g:EasyMotion_keys = "ls;ahg'urieowpqyt[]vcxbnm,.\/094jfkd"
-    " let g:EasyMotion_keys = "asdghklqwertyuiopzxcvbnmfj;"
-    let g:EasyMotion_keys = "aoeidtn',.pyfgcrl;qjkxbmuhs"
-    "nmap , <Plug>(easymotion-overwin-f)
-    " map  <space>j <Plug>(easymotion-bd-f)
-    map <silent> s <Plug>(easymotion-overwin-f2)
-    " nmap <space>j <Plug>(easymotion-overwin-f)
-    " omap <space>j <Plug>(easymotion-tn)
-    let g:EasyMotion_smartcase = 1
-
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-"Plug 'tpope/vim-vinegar'
-
-
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-Plug 'bfrg/vim-cpp-modern'
-Plug 'tpope/vim-abolish'
-Plug 'sheerun/vim-polyglot'
-
-" Plug 'jackguo380/vim-lsp-cxx-highlight'
-
-
-"Plug 'altercation/vim-colors-solarized'
-"Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'psliwka/vim-smoothie'
-"Plug 'itchyny/lightline.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'amix/vim-zenroom2'
-Plug 'junegunn/limelight.vim'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'liuchengxu/vista.vim'
-let g:vista_sidebar_width = 60
-let g:vista_echo_cursor_strategy = 'floating_win'
-let g:vista_default_executive = 'coc'
-nnoremap <space>k :Vista!!<cr>kj
-
-Plug 'beyondmarc/hlsl.vim'
-" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-" Plug 'Iron-E/vim-libmodal'
-
-Plug 'Yggdroot/indentLine'
-Plug 'lukas-reineke/indent-blankline.nvim'
-
-" Plug 'nathanaelkane/vim-indent-guides'
-
-
-"    Plug 'scrooloose/syntastic'
-
-Plug 'scrooloose/nerdtree'
-
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() }, 'tag': '0.21.1' }
-" Plug 'junegunn/fzf.vim', {'commit': '4cf475'}
-"
-" Plug 'ludovicchabant/vim-gutentags'
-"Plug 'yuki-ycino/fzf-preview.vim'
-"
-"
-Plug 'ryanoasis/vim-devicons' " Always load the vim-devicons as the very last one
-
-
-call plug#end()
 
 "set renderoptions=type:directx
 
@@ -665,4 +636,56 @@ let g:which_key_position = 'topleft'
 " autocmd! FileType which_key
 " autocmd  FileType which_key set laststatus=0 noshowmode noruler
 "   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+"
+" ------------------------------------------------------------- Highlight yank "
+augroup HIGHLIGHT_YANK
+    autocmd!
+    autocmd TextYankPost * silent!
+                \ lua vim.highlight.on_yank { 
+                \   higroup='HighlightedyankRegion',
+                \   timeout=1000
+                \ }
+augroup END
 
+        let g:mapleader = "\<Space>"
+        let g:vista_cursor_delay = 0
+
+
+    let g:vista_sidebar_width = 60
+    let g:vista_echo_cursor_strategy = 'floating_win'
+    let g:vista_default_executive = 'coc'
+    nnoremap <space>k :Vista!!<cr>kj
+
+
+        " map , <Plug>(easymotion-prefix)
+        let g:EasyMotion_do_mapping = 0
+        let g:EasyMotion_use_upper = 0
+        " let g:EasyMotion_keys = "ls;ahg'urieowpqyt[]vcxbnm,.\/094jfkd"
+        " let g:EasyMotion_keys = "asdghklqwertyuiopzxcvbnmfj;"
+        let g:EasyMotion_keys = "aoeidtn',.pyfgcrl;qjkxbmuhs"
+        "nmap , <Plug>(easymotion-overwin-f)
+        " map  <space>j <Plug>(easymotion-bd-f)
+        " map <silent> s <Plug>(easymotion-overwin-f)
+        nmap <silent> s <Plug>(easymotion-overwin-f)
+        xmap <silent> s <Plug>(easymotion-bd-f)
+        omap <silent> s <Plug>(easymotion-bd-f)
+        " nmap <space>j <Plug>(easymotion-overwin-f)
+        " omap <space>j <Plug>(easymotion-tn)
+        let g:EasyMotion_smartcase = 1
+
+
+    xmap ga <Plug>(EasyAlign)
+    nmap ga <Plug>(EasyAlign)
+
+" Limelight
+augroup GOYO
+    autocmd! User GoyoEnter Limelight
+    autocmd! User GoyoLeave Limelight!
+augroup END
+
+" Markdown preview
+nmap <leader>mp <Plug>MarkdownPreviewToggle
+let g:which_key_map.m = {
+      \ 'name': '+markdown',
+      \ 'p':    'toggle-preview',
+      \ }
