@@ -6,6 +6,8 @@ call plug#begin(stdpath('data') . '/plugged')
 
     " .................................................... Syntax highlight .. "
     Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'beyondmarc/hlsl.vim'
+    Plug 'bfrg/vim-cpp-modern'
 
     " ......................................................... Status line .. "
     " Plug 'enricobacis/vim-airline-clock' " Breaks Goyo, disabled for now
@@ -13,6 +15,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'vim-airline/vim-airline-themes'
 
     " ............................................................ Movement .. "
+    Plug 'easymotion/vim-easymotion'
     Plug 'justinmk/vim-sneak'
 
     " ............................................................ Mappings .. "
@@ -23,7 +26,8 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'gcmt/taboo.vim'
 
     " ........................................................ Fuzzy search .. "
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    " versions over 0.22.0 break the preview window
+    Plug 'junegunn/fzf', { 'tag': '0.22.0', 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
 
     " ............................................................ Practice .. "
@@ -38,7 +42,10 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'mhinz/vim-startify'
 
     " ....................................................... Color schemes .. "
+    Plug 'sainnhe/edge'
+    Plug 'sainnhe/forest-night'
     Plug 'sainnhe/gruvbox-material'
+    Plug 'sainnhe/sonokai'
 
     " ................................................................. Git .. "
     Plug 'airblade/vim-gitgutter'
@@ -53,25 +60,22 @@ call plug#begin(stdpath('data') . '/plugged')
     " ........................................................... Utilities .. "
     Plug 'Yggdroot/indentLine'
     Plug 'amix/vim-zenroom2'
-    Plug 'beyondmarc/hlsl.vim'
-    Plug 'bfrg/vim-cpp-modern'
-    Plug 'easymotion/vim-easymotion'
     Plug 'jbgutierrez/vim-better-comments'
-    Plug 'junegunn/goyo.vim'
-    Plug 'junegunn/limelight.vim'
-    Plug 'junegunn/vim-easy-align'
+    Plug 'junegunn/goyo.vim'          " Focus mode
+    Plug 'junegunn/limelight.vim'     " Highlight only current paragraph
+    Plug 'junegunn/vim-easy-align'    " Text alignment
     Plug 'kien/rainbow_parentheses.vim'
-    Plug 'lambdalisue/vim-fullscreen'
+    Plug 'lambdalisue/vim-fullscreen' " GUI fullscreen
     Plug 'liuchengxu/vista.vim'
     Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-    Plug 'psliwka/vim-smoothie' " Smooth scrolling
-    Plug 'scrooloose/nerdtree' " Filesystem tree
-    Plug 'sheerun/vim-polyglot' " Syntax files
-    Plug 'tpope/vim-abolish'    " Coercions
-    Plug 'tpope/vim-commentary' " Comments
-    Plug 'tpope/vim-repeat'     " Repeat some plugins with '.'
-    Plug 'tpope/vim-surround'   " Surroundings
+    Plug 'psliwka/vim-smoothie'       " Smooth scrolling
+    Plug 'scrooloose/nerdtree'        " Filesystem tree
+    Plug 'sheerun/vim-polyglot'       " Syntax files
+    Plug 'tpope/vim-abolish'          " Coercions
+    Plug 'tpope/vim-commentary'       " Comments
+    Plug 'tpope/vim-repeat'           " Repeat some plugins with '.'
+    Plug 'tpope/vim-surround'         " Surroundings
 
     " ............................................................ Not-used .. "
     " Plug 'Iron-E/vim-libmodal'
@@ -92,9 +96,6 @@ call plug#begin(stdpath('data') . '/plugged')
     " Plug 'morhetz/gruvbox'
     " Plug 'nathanaelkane/vim-indent-guides'
     " Plug 'qpkorr/vim-bufkill'
-    " Plug 'sainnhe/edge'
-    " Plug 'sainnhe/forest-night'
-    " Plug 'sainnhe/sonokai'
     " Plug 'scrooloose/syntastic'
     " Plug 'tpope/vim-surround'
     " Plug 'tpope/vim-vinegar'
@@ -171,6 +172,8 @@ nmap <silent> <leader>gs :tab G<cr>gg<c-n>
 nmap <silent> <leader>gh :diffget //2<cr>
 nmap <silent> <leader>gl :diffget //3<cr>
 
+nmap <silent> <leader>gd :Gvdiffsplit<cr>
+
 
 nnoremap <silent> [e :cp<cr>
 nnoremap <silent> ]e :cn<cr>
@@ -181,6 +184,7 @@ nnoremap <silent> <leader>bd :BD<cr>
 nnoremap <silent> <leader>bf :Format<cr>
 
 nnoremap <silent> <leader>tn :tabnew<cr>
+nnoremap <silent> <leader>tc :tabclose<cr>
 " nnoremap <silent> <leader>th :tabp<cr>
 " nnoremap <silent> <leader>tl :tabn<cr>
 
@@ -411,7 +415,7 @@ nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for previous item.
 "nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 
 
@@ -434,8 +438,8 @@ nnoremap <silent> ` :NERDTreeToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""
 "Per project settings
-nnoremap <leader>; :!msbuild<cr>
-nnoremap <silent> <leader>' :!e:\pbl\game\PBL_Engine\Debug\PBL_Engine.exe<cr>
+" nnoremap <leader>; :!msbuild<cr>
+" nnoremap <silent> <leader>' :!e:\pbl\game\PBL_Engine\Debug\PBL_Engine.exe<cr>
 " set colorcolumn=81
 let &colorcolumn=join(range(81,999),",")
 set foldmethod=syntax
@@ -623,11 +627,18 @@ let g:which_key_map.l = {
       \ 'f':    'files',
       \ }
 let g:which_key_map.v = {
-      \ 'name': '+configuration',
-      \ 'j':    'increase-font-size',
-      \ 'k':    'decrease-font-size',
-      \ 'v':    'open-configuration',
-      \ 's':    'source-configuration',
+      \ 'name':       '+configuration',
+      \ 'j':          'increase-font-size',
+      \ 'k':          'decrease-font-size',
+      \ 'v':          'open-configuration',
+      \ 's':          'source-configuration',
+      \ 'u':          {
+            \ 'name': '+update',
+            \ 'p':    ['PlugUpgrade', 'plugin-manager'],
+            \ 'u':    ['PlugUpdate', 'plugins'],
+            \ 'c':    ['CocUpdate', 'coc'],
+            \ 'r':    ['UpdateRemotePlugins', 'remote'],
+      \ },
       \ }
 
 let g:which_key_flatten = 0
@@ -683,9 +694,25 @@ augroup GOYO
     autocmd! User GoyoLeave Limelight!
 augroup END
 
+nmap <leader>- :Limelight!!<cr>
+
 " Markdown preview
 nmap <leader>mp <Plug>MarkdownPreviewToggle
 let g:which_key_map.m = {
       \ 'name': '+markdown',
       \ 'p':    'toggle-preview',
       \ }
+
+
+let g:startify_custom_header=['     _           _                      _             ',
+                             \'             ▕                                 ',
+                             \'  ▕ ███       ▕│█     ___   ___                 ',
+                             \'  ▕││███     ▕│███▕│         █   ██      ',
+                             \'  ▕││  ███   ▕│███▕│▕│ ▁ ▕│    ▕│██          ',
+                             \'  ▕││  ▕│███ ▕│███▕│▕│   ▕│    ▕│██  ◢◣  ◢  ',
+                             \'  ▕││  ▕│  ███│███▕│  ▁▁  ▁   ██   ▜█ ██  ',
+                             \'     ▕│    ████      ‾‾    ‾                 ',
+                             \'     ▕│                                        ',
+                             \'                 ‾                      ‾             ']
+
+nmap <leader>; :
