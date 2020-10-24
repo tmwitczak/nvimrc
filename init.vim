@@ -28,7 +28,9 @@ call plug#begin(stdpath('data') . '/plugged')
     " ........................................................ Fuzzy search .. "
     " versions over 0.22.0 break the preview window
     Plug 'junegunn/fzf', { 'tag': '0.22.0', 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/fzf.vim', {'commit': '0fe8e1'}
+
+    Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 
     " ............................................................ Practice .. "
     Plug 'ThePrimeagen/vim-be-good', {'do': '.\install.sh'}
@@ -704,15 +706,31 @@ let g:which_key_map.m = {
       \ }
 
 
-let g:startify_custom_header=['     _           _                      _             ',
-                             \'             ▕                                 ',
-                             \'  ▕ ███       ▕│█     ___   ___                 ',
-                             \'  ▕││███     ▕│███▕│         █   ██      ',
-                             \'  ▕││  ███   ▕│███▕│▕│ ▁ ▕│    ▕│██          ',
-                             \'  ▕││  ▕│███ ▕│███▕│▕│   ▕│    ▕│██  ◢◣  ◢  ',
-                             \'  ▕││  ▕│  ███│███▕│  ▁▁  ▁   ██   ▜█ ██  ',
-                             \'     ▕│    ████      ‾‾    ‾                 ',
-                             \'     ▕│                                        ',
-                             \'                 ‾                      ‾             ']
+" let g:startify_custom_header=['     _           _                      _             ',
+"                              \'             ▕                                 ',
+"                              \'  ▕ ███       ▕│█     ___   ___                 ',
+"                              \'  ▕││███     ▕│███▕│         █   ██      ',
+"                              \'  ▕││  ███   ▕│███▕│▕│ ▁ ▕│    ▕│██          ',
+"                              \'  ▕││  ▕│███ ▕│███▕│▕│   ▕│    ▕│██  ◢◣  ◢  ',
+"                              \'  ▕││  ▕│  ███│███▕│  ▁▁  ▁   ██   ▜█ ██  ',
+"                              \'     ▕│    ████      ‾‾    ‾                 ',
+"                              \'     ▕│                                        ',
+"                              \'                 ‾                      ‾             ']
 
 nmap <leader>; :
+
+set complete+=kspell
+
+
+let g:webdevicons_enable_nerdtree           = 1
+let g:webdevicons_enable_airline_tabline    = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:webdevicons_enable_startify           = 1
+
+
+let g:clap_layout = { 'relative': 'editor', 'width': '80%', 'col': '5%' }
+" let g:clap_theme = 'gruvbox_material'
+let g:clap_insert_mode_only = v:true
+let g:clap_popup_border = 'sharp'
+let g:clap_prompt_format = ' %spinner%%forerunner_status%%provider_id% | '
+let g:clap_preview_size = { '*': 5, 'files': 10 }
