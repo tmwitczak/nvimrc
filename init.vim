@@ -79,6 +79,8 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'tpope/vim-repeat'           " Repeat some plugins with '.'
     Plug 'tpope/vim-surround'         " Surroundings
 
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+
     " ............................................................ Not-used .. "
     " Plug 'Iron-E/vim-libmodal'
     " Plug 'Xuyuanp/scrollbar.nvim'
@@ -746,3 +748,5 @@ let g:clap_insert_mode_only = v:true
 let g:clap_popup_border = 'sharp'
 let g:clap_prompt_format = ' %spinner%%forerunner_status%%provider_id% | '
 let g:clap_preview_size = { '*': 5, 'files': 10 }
+
+let g:livepreview_previewer = 'texworks'
