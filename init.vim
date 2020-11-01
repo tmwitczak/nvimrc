@@ -596,8 +596,8 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
+autocmd FileType c,cpp,java,py setlocal foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-autocmd FileType c,cpp,tex,java,py setlocal foldmethod=expr
 
 " set completeopt=menuone,noinsert,noselect
 " let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
