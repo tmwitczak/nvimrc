@@ -4,7 +4,7 @@ call plug#begin(stdpath('data') . '/plugged')
     " ................................................... Plugin management .. "
     Plug 'junegunn/vim-plug'
 
-    " .................................................... Syntax highlight .. "
+    " ......................................................... Syntax tree .. "
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'beyondmarc/hlsl.vim'
     Plug 'bfrg/vim-cpp-modern'
@@ -594,8 +594,8 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
-set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+autocmd FileType c,cpp,tex,java,py setlocal foldmethod=expr
 
 " set completeopt=menuone,noinsert,noselect
 " let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
@@ -612,7 +612,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 " augroup end
 
 
-map <silent> <leader>bo :%bd\|e#\|bd#<cr>
+map <silent> <leader>bo mt:%bd\|e#\|bd#<cr>'tzz
 map <silent> <leader>ba :%bd<cr>
 map <silent> <leader>bd :bd<cr>
 
