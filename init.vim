@@ -81,6 +81,9 @@ call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
+" Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'romgrk/barbar.nvim' " breaks Vista
+
     " ............................................................ Not-used .. "
     " Plug 'Iron-E/vim-libmodal'
     " Plug 'Xuyuanp/scrollbar.nvim'
@@ -742,11 +745,15 @@ let g:webdevicons_enable_airline_statusline = 1
 let g:webdevicons_enable_startify           = 1
 
 
-let g:clap_layout = { 'relative': 'editor', 'width': '80%', 'col': '5%' }
-" let g:clap_theme = 'gruvbox_material'
+let g:clap_layout = { 'relative': 'editor', 'width': '80%', 'height': '50%', 'col': '10%', 'row': '10%'}
+let g:clap_theme = 'material_design_dark'
 let g:clap_insert_mode_only = v:true
 let g:clap_popup_border = 'sharp'
-let g:clap_prompt_format = ' %spinner%%forerunner_status%%provider_id% | '
+let g:clap_prompt_format = ' %forerunner_status%%provider_id%: '
+" let g:clap_prompt_format = ' %spinner%%forerunner_status%%provider_id% | '
 let g:clap_preview_size = { '*': 5, 'files': 10 }
+let g:clap_search_box_border_style = 'nil'
 
 let g:livepreview_previewer = 'texworks'
+
+nnoremap <silent> <leader>bb :BufferPick<cr>
