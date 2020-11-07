@@ -1,6 +1,7 @@
 " //////////////////////////////////////////////////////////////////////////// "
 "GuiFont! Fira Code:h13
-GuiFont! FiraCode NF:h11
+GuiFont! Iosevka NF:h11
+" GuiFont! FiraCode NF:h11
 "GuiFont! Fira Code iCursive S12:h11
 " GuiFont! Arial:h15
 " GuiFont! Source Code Pro for Powerline:h12
@@ -76,11 +77,10 @@ let g:gruvbox_contrast_dark = "hard"
 
 let g:fullscreen#start_command = "call rpcnotify(0, 'Gui', 'WindowFullScreen', 1)"
 let g:fullscreen#stop_command = "call rpcnotify(0, 'Gui', 'WindowFullScreen', 0)"
-nnoremap <silent> <F11> :FullscreenToggle<CR>
+" nnoremap <silent> <F11> :FullscreenToggle<CR>
 nnoremap <silent> <space>f :FullscreenToggle<CR>
 
 colorscheme gruvbox-material
 
-nnoremap <silent> <space>vk :GuiFont! FiraCode NF:h16<cr>
-nnoremap <silent> <space>vj :GuiFont! FiraCode NF:h11<cr>
-
+nnoremap <silent> <space>vk :GuiFont! Iosevka NF:h16<cr>
+nnoremap <silent> <space>vj :GuiFont! Iosevka NF:h11<cr>

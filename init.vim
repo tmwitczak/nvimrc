@@ -48,6 +48,12 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'sainnhe/forest-night'
     Plug 'sainnhe/gruvbox-material'
     Plug 'sainnhe/sonokai'
+    " Plug 'bluz71/vim-nightfly-guicolors'
+    Plug 'arcticicestudio/nord-vim'
+    Plug 'ayu-theme/ayu-vim'
+
+    Plug 'tjdevries/colorbuddy.vim'
+    Plug 'Th3Whit3Wolf/onebuddy'
 
     " ................................................................. Git .. "
     Plug 'airblade/vim-gitgutter'
@@ -88,8 +94,6 @@ Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
     " Plug 'Iron-E/vim-libmodal'
     " Plug 'Xuyuanp/scrollbar.nvim'
     " Plug 'altercation/vim-colors-solarized'
-    " Plug 'arcticicestudio/nord-vim'
-    " Plug 'ayu-theme/ayu-vim'
     " Plug 'cocopon/iceberg.vim'
     " Plug 'dracula/vim', { 'as': 'dracula' }
     " Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
@@ -237,10 +241,19 @@ set background=dark
 "colorscheme gruvbox
 let g:airline#extensions#coc#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#left_sep      = "\ue0b4"
+let g:airline#extensions#tabline#left_alt_sep  = "\ue0b5"
+let g:airline#extensions#tabline#right_sep     = "\ue0b6"
+let g:airline#extensions#tabline#right_alt_sep = "\ue0b7"
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline_powerline_fonts = 1
+let g:airline_left_sep      = "\ue0b4"
+let g:airline_left_alt_sep  = "\ue0b5"
+let g:airline_right_sep     = "\ue0b6"
+let g:airline_right_alt_sep = "\ue0b7"
+let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " " . "\uE0A3" . '%{col(".")}'])
 "let g:airline_left_sep=' '
 "let g:airline_left_alt_sep='|'
 "AirlineTheme gruvbox
@@ -713,7 +726,7 @@ augroup GOYO
     autocmd! User GoyoLeave Limelight!
 augroup END
 
-nmap <leader>- :Limelight!!<cr>
+nmap <silent> <leader>- :Limelight!!<cr>
 
 " Markdown preview
 nmap <leader>mp <Plug>MarkdownPreviewToggle
@@ -757,3 +770,76 @@ let g:clap_search_box_border_style = 'nil'
 let g:livepreview_previewer = 'texworks'
 
 nnoremap <silent> <leader>bb :BufferPick<cr>
+
+" change font size
+nnoremap <silent> <space>vk :silent! let &guifont = substitute(
+ \ &guifont,
+ \ ':h\zs\d\+',
+ \ '\=eval(submatch(0)+1)',
+ \ '')<CR>
+nnoremap <silent> <space>vj :silent! let &guifont = substitute(
+ \ &guifont,
+ \ ':h\zs\d\+',
+ \ '\=eval(submatch(0)-1)',
+ \ '')<CR>
+
+"fzf colors
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+"fzf
+" let $BAT_THEME = "gruvbox-light"
+" command! -bang -nargs=? -complete=dir Files
+"             \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+"neovide
+if has('termguicolors')
+  set termguicolors
+endif
+set background=dark
+let g:gruvbox_material_background = 'medium'
+let g:gruvbox_material_disable_italic_comment = 0
+let g:gruvbox_material_enable_bold = 1
+let g:gruvbox_material_enable_italic = 1
+let g:gruvbox_material_cursor = 'auto'
+let g:gruvbox_material_transparent_background = 0
+let g:gruvbox_material_visual = 'grey background'
+let g:gruvbox_material_sign_column_background = 'none'
+let g:gruvbox_material_diagnostic_line_highlight = 0
+let g:gruvbox_material_current_word = 'grey background'
+let g:gruvbox_material_better_performance = 0
+let g:gruvbox_material_palette = 'material'
+let g:gruvbox_contrast_dark = "medium"
+colorscheme gruvbox-material
+let g:airline_theme='gruvbox_material'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_skip_empty_sections = 1
+" AirlineRefresh
+function! FullscreenToggleNeovide()
+    if g:neovide_fullscreen
+        let g:neovide_fullscreen = 0
+    else
+        let g:neovide_fullscreen = 1
+    endif
+endfunction
+nnoremap <silent> <space>ff :call FullscreenToggleNeovide()<cr>
+set guifont=Iosevka:h16
+" nnoremap <silent> <space>vk :set guifont=Iosevka:h20<cr>
+" nnoremap <silent> <space>vj :set guifont=Iosevka:h16<cr>
+let g:neovide_cursor_animation_length = 0.08
+let g:neovide_cursor_trail_size       = 0.4
+let g:neovide_cursor_vfx_mode         = "sonicboom"
+let g:neovide_cursor_vfx_opacity      = 50
