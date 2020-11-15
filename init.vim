@@ -30,7 +30,11 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'junegunn/fzf', { 'tag': '0.22.0', 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim', {'commit': '0fe8e1'}
 
-    Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+    Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download() } }
+
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-lua/telescope.nvim'
 
     " ............................................................ Practice .. "
     Plug 'ThePrimeagen/vim-be-good', {'do': '.\install.sh'}
@@ -803,6 +807,25 @@ let g:fzf_colors =
 " let $BAT_THEME = "gruvbox-light"
 " command! -bang -nargs=? -complete=dir Files
 "             \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+
+"paragraphs
+nnoremap <expr><silent> { (col('.') == 1 && len(getline(line('.') - 1)) == 0 ? '2{j' : '{j')
+nnoremap <expr><silent> } (col('.') == 1 && len(getline(line('.'))) == 0 ? 'j' : '}j')
+
+"airline
+" augroup AIRLINE
+    " autocmd!
+    let g:airline#extensions#branch#enabled = 0
+    let g:airline#extensions#hunks#enabled  = 0
+    let g:airline_section_y                 = ''
+    let g:airline_section_z                 = ''
+    let g:airline_section_y = airline#section#create([])
+    let g:airline_skip_empty_sections       = 1
+
+let g:airline#extensions#default#layout = [ [ 'a', 'c' ], [ 'x', 'error', 'warning' ] ]
+" let g:airline_statusline_ontop = 1
+" autocmd BufEnter <buffer> laststatus=0 noshowmode noruler
+" augroup END
 
 "neovide
 if has('termguicolors')
