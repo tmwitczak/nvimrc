@@ -10,6 +10,10 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'bfrg/vim-cpp-modern'
 
     " ......................................................... Status line .. "
+Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+" Plug 'ryanoasis/vim-devicons' Icons without colours
+Plug 'akinsho/nvim-bufferline.lua'
+
     " Plug 'enricobacis/vim-airline-clock' " Breaks Goyo, disabled for now
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -61,6 +65,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
     " ................................................................. Git .. "
     Plug 'airblade/vim-gitgutter'
+    Plug 'tpope/vim-git'
     Plug 'junegunn/gv.vim'
     Plug 'tpope/vim-fugitive'
 
@@ -68,6 +73,12 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'iamcco/markdown-preview.nvim', {
                 \ 'do': { -> mkdp#util#install() },
                 \ 'for': ['markdown', 'vim-plug']}
+    Plug 'jkramer/vim-checkbox'
+
+    " Plug 'godlygeek/tabular'
+    " Plug 'plasticboy/vim-markdown'
+
+    " Plug 'SidOfc/mkdx'
 
     " ........................................................... Utilities .. "
     Plug 'Yggdroot/indentLine'
@@ -117,10 +128,12 @@ Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
     " Plug 'yuki-ycino/fzf-preview.vim'
 
     " ............................................................... Icons .. "
-    Plug 'ryanoasis/vim-devicons' " Always load the plugin as the very last one
+    " Plug 'ryanoasis/vim-devicons' " Always load the plugin as the very last one
 
 call plug#end()
+
 " ---------------------------------------------------------------------------- "
+"
 "
 "
 "
@@ -180,8 +193,9 @@ nnoremap <silent> <leader>vv
         \ :execute "edit ".stdpath("config")."\\init.vim"<bar>
         \ :TabooRename "Configuration"<cr>
 nnoremap <silent> <leader>vs
-        \ :execute "source ".stdpath("config")."\\init.vim"<bar>
-        \ :execute "source ".stdpath("config")."\\ginit.vim"<cr>
+        \ :execute "source ".stdpath("config")."\\init.vim"<cr>
+        " \ :execute "source ".stdpath("config")."\\init.vim"<bar>
+        " \ :execute "source ".stdpath("config")."\\ginit.vim"<cr>
 
 nmap <silent> <leader>gs :tab G<cr>gg<c-n>
 nmap <silent> <leader>gh :diffget //2<cr>
@@ -244,7 +258,7 @@ let g:startify_change_to_vcs_root  = 1
 set background=dark
 "colorscheme gruvbox
 let g:airline#extensions#coc#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#left_sep      = "\ue0b4"
@@ -580,7 +594,7 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 let g:indentLine_char = '¦'
 let g:indent_blankline_char = '¦'
 
-set conceallevel=0
+" set conceallevel=0
 
 " Treesitter
 lua <<EOF
@@ -615,6 +629,7 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 }
+require'bufferline'.setup{}
 EOF
 autocmd FileType c,cpp,java,py setlocal foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
@@ -809,8 +824,12 @@ let g:fzf_colors =
 "             \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 
 "paragraphs
-nnoremap <expr><silent> { (col('.') == 1 && len(getline(line('.') - 1)) == 0 ? '2{j' : '{j')
-nnoremap <expr><silent> } (col('.') == 1 && len(getline(line('.'))) == 0 ? 'j' : '}j')
+nnoremap <expr> <silent> { (col('.') == 1 && len(getline(line('.') - 1)) == 0 ? '2{j' : '{j')
+nnoremap <expr> <silent> } (col('.') == 1 && len(getline(line('.'))) == 0 ? 'j' : '}j')
+
+"git changes
+nmap <silent> <leader>gcp vac:diffput<cr>]czz
+nmap <silent> <leader>gcg vac:diffget<cr>]czz
 
 "airline
 " augroup AIRLINE
@@ -847,7 +866,7 @@ let g:gruvbox_material_palette = 'material'
 let g:gruvbox_contrast_dark = "medium"
 colorscheme gruvbox-material
 let g:airline_theme='gruvbox_material'
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_skip_empty_sections = 1
 " AirlineRefresh
@@ -866,3 +885,61 @@ let g:neovide_cursor_animation_length = 0.08
 let g:neovide_cursor_trail_size       = 0.4
 let g:neovide_cursor_vfx_mode         = "sonicboom"
 let g:neovide_cursor_vfx_opacity      = 50
+
+" bufferline
+" lua <<EOF
+" require'bufferline'.setup {
+  " options = {
+    " view = "multiwindow",
+    " numbers = "none" | "ordinal" | "buffer_id",
+    " number_style = "superscript" | "",
+    " mappings = true | false,
+    " buffer_close_icon= '',
+    " modified_icon = '●',
+    " close_icon = '',
+    " left_trunc_marker = '',
+    " right_trunc_marker = '',
+    " max_name_length = 18,
+    " tab_size = 18,
+    " show_buffer_close_icons = true | false,
+    " -- can also be a table containing 2 custom separators
+    " -- [focused and unfocused]. eg: { '|', '|' }
+    " separator_style = "slant" | "thick" | "thin" | { 'any', 'any' },
+    " enforce_regular_tabs = false | true,
+    " always_show_bufferline = true | false,
+    " sort_by = 'extension' | 'relative_directory' | 'directory' | function(buffer_a, buffer_b)
+    "   -- add custom logic
+    "   return buffer_a.modified > buffer_b.modified
+    " end
+  " },
+" }
+" EOF
+" let g:airline#extensions#tabline#enabled = 0
+" AirlineToggle
+" AirlineRefresh
+" AirlineToggle
+" AirlineRefresh
+" :execute "source ".stdpath("config")."\\init.vim"
+"
+" let g:sourced = 0
+" function! DoubleSourceOnStart()
+"     if g:sourced == 0
+"         execute "source ".stdpath("config")."\\init.vim"
+"         let g:sourced = 1
+"     endif
+" endfunction
+" call DoubleSourceOnStart()
+
+"markdown checkboxes
+if has('conceal')
+  if &termencoding ==# "utf-8" || &encoding ==# "utf-8"
+    let s:checkbox_unchecked = " "
+    let s:checkbox_checked = "\u2713"
+  else
+    let s:checkbox_unchecked = 'o'
+    let s:checkbox_checked = 'x'
+  endif
+  syntax match markdownCheckbox "^\s*\([-\*] \[[ x]\]\|--\|++\) " contains=markdownCheckboxChecked,markdownCheckboxUnchecked
+  execute 'syntax match markdownCheckboxUnchecked "\([-\*] \[ \]\|--\)" contained conceal cchar='.s:checkbox_unchecked
+  execute 'syntax match markdownCheckboxChecked "\([-\*] \[x\]\|++\)" contained conceal cchar='.s:checkbox_checked
+endif
