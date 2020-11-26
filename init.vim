@@ -5,7 +5,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'junegunn/vim-plug'
 
     " ......................................................... Syntax tree .. "
-    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'nvim-treesitter/nvim-treesitter', {'commit': '049028'}
     Plug 'beyondmarc/hlsl.vim'
     Plug 'bfrg/vim-cpp-modern'
 
@@ -544,12 +544,12 @@ set list listchars=tab:»·,trail:·
 """""""""""""""""""""""""""""""""""""""""
 autocmd BufWritePost CMakeLists.txt silent exe "!cmake-format -i \<afile>" | exe "e"
 
-nnoremap ]b :bnext<cr>
-nnoremap [b :bprev<cr>
-nnoremap ]t :tabn<cr>
-nnoremap [t :tabp<cr>
-nnoremap <tab>   <c-w>w
-nnoremap <S-tab> <c-w>W
+nnoremap <silent> ]b :bnext<cr>
+nnoremap <silent> [b :bprev<cr>
+nnoremap <silent> ]t :tabn<cr>
+nnoremap <silent> [t :tabp<cr>
+nnoremap <silent> <tab>   <c-w>w
+nnoremap <silent> <S-tab> <c-w>W
 
 " ----------------------------------------------------------------------------
 " Help in new tabs
