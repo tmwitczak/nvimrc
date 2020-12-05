@@ -5,6 +5,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'junegunn/vim-plug'
 
     " ......................................................... Syntax tree .. "
+    " Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'nvim-treesitter/nvim-treesitter', {'commit': '049028'}
     Plug 'beyondmarc/hlsl.vim'
     Plug 'bfrg/vim-cpp-modern'
@@ -494,9 +495,9 @@ au FileType gitcommit autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 nnoremap <silent> <leader>lf :Files<cr>
 nnoremap <silent> <leader>lg :GFiles<cr>
-nnoremap <silent> <leader>lb :Buffers<cr>
+nnoremap <silent> <leader>lb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <silent> <leader>lr :Rg<cr>
-nnoremap <silent> <leader>ll :BLines<cr>
+nnoremap <silent> <leader>ll <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
 nnoremap <silent> <leader>lc :Commits<cr>
 nnoremap <silent> <leader>lm :Marks<cr>
 nnoremap <silent> <leader>lw :Windows<cr>
@@ -655,12 +656,12 @@ map <silent> <leader>bd :bd<cr>
 
 nnoremap Q @q
 
-" map f <Plug>Sneak_f
-" map F <Plug>Sneak_F
-" map t <Plug>Sneak_t
-" map T <Plug>Sneak_T
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 
-" nnoremap <silent> s :<C-U>call sneak#wrap('',           2, 0, 2, 1)<CR>
+" nnoremap <silent> ss :<C-U>call sneak#wrap('', 2, 0, 2, 1)<CR>
 
 autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 
@@ -719,8 +720,8 @@ augroup END
     nnoremap <space>k :Vista!!<cr>kj
 
 
-        " map , <Plug>(easymotion-prefix)
-        let g:EasyMotion_do_mapping = 0
+        map s <Plug>(easymotion-prefix)
+        let g:EasyMotion_do_mapping = 1
         let g:EasyMotion_use_upper = 0
         " let g:EasyMotion_keys = "ls;ahg'urieowpqyt[]vcxbnm,.\/094jfkd"
         " let g:EasyMotion_keys = "asdghklqwertyuiopzxcvbnmfj;"
@@ -728,9 +729,9 @@ augroup END
         "nmap , <Plug>(easymotion-overwin-f)
         " map  <space>j <Plug>(easymotion-bd-f)
         " map <silent> s <Plug>(easymotion-overwin-f)
-        nmap <silent> s <Plug>(easymotion-overwin-f)
-        xmap <silent> s <Plug>(easymotion-bd-f)
-        omap <silent> s <Plug>(easymotion-bd-f)
+        """nmap <silent> s <Plug>(easymotion-bd-f2)
+        """xmap <silent> s <Plug>(easymotion-bd-f)
+        """omap <silent> s <Plug>(easymotion-bd-f)
         " nmap <space>j <Plug>(easymotion-overwin-f)
         " omap <space>j <Plug>(easymotion-tn)
         let g:EasyMotion_smartcase = 1
@@ -943,3 +944,25 @@ if has('conceal')
   execute 'syntax match markdownCheckboxUnchecked "\([-\*] \[ \]\|--\)" contained conceal cchar='.s:checkbox_unchecked
   execute 'syntax match markdownCheckboxChecked "\([-\*] \[x\]\|++\)" contained conceal cchar='.s:checkbox_checked
 endif
+
+"telescope
+lua << EOF
+require('telescope').setup{
+    defaults = {
+        prompt_position = "top",
+        prompt_prefix = '',
+        sorting_strategy = "ascending",
+        layout_strategy = "flex",
+        generic_sorter = require'telescope.sorters'.get_fzy_sorter,
+        use_less = false,
+        set_env = { ['COLORTERM'] = 'truecolor' },
+    }
+}
+EOF
+
+
+
+   :map [[ ?{<CR>w99[{
+   :map ][ /}<CR>b99]}
+   :map ]] j0[[%/{<CR>
+   :map [] k$][%?}<CR>
