@@ -34,6 +34,8 @@ Plug 'akinsho/nvim-bufferline.lua'
     " versions over 0.22.0 break the preview window
     Plug 'junegunn/fzf', { 'tag': '0.22.0', 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim', {'commit': '0fe8e1'}
+    " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    " Plug 'junegunn/fzf.vim'
 
     Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download() } }
 
@@ -293,11 +295,11 @@ let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " 
 "
 "
 " filetype plugin indent on
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
-set ts=4 sw=4 et
+" set ts=4 sw=4 et
 "
 "
 "
@@ -448,7 +450,7 @@ nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 nnoremap <silent> <space>ls  :<C-u>Vista finder coc<cr>
 " Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 "nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
@@ -602,6 +604,7 @@ lua <<EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
+    disable = { "python" },
   },
   incremental_selection = {
     enable = true,
@@ -804,25 +807,25 @@ nnoremap <silent> <space>vj :silent! let &guifont = substitute(
  \ '')<CR>
 
 "fzf colors
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+" let g:fzf_colors =
+" \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'border':  ['fg', 'Ignore'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
 
 "fzf
 " let $BAT_THEME = "gruvbox-light"
-" command! -bang -nargs=? -complete=dir Files
-"             \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+command! -bang -nargs=? -complete=dir Files
+            \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline', '--preview-window=right:50%']}), <bang>0)
 
 "paragraphs
 nnoremap <expr> <silent> { (col('.') == 1 && len(getline(line('.') - 1)) == 0 ? '2{j' : '{j')
@@ -947,15 +950,22 @@ endif
 
 "telescope
 lua << EOF
+local actions = require('telescope.actions')
 require('telescope').setup{
     defaults = {
+    mappings = {
+    i={
+        ["<esc>"] = actions.close
+    },
+    },
         prompt_position = "top",
-        prompt_prefix = '',
+        prompt_prefix = '> ',
         sorting_strategy = "ascending",
         layout_strategy = "flex",
-        generic_sorter = require'telescope.sorters'.get_fzy_sorter,
+        -- generic_sorter = require'telescope.sorters'.get_fzy_sorter,
         use_less = false,
-        set_env = { ['COLORTERM'] = 'truecolor' },
+        -- set_env = { ['COLORTERM'] = 'truecolor' },
+        file_previewer = require'telescope.previewers'.cat.new,
     }
 }
 EOF
@@ -966,3 +976,15 @@ EOF
    :map ][ /}<CR>b99]}
    :map ]] j0[[%/{<CR>
    :map [] k$][%?}<CR>
+
+
+
+highlight link EasyMotionTarget        MoreMsg
+highlight link EasyMotionShade         NonText
+highlight link EasyMotionTarget2First  MoreMsg
+highlight link EasyMotionTarget2Second NonText
+" highlight link EasyMotionMoveHL        NonText
+" highlight link EasyMotionIncSearch     NonText
+"
+
+nmap <silent> <space>ss <cmd>setlocal spell!<cr>
