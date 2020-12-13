@@ -140,7 +140,7 @@ call plug#end()
 "
 "
 "
-let g:python3_host_prog = "C:/Program Files/Python38/python.exe"
+" let g:python3_host_prog = "C:/Program Files/Python38/python.exe"
 
 language en
 "set langmenu=en_US.UTF-8
@@ -270,10 +270,35 @@ let g:airline#extensions#tabline#right_sep     = "\ue0b6"
 let g:airline#extensions#tabline#right_alt_sep = "\ue0b7"
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline_powerline_fonts = 1
-let g:airline_left_sep      = "\ue0b4"
-let g:airline_left_alt_sep  = "\ue0b5"
-let g:airline_right_sep     = "\ue0b6"
-let g:airline_right_alt_sep = "\ue0b7"
+let g:airline_left_sep      = ""
+let g:airline_left_alt_sep  = ""
+let g:airline_right_sep     = ""
+let g:airline_right_alt_sep = ""
+" let g:airline_left_sep      = "\ue0b4"
+" let g:airline_left_alt_sep  = "\ue0b5"
+" let g:airline_right_sep     = "\ue0b6"
+" let g:airline_right_alt_sep = "\ue0b7"
+  let g:airline_mode_map = {
+      \ '__'     : '-',
+      \ 'c'      : 'C',
+      \ 'i'      : 'I',
+      \ 'ic'     : 'I',
+      \ 'ix'     : 'I',
+      \ 'n'      : 'N',
+      \ 'multi'  : 'M',
+      \ 'ni'     : 'N',
+      \ 'no'     : 'N',
+      \ 'R'      : 'R',
+      \ 'Rv'     : 'R',
+      \ 's'      : 'S',
+      \ 'S'      : 'S',
+      \ ''     : 'S',
+      \ 't'      : 'T',
+      \ 'v'      : 'V',
+      \ 'V'      : 'V',
+      \ ''     : 'V',
+      \ }
+" highlight link airline_tab MoreMsg
 let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " " . "\uE0A3" . '%{col(".")}'])
 "let g:airline_left_sep=' '
 "let g:airline_left_alt_sep='|'
