@@ -893,8 +893,10 @@ let g:gruvbox_material_current_word = 'grey background'
 let g:gruvbox_material_better_performance = 0
 let g:gruvbox_material_palette = 'material'
 let g:gruvbox_contrast_dark = "medium"
-colorscheme gruvbox-material
-let g:airline_theme='gruvbox_material'
+colorscheme edge
+let g:airline_theme='edge'
+" colorscheme gruvbox-material
+" let g:airline_theme='gruvbox_material'
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_skip_empty_sections = 1

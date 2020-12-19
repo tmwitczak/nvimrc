@@ -2,7 +2,7 @@
   "clangd.semanticHighlighting": true,
   "python.formatting.provider": "black",
   "python.pythonPath": "python",
-  "python.jediEnabled": false,
+  "python.jediEnabled": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "cpp",
     "hpp",
