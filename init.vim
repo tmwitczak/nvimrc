@@ -258,7 +258,7 @@ let g:startify_session_persistence = 1
 let g:startify_change_to_dir       = 1
 let g:startify_change_to_vcs_root  = 1
 
-set background=dark
+set background=light
 "colorscheme gruvbox
 let g:airline#extensions#coc#enabled = 1
 let g:airline#extensions#tabline#enabled = 0
@@ -879,7 +879,7 @@ let g:airline#extensions#default#layout = [ [ 'a', 'c' ], [ 'x', 'error', 'warni
 if has('termguicolors')
   set termguicolors
 endif
-set background=dark
+set background=light
 let g:gruvbox_material_background = 'medium'
 let g:gruvbox_material_disable_italic_comment = 0
 let g:gruvbox_material_enable_bold = 1
