@@ -7,6 +7,7 @@ call plug#begin(stdpath('data') . '/plugged')
     " ......................................................... Syntax tree .. "
     " Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'nvim-treesitter/nvim-treesitter', {'commit': '049028'}
+    Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'beyondmarc/hlsl.vim'
     Plug 'bfrg/vim-cpp-modern'
 
@@ -396,7 +397,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -644,7 +645,14 @@ require'nvim-treesitter.configs'.setup {
     enable = true
   },
   refactor = {
+    enable = true,
     highlight_definitions = { enable = true },
+    smart_rename = {
+      enable = true,
+      keymaps = {
+        smart_rename = "grn",
+      },
+    },
   },
   textobjects = {
     select = {
