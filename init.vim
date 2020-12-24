@@ -259,7 +259,7 @@ let g:startify_session_persistence = 1
 let g:startify_change_to_dir       = 1
 let g:startify_change_to_vcs_root  = 1
 
-set background=light
+set background=dark
 "colorscheme gruvbox
 let g:airline#extensions#coc#enabled = 1
 let g:airline#extensions#tabline#enabled = 0
@@ -509,7 +509,7 @@ nnoremap <silent> ` :NERDTreeToggle<cr>
 " nnoremap <silent> <leader>' :!e:\pbl\game\PBL_Engine\Debug\PBL_Engine.exe<cr>
 " set colorcolumn=81
 let &colorcolumn=join(range(81,999),",")
-set foldmethod=syntax
+" set foldmethod=syntax
 
 
 
@@ -668,8 +668,9 @@ require'nvim-treesitter.configs'.setup {
 }
 require'bufferline'.setup{}
 EOF
-autocmd FileType c,cpp,java,py setlocal foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+set foldmethod=expr
+" autocmd FileType c,cpp,java,py setlocal foldmethod=expr
 
 " set completeopt=menuone,noinsert,noselect
 " let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
@@ -887,7 +888,7 @@ let g:airline#extensions#default#layout = [ [ 'a', 'c' ], [ 'x', 'error', 'warni
 if has('termguicolors')
   set termguicolors
 endif
-set background=light
+set background=dark
 let g:gruvbox_material_background = 'medium'
 let g:gruvbox_material_disable_italic_comment = 0
 let g:gruvbox_material_enable_bold = 1
@@ -901,8 +902,8 @@ let g:gruvbox_material_current_word = 'grey background'
 let g:gruvbox_material_better_performance = 0
 let g:gruvbox_material_palette = 'material'
 let g:gruvbox_contrast_dark = "medium"
-colorscheme edge
-let g:airline_theme='edge'
+colorscheme gruvbox-material
+let g:airline_theme='gruvbox_material'
 " colorscheme gruvbox-material
 " let g:airline_theme='gruvbox_material'
 let g:airline#extensions#tabline#enabled = 0
@@ -1023,3 +1024,17 @@ highlight link EasyMotionTarget2Second NonText
 "
 
 nmap <silent> <space>ss <cmd>setlocal spell!<cr>
+
+
+function! NeatFoldText()
+    let line             = getline(v:foldstart)
+    let foldchar         = ' '
+    let hiddenLinesCount = v:foldend - v:foldstart
+    let lines_count_text = printf("%1s \u22ef", hiddenLinesCount) . repeat(foldchar, 9)
+    let foldtextstart    = " \u22ef " " . repeat(' ', indent(nextnonblank(v:foldstart)))
+    let foldtextend      = lines_count_text " . repeat(foldchar, 8)
+    let foldtextlength   = strlen(substitute(line . foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+
+    return line . foldtextstart . repeat(foldchar, winwidth(0) - foldtextlength) . foldtextend
+endfunction
+set foldtext=NeatFoldText()
