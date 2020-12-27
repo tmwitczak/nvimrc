@@ -507,9 +507,12 @@ nnoremap <silent> ` :NERDTreeToggle<cr>
 "Per project settings
 " nnoremap <leader>; :!msbuild<cr>
 " nnoremap <silent> <leader>' :!e:\pbl\game\PBL_Engine\Debug\PBL_Engine.exe<cr>
-" set colorcolumn=81
-let &colorcolumn=join(range(81,999),",")
 " set foldmethod=syntax
+
+
+
+set colorcolumn=81
+" let &colorcolumn=join(range(81,999),",")
 
 
 
@@ -646,7 +649,6 @@ require'nvim-treesitter.configs'.setup {
   },
   refactor = {
     enable = true,
-    highlight_definitions = { enable = true },
     smart_rename = {
       enable = true,
       keymaps = {
@@ -889,7 +891,7 @@ if has('termguicolors')
   set termguicolors
 endif
 set background=dark
-let g:gruvbox_material_background = 'medium'
+let g:gruvbox_material_background = 'soft'
 let g:gruvbox_material_disable_italic_comment = 0
 let g:gruvbox_material_enable_bold = 1
 let g:gruvbox_material_enable_italic = 1
@@ -901,7 +903,7 @@ let g:gruvbox_material_diagnostic_line_highlight = 0
 let g:gruvbox_material_current_word = 'grey background'
 let g:gruvbox_material_better_performance = 0
 let g:gruvbox_material_palette = 'material'
-let g:gruvbox_contrast_dark = "medium"
+" let g:gruvbox_contrast_dark = "low"
 colorscheme gruvbox-material
 let g:airline_theme='gruvbox_material'
 " colorscheme gruvbox-material
