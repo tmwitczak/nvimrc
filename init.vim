@@ -235,8 +235,8 @@ nnoremap <silent> <leader>sl :vsplit<cr><c-w>l<cr>
 
 nnoremap <silent> <leader><leader> :Goyo<cr>
 let g:goyo_width=100
-let g:goyo_height='100%'
-let g:goyo_linenr=1
+let g:goyo_height='62%'
+let g:goyo_linenr=0
 
 set incsearch
 
@@ -779,13 +779,35 @@ augroup END
     xmap ga <Plug>(EasyAlign)
     nmap ga <Plug>(EasyAlign)
 
+" ---------------------------------------------------------------------- Goyo
+function! s:goyo_enter()
+  Limelight
+  silent! let &guifont = substitute(
+     \ &guifont,
+     \ ':h\zs\d\+',
+     \ '\=eval(submatch(0)+5)',
+     \ '')
+endfunction
+
+function! s:goyo_leave()
+  Limelight!
+  silent! let &guifont = substitute(
+     \ &guifont,
+     \ ':h\zs\d\+',
+     \ '\=eval(submatch(0)-5)',
+     \ '')
+endfunction
+
+
 " Limelight
 augroup GOYO
-    autocmd! User GoyoEnter Limelight
-    autocmd! User GoyoLeave Limelight!
+    autocmd! User GoyoEnter nested call <SID>goyo_enter()
+    autocmd! User GoyoLeave nested call <SID>goyo_leave()
 augroup END
 
 nmap <silent> <leader>- :Limelight!!<cr>
+
+" ----------------------------------------------------------------------
 
 " Markdown preview
 nmap <leader>mp <Plug>MarkdownPreviewToggle
