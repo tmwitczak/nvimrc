@@ -6,7 +6,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
     " ......................................................... Syntax tree .. "
     " Plug 'nvim-treesitter/nvim-treesitter'
-    Plug 'nvim-treesitter/nvim-treesitter', {'commit': '049028'}
+    Plug 'nvim-treesitter/nvim-treesitter' ", {'commit': '049028'}
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'beyondmarc/hlsl.vim'
     Plug 'bfrg/vim-cpp-modern'
@@ -633,7 +633,7 @@ lua <<EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
-    disable = { "python" },
+    disable = {"python"},
   },
   incremental_selection = {
     enable = true,
