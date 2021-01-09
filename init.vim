@@ -176,6 +176,8 @@ autocmd FocusGained,BufEnter * :checktime
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 
+set fileformats=dos
+
 
 
 " tnoremap <Esc> <C-\><C-n>
@@ -525,10 +527,14 @@ au FileType gitcommit autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 
 nnoremap <silent> <leader>lf :Files<cr>
+" nnoremap <silent> <leader>lf <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <silent> <leader>lg :GFiles<cr>
-nnoremap <silent> <leader>lb <cmd>lua require('telescope.builtin').buffers()<cr>
+" nnoremap <silent> <leader>lg <cmd>lua require('telescope.builtin').git_files()<cr>
+nnoremap <silent> <leader>lb :Buffers<cr>
+" nnoremap <silent> <leader>lb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <silent> <leader>lr :Rg<cr>
-nnoremap <silent> <leader>ll <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
+nnoremap <silent> <leader>ll :BLines<cr>
+" nnoremap <silent> <leader>ll <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
 nnoremap <silent> <leader>lc :Commits<cr>
 nnoremap <silent> <leader>lm :Marks<cr>
 nnoremap <silent> <leader>lw :Windows<cr>
@@ -633,7 +639,7 @@ lua <<EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
-    disable = {"python"},
+    -- disable = {"python"},
   },
   incremental_selection = {
     enable = true,
@@ -1025,7 +1031,7 @@ require('telescope').setup{
         -- generic_sorter = require'telescope.sorters'.get_fzy_sorter,
         use_less = false,
         -- set_env = { ['COLORTERM'] = 'truecolor' },
-        file_previewer = require'telescope.previewers'.cat.new,
+        file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
     }
 }
 EOF
