@@ -5,8 +5,8 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'junegunn/vim-plug'
 
     " ......................................................... Syntax tree .. "
-    " Plug 'nvim-treesitter/nvim-treesitter'
-    Plug 'nvim-treesitter/nvim-treesitter', {'commit': '00ea651'}
+    Plug 'nvim-treesitter/nvim-treesitter'
+    " Plug 'nvim-treesitter/nvim-treesitter', {'commit': '00ea651'}
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'beyondmarc/hlsl.vim'
     Plug 'bfrg/vim-cpp-modern'
