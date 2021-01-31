@@ -8,6 +8,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'nvim-treesitter/nvim-treesitter'
     " Plug 'nvim-treesitter/nvim-treesitter', {'commit': '00ea651'}
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
+    Plug 'p00f/nvim-ts-rainbow'
     Plug 'beyondmarc/hlsl.vim'
     Plug 'bfrg/vim-cpp-modern'
 
@@ -103,6 +104,8 @@ Plug 'akinsho/nvim-bufferline.lua'
     Plug 'tpope/vim-commentary'       " Comments
     Plug 'tpope/vim-repeat'           " Repeat some plugins with '.'
     Plug 'tpope/vim-surround'         " Surroundings
+    Plug 'tpope/vim-sleuth'
+    Plug 'jiangmiao/auto-pairs'
 
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
@@ -323,10 +326,16 @@ let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " 
 "
 "
 " filetype plugin indent on
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
+
+
+
+" set tabstop=2
+" set shiftwidth=2
+" set softtabstop=2
+" set expandtab
+
+
+
 " set ts=4 sw=4 et
 "
 "
@@ -397,8 +406,8 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
 " nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
@@ -513,8 +522,9 @@ nnoremap <silent> ` :NERDTreeToggle<cr>
 
 
 
-set colorcolumn=81
-" let &colorcolumn=join(range(81,999),",")
+" set colorcolumn=81
+let &colorcolumn=join(range(81,999),",")
+" highlight ColorColumn ctermbg=0 guibg=red
 
 
 
@@ -636,6 +646,7 @@ let g:indent_blankline_char = '¦'
 
 " Treesitter
 lua <<EOF
+require 'nvim-treesitter.install'.compilers = { "clang", "gcc" }
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
@@ -661,6 +672,9 @@ require'nvim-treesitter.configs'.setup {
         smart_rename = "grn",
       },
     },
+  },
+  rainbow = {
+    enable = true,
   },
   textobjects = {
     select = {
@@ -919,18 +933,56 @@ if has('termguicolors')
   set termguicolors
 endif
 set background=dark
-let g:gruvbox_material_background = 'soft'
+let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_disable_italic_comment = 0
 let g:gruvbox_material_enable_bold = 1
 let g:gruvbox_material_enable_italic = 1
 let g:gruvbox_material_cursor = 'auto'
 let g:gruvbox_material_transparent_background = 0
 let g:gruvbox_material_visual = 'grey background'
+let g:gruvbox_material_menu_selection_background = 'grey'
 let g:gruvbox_material_sign_column_background = 'none'
+let g:gruvbox_material_diagnostic_text_highlight = 0
 let g:gruvbox_material_diagnostic_line_highlight = 0
 let g:gruvbox_material_current_word = 'grey background'
+let g:gruvbox_material_statusline_style = 'default'
 let g:gruvbox_material_better_performance = 0
 let g:gruvbox_material_palette = 'material'
+let g:gruvbox_material_palette = {
+      \ 'bg0':              ['#1d2021',   '234'],
+      \ 'bg1':              ['#262727',   '235'],
+      \ 'bg2':              ['#0f1112',   '235'],
+      \ 'bg3':              ['#3c3836',   '237'],
+      \ 'bg4':              ['#3c3836',   '237'],
+      \ 'bg5':              ['#504945',   '239'],
+      \ 'bg_statusline1':   ['#0f1112',   '235'],
+      \ 'bg_statusline2':   ['#32302f',   '235'],
+      \ 'bg_statusline3':   ['#504945',   '239'],
+      \ 'bg_diff_green':    ['#32361a',   '22'],
+      \ 'bg_visual_green':  ['#333e34',   '22'],
+      \ 'bg_diff_red':      ['#3c1f1e',   '52'],
+      \ 'bg_visual_red':    ['#442e2d',   '52'],
+      \ 'bg_diff_blue':     ['#0d3138',   '17'],
+      \ 'bg_visual_blue':   ['#2e3b3b',   '17'],
+      \ 'bg_visual_yellow': ['#473c29',   '94'],
+      \ 'bg_current_word':  ['#32302f',   '236'],
+      \ 'fg0':              ['#d4be98',   '223'],
+      \ 'fg1':              ['#ddc7a1',   '223'],
+      \ 'red':              ['#ea6962',   '167'],
+      \ 'orange':           ['#e78a4e',   '208'],
+      \ 'yellow':           ['#d8a657',   '214'],
+      \ 'green':            ['#a9b665',   '142'],
+      \ 'aqua':             ['#89b482',   '108'],
+      \ 'blue':             ['#7daea3',   '109'],
+      \ 'purple':           ['#d3869b',   '175'],
+      \ 'bg_red':           ['#ea6962',   '167'],
+      \ 'bg_green':         ['#a9b665',   '142'],
+      \ 'bg_yellow':        ['#d8a657',   '214'],
+      \ 'grey0':            ['#7c6f64',   '243'],
+      \ 'grey1':            ['#928374',   '245'],
+      \ 'grey2':            ['#a89984',   '246'],
+      \ 'none':             ['NONE',      'NONE']
+      \ }
 " let g:gruvbox_contrast_dark = "low"
 colorscheme gruvbox-material
 let g:airline_theme='gruvbox_material'
