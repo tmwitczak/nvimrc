@@ -8,14 +8,15 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'nvim-treesitter/nvim-treesitter'
     " Plug 'nvim-treesitter/nvim-treesitter', {'commit': '00ea651'}
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
+    Plug 'nvim-treesitter/playground'
     Plug 'p00f/nvim-ts-rainbow'
     Plug 'beyondmarc/hlsl.vim'
     Plug 'bfrg/vim-cpp-modern'
 
     " ......................................................... Status line .. "
-Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
-" Plug 'ryanoasis/vim-devicons' Icons without colours
-Plug 'akinsho/nvim-bufferline.lua'
+    Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+    " Plug 'ryanoasis/vim-devicons' Icons without colours
+    Plug 'akinsho/nvim-bufferline.lua'
 
     " Plug 'enricobacis/vim-airline-clock' " Breaks Goyo, disabled for now
     Plug 'vim-airline/vim-airline'
@@ -536,10 +537,10 @@ au FileType gitcommit setlocal spell
 au FileType gitcommit autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 
-nnoremap <silent> <leader>lf :Files<cr>
-" nnoremap <silent> <leader>lf <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <silent> <leader>lg :GFiles<cr>
-" nnoremap <silent> <leader>lg <cmd>lua require('telescope.builtin').git_files()<cr>
+" nnoremap <silent> <leader>lf :Files<cr>
+nnoremap <silent> <leader>lf <cmd>lua require('telescope.builtin').find_files()<cr>
+" nnoremap <silent> <leader>lg :GFiles<cr>
+nnoremap <silent> <leader>lg <cmd>lua require('telescope.builtin').git_files()<cr>
 nnoremap <silent> <leader>lb :Buffers<cr>
 " nnoremap <silent> <leader>lb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <silent> <leader>lr :Rg<cr>
@@ -648,6 +649,12 @@ let g:indent_blankline_char = '¦'
 lua <<EOF
 require 'nvim-treesitter.install'.compilers = { "clang", "gcc" }
 require'nvim-treesitter.configs'.setup {
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false -- Whether the query persists across vim sessions
+  },
   highlight = {
     enable = true,
     -- disable = {"python"},
