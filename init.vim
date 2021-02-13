@@ -14,10 +14,6 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'bfrg/vim-cpp-modern'
 
     " ......................................................... Status line .. "
-    Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
-    " Plug 'ryanoasis/vim-devicons' Icons without colours
-    Plug 'akinsho/nvim-bufferline.lua'
-
     " Plug 'enricobacis/vim-airline-clock' " Breaks Goyo, disabled for now
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -40,14 +36,14 @@ call plug#begin(stdpath('data') . '/plugged')
     " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     " Plug 'junegunn/fzf.vim'
 
-    Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download() } }
+    " Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download() } }
 
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-lua/telescope.nvim'
 
     " ............................................................ Practice .. "
-    Plug 'ThePrimeagen/vim-be-good', {'do': '.\install.sh'}
+    " Plug 'ThePrimeagen/vim-be-good', {'do': '.\install.sh'}
 
     " ................................................................. LSP .. "
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -87,6 +83,7 @@ call plug#begin(stdpath('data') . '/plugged')
     " Plug 'SidOfc/mkdx'
 
     " ........................................................... Utilities .. "
+    " Plug 'TaDaa/vimade'
     Plug 'Yggdroot/indentLine'
     Plug 'amix/vim-zenroom2'
     Plug 'jbgutierrez/vim-better-comments'
@@ -100,6 +97,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     Plug 'psliwka/vim-smoothie'       " Smooth scrolling
     Plug 'scrooloose/nerdtree'        " Filesystem tree
+" Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python -m chadtree deps'}
     Plug 'sheerun/vim-polyglot'       " Syntax files
     Plug 'tpope/vim-abolish'          " Coercions
     Plug 'tpope/vim-commentary'       " Comments
@@ -109,6 +107,12 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'jiangmiao/auto-pairs'
 
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+
+
+
+    Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+    " Plug 'ryanoasis/vim-devicons' Icons without colours
+    Plug 'akinsho/nvim-bufferline.lua'
 
 " Plug 'kyazdani42/nvim-web-devicons'
 " Plug 'romgrk/barbar.nvim' " breaks Vista
@@ -268,14 +272,14 @@ let g:startify_change_to_vcs_root  = 1
 set background=dark
 "colorscheme gruvbox
 let g:airline#extensions#coc#enabled = 1
-let g:airline#extensions#tabline#enabled = 0
+" let g:airline#extensions#tabline#enabled = 0
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#left_sep      = "\ue0b4"
-let g:airline#extensions#tabline#left_alt_sep  = "\ue0b5"
-let g:airline#extensions#tabline#right_sep     = "\ue0b6"
-let g:airline#extensions#tabline#right_alt_sep = "\ue0b7"
-let g:airline#extensions#tabline#formatter = 'default'
+" let g:airline#extensions#tabline#left_sep      = "\ue0b4"
+" let g:airline#extensions#tabline#left_alt_sep  = "\ue0b5"
+" let g:airline#extensions#tabline#right_sep     = "\ue0b6"
+" let g:airline#extensions#tabline#right_alt_sep = "\ue0b7"
+" let g:airline#extensions#tabline#formatter = 'default'
 let g:airline_powerline_fonts = 1
 let g:airline_left_sep      = ""
 let g:airline_left_alt_sep  = ""
@@ -695,7 +699,6 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 }
-require'bufferline'.setup{}
 EOF
 set foldexpr=nvim_treesitter#foldexpr()
 set foldmethod=expr
@@ -861,7 +864,7 @@ set complete+=kspell
 
 
 let g:webdevicons_enable_nerdtree           = 1
-let g:webdevicons_enable_airline_tabline    = 1
+" let g:webdevicons_enable_airline_tabline    = 1
 let g:webdevicons_enable_airline_statusline = 1
 let g:webdevicons_enable_startify           = 1
 
@@ -996,15 +999,16 @@ let g:airline_theme='gruvbox_material'
 " colorscheme gruvbox-material
 " let g:airline_theme='gruvbox_material'
 let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#tabline#formatter = 'unique_tail'
+" let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_skip_empty_sections = 1
 " AirlineRefresh
 function! FullscreenToggleNeovide()
-    if g:neovide_fullscreen
-        let g:neovide_fullscreen = 0
-    else
-        let g:neovide_fullscreen = 1
-    endif
+    let g:neovide_fullscreen = 1 - g:neovide_fullscreen
+    " if g:neovide_fullscreen
+    "     let g:neovide_fullscreen = 0
+    " else
+    "     let g:neovide_fullscreen = 1
+    " endif
 endfunction
 nnoremap <silent> <space>ff :call FullscreenToggleNeovide()<cr>
 set guifont=Iosevka:h16
@@ -1016,34 +1020,41 @@ let g:neovide_cursor_vfx_mode         = "sonicboom"
 let g:neovide_cursor_vfx_opacity      = 50
 
 " bufferline
-" lua <<EOF
-" require'bufferline'.setup {
-  " options = {
-    " view = "multiwindow",
-    " numbers = "none" | "ordinal" | "buffer_id",
-    " number_style = "superscript" | "",
-    " mappings = true | false,
-    " buffer_close_icon= '',
-    " modified_icon = '●',
-    " close_icon = '',
-    " left_trunc_marker = '',
-    " right_trunc_marker = '',
-    " max_name_length = 18,
-    " tab_size = 18,
-    " show_buffer_close_icons = true | false,
-    " -- can also be a table containing 2 custom separators
-    " -- [focused and unfocused]. eg: { '|', '|' }
-    " separator_style = "slant" | "thick" | "thin" | { 'any', 'any' },
-    " enforce_regular_tabs = false | true,
-    " always_show_bufferline = true | false,
-    " sort_by = 'extension' | 'relative_directory' | 'directory' | function(buffer_a, buffer_b)
-    "   -- add custom logic
-    "   return buffer_a.modified > buffer_b.modified
-    " end
-  " },
-" }
-" EOF
-" let g:airline#extensions#tabline#enabled = 0
+lua <<EOF
+require"bufferline".setup{
+    options = {
+        view = "multiwindow",
+        -- numbers = "ordinal",
+        -- number_style = "superscript" | "",
+        -- mappings = true | false,
+        -- buffer_close_icon= "",
+        -- modified_icon = "●",
+        -- close_icon = "",
+        -- left_trunc_marker = "",
+        -- right_trunc_marker = "",
+        -- max_name_length = 18,
+        -- max_prefix_length = 15, -- prefix used when a buffer is deduplicated
+        -- tab_size = 18,
+        -- diagnostics = false | "nvim_lsp"
+        -- diagnostics_indicator = function(count, level)
+        -- return "("..count..")"
+        -- end
+        show_buffer_close_icons = false,
+        -- persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+        -- -- can also be a table containing 2 custom separators
+        -- -- [focused and unfocused]. eg: { "|", "|" }
+        -- separator_style = "thick",
+        -- enforce_regular_tabs = false,
+        -- always_show_bufferline = true | false,
+        sort_by = "directory",
+        -- sort_by = "extension" | "relative_directory" | "directory" | function(buffer_a, buffer_b)
+        -- -- add custom logic
+        -- return buffer_a.modified > buffer_b.modified
+        -- end
+    }
+}
+EOF
+let g:airline#extensions#tabline#enabled = 0
 " AirlineToggle
 " AirlineRefresh
 " AirlineToggle
@@ -1127,3 +1138,11 @@ function! NeatFoldText()
     return line . foldtextstart . repeat(foldchar, winwidth(0) - foldtextlength) . foldtextend
 endfunction
 set foldtext=NeatFoldText()
+
+
+
+nmap <space>bp :b#<cr>
+
+
+
+" let g:vimade.fadelevel = 0.6
