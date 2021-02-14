@@ -545,8 +545,8 @@ au FileType gitcommit autocmd BufWritePre <buffer> :%s/\s\+$//e
 nnoremap <silent> <leader>lf <cmd>lua require('telescope.builtin').find_files()<cr>
 " nnoremap <silent> <leader>lg :GFiles<cr>
 nnoremap <silent> <leader>lg <cmd>lua require('telescope.builtin').git_files()<cr>
-nnoremap <silent> <leader>lb :Buffers<cr>
-" nnoremap <silent> <leader>lb <cmd>lua require('telescope.builtin').buffers()<cr>
+" nnoremap <silent> <leader>lb :Buffers<cr>
+nnoremap <silent> <leader>lb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <silent> <leader>lr :Rg<cr>
 nnoremap <silent> <leader>ll :BLines<cr>
 " nnoremap <silent> <leader>ll <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
@@ -1102,6 +1102,8 @@ require('telescope').setup{
         use_less = false,
         -- set_env = { ['COLORTERM'] = 'truecolor' },
         file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+        grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+        qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
     }
 }
 EOF
