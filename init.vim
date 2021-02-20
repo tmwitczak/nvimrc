@@ -1148,3 +1148,7 @@ nmap <space>bp :b#<cr>
 
 
 " let g:vimade.fadelevel = 0.6
+
+
+vmap <space>dp <cmd>diffput<cr>
+vmap <space>dg <cmd>diffget<cr>
