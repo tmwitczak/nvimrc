@@ -1,0 +1,5 @@
+.netrwhist
+after/plugin/double-source.vim
+autoload/plug.vim
+autoload/plug.vim.old
+tags
