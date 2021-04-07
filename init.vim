@@ -30,6 +30,10 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'phaazon/hop.nvim'
     " Plug 'unblevable/quick-scope'
 
+    " Motions
+    Plug 'chaoren/vim-wordmotion'
+    Plug 'wellle/targets.vim'
+
     " Mappings "
     Plug 'Konfekt/vim-alias'
     Plug 'liuchengxu/vim-which-key'
@@ -39,6 +43,9 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'psf/black', { 'branch': 'stable' }
     " Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
+    "
+    "
+    Plug 'nacro90/numb.nvim'
 
     " ................................................................ Tabs .. "
     " Plug 'gcmt/taboo.vim'
@@ -51,6 +58,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-lua/telescope.nvim'
+    Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
     Plug 'svermeulen/vimpeccable'
 
@@ -61,7 +69,9 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'neovim/nvim-lspconfig'
     " Plug 'kabouzeid/nvim-lspinstall'
     Plug 'nvim-lua/completion-nvim'
+    Plug 'hrsh7th/nvim-compe'
     Plug 'kosayoda/nvim-lightbulb'
+    Plug 'onsails/lspkind-nvim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     " ............................................................ Markdown .. "
@@ -104,6 +114,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     Plug 'psliwka/vim-smoothie'       " Smooth scrolling
     Plug 'scrooloose/nerdtree'        " Filesystem tree
+    Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python -m chadtree deps'}
     Plug 'sheerun/vim-polyglot'       " Syntax files
     Plug 'tpope/vim-abolish'          " Coercions
@@ -112,11 +123,14 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'tpope/vim-surround'         " Surroundings
     " Plug 'tpope/vim-sleuth'
     " Plug 'jiangmiao/auto-pairs'
+    "
 
 
 call plug#end()
 
-lua require('main')
+lua <<EOF
+require('main')
+EOF
 
 " old config below ----------------------------------------------------------- "
 
@@ -137,7 +151,6 @@ lua require('main')
 " tnoremap <Esc> <C-\><C-n>
 
 
-nmap <silent> <leader>gg :GitGutterLineHighlightsToggle<cr>
 
 " nnoremap <leader>` i~<esc>
 
@@ -303,7 +316,7 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+" inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
@@ -424,7 +437,7 @@ let g:startify_custom_header = 'startify#pad(startify#fortune#boxed())'
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeWinSize = 39
-nnoremap <silent> ` :NERDTreeToggle<cr>
+" nnoremap <silent> ` :NERDTreeToggle<cr>
 
 
 
@@ -448,21 +461,6 @@ au FileType gitcommit setlocal colorcolumn=51,73
 au FileType gitcommit setlocal spell
 au FileType gitcommit autocmd BufWritePre <buffer> :%s/\s\+$//e
 
-
-" nnoremap <silent> <leader>lf :Files<cr>
-nnoremap <silent> <leader>lf <cmd>lua require('telescope.builtin').find_files()<cr>
-" nnoremap <silent> <leader>lg :GFiles<cr>
-nnoremap <silent> <leader>lg <cmd>lua require('telescope.builtin').git_files()<cr>
-" nnoremap <silent> <leader>lb :Buffers<cr>
-nnoremap <silent> <leader>lb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <silent> <leader>lr :Rg<cr>
-nnoremap <silent> <leader>ll :BLines<cr>
-" nnoremap <silent> <leader>ll <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
-nnoremap <silent> <leader>lc :Commits<cr>
-nnoremap <silent> <leader>lm :Marks<cr>
-nnoremap <silent> <leader>lw :Windows<cr>
-nnoremap <silent> <leader>lhc :History:<cr>
-nnoremap <silent> <leader>lhs :History/<cr>
 
 set winblend=5
 
@@ -537,7 +535,7 @@ autocmd BufEnter *.txt call s:helptab()
 "
 
 function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let command_fmt = 'rg --trim --no-line-number --no-heading --color=always --smart-case -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
@@ -552,9 +550,12 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 "     \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 " endif
 "
-let g:indentLine_char = '¦'
-let g:indent_blankline_char = '¦'
+" let g:indentLine_char = '¦'
+" let g:indent_blankline_char = '¦'
 let g:indent_blankline_char = '▏'
+let g:indent_blankline_filetype_exclude = ['help', 'startify', 'vista', 'vista_kind']
+let g:indent_blankline_context_patterns = ['class', 'function', 'method', 'if', 'for']
+let g:indent_blankline_context_highlight_list = ['Error', 'Warning']
 
 " set conceallevel=0
 
@@ -977,17 +978,18 @@ require('telescope').setup{
     },
     },
         prompt_position = "top",
-        prompt_prefix = '> ',
+        -- prompt_prefix = '> ',
         sorting_strategy = "ascending",
         layout_strategy = "flex",
         -- generic_sorter = require'telescope.sorters'.get_fzy_sorter,
         use_less = false,
         -- set_env = { ['COLORTERM'] = 'truecolor' },
-        file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-        grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-        qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-    }
+        -- file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+        -- grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+        -- qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+    },
 }
+require('telescope').load_extension('fzy_native')
 EOF
 
 
@@ -1029,106 +1031,6 @@ nmap <space>bp :b#<cr>
 
 
 
-vmap <space>dp <cmd>diffput<cr>
-vmap <space>dg <cmd>diffget<cr>
-
-
-" //////////////////////////////////////////////////////////////////// LSP
-" lua << EOF
-" local function setup_servers()
-"   require'lspinstall'.setup()
-"   local servers = require'lspinstall'.installed_servers()
-"   for _, server in pairs(servers) do
-"     require'lspconfig'[server].setup{}
-"   end
-" end
-
-" setup_servers()
-
-" -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-" require'lspinstall'.post_install_hook = function ()
-"   setup_servers() -- reload installed servers
-"   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-" end
-" EOF
-
-" lua require'lspconfig'.clangd.setup{on_attach=require'completion'.on_attach}
-" lua require'lspconfig'.clangd.setup{}
-" nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-" nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-"
-lua << EOF
-local nvim_lsp = require('lspconfig')
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  require'completion'.on_attach()
-
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-  buf_set_keymap('n', '<space>a', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  -- buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  -- buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  -- buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  -- buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  -- buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-
-  -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
-    buf_set_keymap("n", "<space>bf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  elseif client.resolved_capabilities.document_range_formatting then
-    buf_set_keymap("n", "<space>bf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-  end
-
-  -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec([[
-      hi LspReferenceRead cterm=bold ctermbg=red gui=bold guibg=#504945
-      hi LspReferenceText cterm=bold ctermbg=red gui=bold guibg=#504945
-      hi LspReferenceWrite cterm=bold ctermbg=red gui=bold guibg=#504945
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]], false)
-  end
-end
-
--- Use a loop to conveniently both setup defined servers
--- and map buffer local keybindings when the language server attaches
-local servers = { "clangd", "pyright" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
-end
-EOF
-
-augroup lsp
-    autocmd!
-    autocmd BufWritePre *.cpp,*.c,*.hpp,*.h lua vim.lsp.buf.formatting()
-    autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
-    nmap <silent> <space>bs :ClangdSwitchSourceHeader<cr>
-augroup end
-
-set completeopt=menuone,noinsert,noselect
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
-let g:completion_abbr_length = 30
-let g:completion_menu_length = 30
-let g:completion_sorting = "length"
-
 set noswapfile
 set foldlevelstart=99
 
@@ -1147,7 +1049,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 
 augroup folding
         autocmd!
-        autocmd BufReadPost,BufNewFile *.py setlocal foldmethod=indent
+        autocmd BufReadPost,BufNewFile *.py,*.lua setlocal foldmethod=indent
 augroup end
 
 let g:airline_highlighting_cache = 1
@@ -1241,3 +1143,14 @@ augroup column
     " autocmd FileChangedShellPost,TextChanged,TextChangedI,WinScrolled,BufWinEnter,Filetype * call ColumnRefreshWindow()
     " autocmd TextChanged,TextChangedI,InsertEnter * call ColumnRefreshWindow()
 augroup end
+
+
+let g:startify_lists = [
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ ]
+      " \ { 'type': 'files',     'header': ['   MRU']            },
+      " \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+      " \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      " \ { 'type': 'commands',  'header': ['   Commands']       },
+let g:startify_fortune_use_unicode = 1
+let g:startify_session_sort = 1

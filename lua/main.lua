@@ -1,3 +1,4 @@
+local vim = vim
 local o, g, cmd = vim.o, vim.g, vim.cmd
 
 --if has('termguicolors')
@@ -19,10 +20,10 @@ o.showcmd    = true
 o.showmode = false
 
 -- Searching
--- o.ignorecase = true
-o.inccommand    = 'nosplit'
-o.incsearch     = true
-o.smartcase     = true
+o.inccommand = 'nosplit'
+o.incsearch  = true
+o.smartcase  = true
+o.ignorecase = true
 
 -- Line numbers
 o.number         = true
@@ -34,7 +35,7 @@ o.linebreak = true -- ?
 o.clipboard = 'unnamed'
 
 
-o.guifont = 'Iosevka:h16'
+o.guifont = 'Iosevka:h18'
 
 o.background = 'dark'
 
@@ -95,7 +96,7 @@ g.gruvbox_material_palette = 'material'
 
 -- cmd('colorscheme gruvbox-material')
 -- g.airline_theme='gruvbox_material'
-cmd('colorscheme gruvbox-material')
+cmd('colorscheme everforest')
 -- g.airline_theme='edge'
 
 o.termguicolors = true
@@ -196,6 +197,7 @@ require('mappings')
 
 -- cmd('highlight StatusLine guibg=#0f1112')
 -- cmd('highlight StatusLineNC guibg=#0f1112')
+-- cmd('highlight! StatusLineNC gui=underline guibg=NONE guifg=anycolor')
 require('statusline')
 
 require'colorizer'.setup()
@@ -221,3 +223,72 @@ require'colorizer'.setup()
 -- Hop
 local hop = require'hop'
 hop.setup { keys = 'aoeidtnpyfgcrlqjkxbmuh' }
+
+require('lsp')
+
+require('numb').setup()
+
+o.mouse = 'a'
+
+-- Tree
+g.nvim_tree_width = 40
+g.nvim_tree_indent_markers = 1
+g.nvim_tree_add_trailing = 1
+g.nvim_tree_hide_dotfiles = 1
+g.nvim_tree_git_hl = 1
+g.nvim_tree_follow = 1
+g.nvim_tree_icons = {
+    default = '',
+    symlink = '',
+    git = {
+      unstaged = "✗",
+      staged = "✓",
+      unmerged = "",
+      renamed = "➜",
+      untracked = "★",
+      deleted = ""
+      },
+    folder = {
+      default = "",
+      open = "",
+      empty = "",
+      empty_open = "",
+      symlink = "",
+      symlink_open = "",
+      }
+    }
+vim.cmd([[autocmd FileType NvimTree VimadeWinDisable]])
+
+local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+vim.g.nvim_tree_bindings = {
+	  -- ["<CR>"] = ":YourVimFunction()<cr>",
+	  -- ["u"] = ":lua require'some_module'.some_function()<cr>",
+  -- default mappings
+  ["<CR>"]           = tree_cb("edit"),
+  ["o"]              = tree_cb("edit"),
+  ["<2-LeftMouse>"]  = tree_cb("edit"),
+  ["<2-RightMouse>"] = tree_cb("cd"),
+  ["<C-]>"]          = tree_cb("cd"),
+  ["<C-v>"]          = tree_cb("vsplit"),
+  ["<C-x>"]          = tree_cb("split"),
+  ["<C-t>"]          = tree_cb("tabnew"),
+  ["<"]              = tree_cb("prev_sibling"),
+  [">"]              = tree_cb("next_sibling"),
+  ["<BS>"]           = tree_cb("close_node"),
+  ["<S-CR>"]         = tree_cb("close_node"),
+  ["<Tab>"]          = "",
+  ["I"]              = tree_cb("toggle_ignored"),
+  ["H"]              = tree_cb("toggle_dotfiles"),
+  ["R"]              = tree_cb("refresh"),
+  ["a"]              = tree_cb("create"),
+  ["d"]              = "",
+  ["r"]              = "",
+  ["<C-r>"]          = "",
+  ["x"]              = "",
+  ["c"]              = "",
+  ["p"]              = "",
+  ["[c"]             = tree_cb("prev_git_item"),
+  ["]c"]             = tree_cb("next_git_item"),
+  ["-"]              = tree_cb("dir_up"),
+  ["q"]              = tree_cb("close"),
+}

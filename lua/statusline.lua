@@ -2,7 +2,7 @@ local gl = require('galaxyline')
 local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
 local gls = gl.section
-gl.short_line_list = {'vim-plug', 'nerdtree','NvimTree','vista','dbui','packer'}
+gl.short_line_list = {'startify', 'vim-plug', 'nerdtree','NvimTree','vista','dbui','packer', 'vista_kind'}
 
 -- local diagnostic = require('galaxyline.provider_diagnostic')
 local vcs = require('galaxyline.provider_vcs')
@@ -235,18 +235,31 @@ gls.right[8] = {
 --   }
 -- }
 
+gls.short_line_left[1] = {
+  FillLeftShort = {
+    provider = function() return '▎' end,
+    -- separator = '▎ ',
+    -- highlight = {colors.fg,colors.bg,'bold'}
+  },
+}
 gls.short_line_left[2] = {
+  ViModeShort = {
+    provider = function() return '⫼ ' end,
+    -- highlight = {colors.red,colors.bg,'bold'},
+  },
+}
+gls.short_line_left[3] = {
   SFileName = {
     provider =  'SFileName',
     condition = condition.buffer_not_empty,
-    highlight = {colors.fg,colors.bg,'bold'}
+    -- highlight = {colors.fg,colors.bg,'bold'}
   }
 }
 
 gls.short_line_right[1] = {
   BufferIcon = {
     provider= 'BufferIcon',
-    highlight = {colors.fg,colors.bg}
+    -- highlight = {colors.fg,colors.bg}
   }
 }
 -- local gl = require('galaxyline')
