@@ -179,10 +179,6 @@ nnoremap <silent> <leader>wj <c-w>j<cr>
 nnoremap <silent> <leader>wk <c-w>k<cr>
 nnoremap <silent> <leader>wh <c-w>h<cr>
 nnoremap <silent> <leader>wl <c-w>l<cr>
-nnoremap <silent> <leader>sj :split<cr><c-w>j<cr>
-nnoremap <silent> <leader>sk :split<cr>
-nnoremap <silent> <leader>sh :vsplit<cr>
-nnoremap <silent> <leader>sl :vsplit<cr><c-w>l<cr>
 
 nnoremap <silent> <leader><leader> :Goyo<cr>
 let g:goyo_width=100
