@@ -104,7 +104,7 @@ vimp.nnoremap({'silent'}, '<leader>lhc', ':History:<cr>')
 vimp.nnoremap({'silent'}, '<leader>lhs', ':History/<cr>')
 
 -- Windows and splits
-vimp.nnoremap({'silent'}, '<leader>wsj', ':split<cr><c-w>j<cr>')
+vimp.nnoremap({'silent'}, '<leader>wsj', ':split<cr><c-w>j')
 vimp.nnoremap({'silent'}, '<leader>wsk', ':split<cr>')
-vimp.nnoremap({'silent'}, '<leader>wsh', ':vsplit<cr>')
-vimp.nnoremap({'silent'}, '<leader>wsl', ':vsplit<cr><c-w>l<cr>')
+vimp.nnoremap({'silent'}, '<leader>wsh', ':vsplit<cr><c-w>h')
+vimp.nnoremap({'silent'}, '<leader>wsl', ':vsplit<cr>')
