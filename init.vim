@@ -1161,3 +1161,10 @@ let g:startify_lists = [
       " \ { 'type': 'commands',  'header': ['   Commands']       },
 let g:startify_fortune_use_unicode = 1
 let g:startify_session_sort = 1
+
+augroup DISABLE_DIFF
+  autocmd!
+  autocmd DiffUpdated * let b:coc_enabled=0
+  autocmd DiffUpdated * setlocal nonumber norelativenumber
+  autocmd DiffUpdated * setlocal signcolumn=no
+augroup END
