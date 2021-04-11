@@ -92,6 +92,23 @@ vimp.nnoremap({'silent'}, '<leader>lc', function ()
   tb.commands()
 end)
 
+vimp.nnoremap({'silent'}, '<leader>ls', function ()
+  tb.lsp_document_symbols()
+end)
+
+-- vimp.nnoremap({'silent'}, '<leader>lr', function ()
+--   tb.lsp_references()
+-- end)
+
+vimp.nnoremap({'silent'}, '<leader>a', function ()
+  tb.lsp_code_actions()
+end)
+
+
+
+
+
+
 -- nnoremap <silent> <leader>lf :Files<cr>
 -- nnoremap <silent> <leader>lg :GFiles<cr>
 -- nnoremap <silent> <leader>lb :Buffers<cr>
