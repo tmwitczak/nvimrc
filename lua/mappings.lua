@@ -104,6 +104,11 @@ vimp.nnoremap({'silent'}, '<leader>a', function ()
   tb.lsp_code_actions()
 end)
 
+-- vimp.nnoremap({'silent'}, '<leader>lr', function ()
+--   tb.grep_string({
+-- 		search = vim.fn.input('Grep: ')
+-- 	})
+-- end)
 
 
 
