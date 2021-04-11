@@ -681,14 +681,19 @@ augroup HIGHLIGHT_YANK
                 \ }
 augroup END
 
-        let g:mapleader = "\<Space>"
-        let g:vista_cursor_delay = 0
+let g:mapleader = "\<Space>"
+" let g:vista_cursor_delay = 0
 
 
-    let g:vista_sidebar_width = 60
-    let g:vista_echo_cursor_strategy = 'floating_win'
-    let g:vista_default_executive = 'coc'
-    nnoremap <space>k :Vista!!<cr>kj
+" let g:vista_sidebar_width = 60
+let g:vista_echo_cursor = 0
+" let g:vista_echo_cursor_strategy = 'scroll'
+let g:vista_default_executive = 'coc'
+let g:vista_executive_for = {
+  \ 'cpp': 'nvim_lsp',
+  \ 'python': 'nvim_lsp',
+\ }
+nnoremap <silent> <space>k :Vista!!<cr>kj
 
 
     xmap ga <Plug>(EasyAlign)
