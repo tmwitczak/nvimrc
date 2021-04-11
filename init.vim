@@ -1,3 +1,7 @@
+lua <<EOF
+require('before')
+EOF
+
 call plug#begin(stdpath('data') . '/plugged')
     " Plugin management "
     Plug 'junegunn/vim-plug'
