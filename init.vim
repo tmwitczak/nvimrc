@@ -29,6 +29,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'justinmk/vim-sneak'
     Plug 'phaazon/hop.nvim'
     " Plug 'unblevable/quick-scope'
+    Plug 'haya14busa/vim-asterisk'
 
     " Motions
     Plug 'chaoren/vim-wordmotion'

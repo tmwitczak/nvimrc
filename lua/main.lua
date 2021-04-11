@@ -292,3 +292,5 @@ vim.g.nvim_tree_bindings = {
   ["-"]              = tree_cb("dir_up"),
   ["q"]              = tree_cb("close"),
 }
+
+vim.cmd('let g:asterisk#keeppos = 1')

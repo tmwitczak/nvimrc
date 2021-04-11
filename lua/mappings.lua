@@ -108,3 +108,9 @@ vimp.nnoremap({'silent'}, '<leader>wsj', ':split<cr><c-w>j')
 vimp.nnoremap({'silent'}, '<leader>wsk', ':split<cr>')
 vimp.nnoremap({'silent'}, '<leader>wsh', ':vsplit<cr><c-w>h')
 vimp.nnoremap({'silent'}, '<leader>wsl', ':vsplit<cr>')
+
+-- Search
+vimp.rbind('nvo', {'silent'}, '*',  '<Plug>(asterisk-z*)')
+vimp.rbind('nvo', {'silent'}, '#',  '<Plug>(asterisk-z#)')
+vimp.rbind('nvo', {'silent'}, 'g*', '<Plug>(asterisk-gz*)')
+vimp.rbind('nvo', {'silent'}, 'g#', '<Plug>(asterisk-gz#)')
