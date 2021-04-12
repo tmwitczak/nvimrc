@@ -1168,3 +1168,25 @@ augroup DISABLE_DIFF
   autocmd DiffUpdated * setlocal nonumber norelativenumber
   autocmd DiffUpdated * setlocal signcolumn=no
 augroup END
+
+function! FugitiveDiff()
+	silent wincmd o
+  normal dv
+  wincmd k
+  wincmd L
+  vertical resize 40
+  setlocal winfixwidth
+  wincmd h
+  wincmd h
+  wincmd =
+  diffupdate
+  wincmd l
+  normal gg
+endfunction
+
+augroup FUGITIVE_MAP
+  autocmd!
+	autocmd FileType fugitive set nonumber norelativenumber
+  autocmd FileType fugitive map <buffer><silent> dd :call FugitiveDiff()<cr>
+	autocmd FileType fugitive map <buffer><silent> q gq:set nu rnu<cr>
+augroup END

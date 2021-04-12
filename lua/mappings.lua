@@ -32,8 +32,11 @@ vimp.nnoremap({'silent'}, '<leader>vs', function ()
 end)
 
 -- Git
-vimp.nnoremap({'silent'}, '<leader>gd', ':Gvdiffsplit<cr>')
-vimp.nnoremap({'silent'}, '<leader>gs', ':tab G<cr>gg<c-n>')
+vimp.nnoremap({'silent'}, '<leader>gd', function ()
+	vim.cmd('Gvdiffsplit')
+	vim.cmd('diffupdate')
+end)
+vimp.nmap({'silent'}, '<leader>gs', ':tab G<cr>gg<c-n>')
 vimp.nnoremap('<leader>dp', ':.diffput<cr>')
 vimp.nnoremap('<leader>dg', ':.diffget<cr>')
 vimp.xnoremap('<leader>dp', ':diffput<cr>')
