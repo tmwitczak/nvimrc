@@ -51,7 +51,7 @@ call plug#begin(stdpath('data') . '/plugged')
     "
     "
     Plug 'nacro90/numb.nvim'
-		Plug 'romainl/vim-cool'
+    Plug 'romainl/vim-cool'
 
     " ................................................................ Tabs .. "
     " Plug 'gcmt/taboo.vim'
