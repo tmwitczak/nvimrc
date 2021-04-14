@@ -58,8 +58,8 @@ call plug#begin(stdpath('data') . '/plugged')
     "
     " Fuzzy search "
     " versions over 0.22.0 break the preview window
-    Plug 'junegunn/fzf', { 'tag': '0.22.0', 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim', {'commit': '0fe8e1'}
+    " Plug 'junegunn/fzf', { 'tag': '0.22.0', 'do': { -> fzf#install() } }
+    " Plug 'junegunn/fzf.vim', {'commit': '0fe8e1'}
     " Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download() } }
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
