@@ -129,7 +129,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     Plug 'psliwka/vim-smoothie'       " Smooth scrolling
     Plug 'scrooloose/nerdtree'        " Filesystem tree
-    Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'kyazdani42/nvim-tree.lua', {'commit': '82b20f5b'}
 " Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python -m chadtree deps'}
     Plug 'sheerun/vim-polyglot'       " Syntax files
     Plug 'tpope/vim-abolish'          " Coercions
