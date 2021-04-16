@@ -30,6 +30,12 @@ vimp.nnoremap({'silent'}, '<leader>vs', function ()
   end
   vim.cmd('source '..configPath..'/init.vim')
 end)
+vimp.nnoremap({'silent'}, '<leader>ww', function ()
+	vim.cmd('update')
+end)
+vimp.nnoremap({'silent'}, '<leader>wa', function ()
+	vim.cmd('wall')
+end)
 
 -- Git
 vimp.nnoremap({'silent'}, '<leader>gd', function ()
