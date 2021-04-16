@@ -396,7 +396,7 @@ gls.short_line_right[1] = {
 -- -- }
 
 
-gls.right[0] = {
+gls.right[7] = {
   ShowGitBranch = {
     provider = 'GitBranch',
     -- condition = condition.check_git_workspace,

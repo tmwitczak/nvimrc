@@ -1027,7 +1027,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 
 augroup folding
         autocmd!
-        autocmd BufReadPost,BufNewFile *.py,*.lua setlocal foldmethod=indent
+        autocmd BufReadPost,BufNewFile,WinEnter *.py,*.lua setlocal foldmethod=indent
 augroup end
 
 " let g:airline_highlighting_cache = 1

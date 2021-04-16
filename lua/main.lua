@@ -262,8 +262,8 @@ vim.cmd([[autocmd FileType NvimTree VimadeWinDisable]])
 
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 vim.g.nvim_tree_bindings = {
-	  -- ["<CR>"] = ":YourVimFunction()<cr>",
-	  -- ["u"] = ":lua require'some_module'.some_function()<cr>",
+    -- ["<CR>"] = ":YourVimFunction()<cr>",
+    -- ["u"] = ":lua require'some_module'.some_function()<cr>",
   -- default mappings
   ["<CR>"]           = tree_cb("edit"),
   ["o"]              = tree_cb("edit"),
