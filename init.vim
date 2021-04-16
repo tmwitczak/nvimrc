@@ -1146,7 +1146,14 @@ augroup DISABLE_DIFF
   autocmd DiffUpdated * setlocal signcolumn=no
 augroup END
 
+function! SaveAllWindowsInTab()
+	let l:start_window = winnr()
+	silent windo update
+	silent execute l:start_window.'wincmd w'
+endfunction
+
 function! FugitiveDiff()
+	call SaveAllWindowsInTab()
 	silent wincmd o
 	vsplit
   normal dv
@@ -1155,10 +1162,12 @@ function! FugitiveDiff()
   vertical resize 40
   setlocal winfixwidth
   wincmd w
+	setlocal foldmethod=diff
   wincmd =
   diffupdate
 	update
   wincmd w
+	setlocal foldmethod=diff
 	update
   windo setlocal winfixwidth
   wincmd W
