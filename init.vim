@@ -108,6 +108,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
     " Git "
     Plug 'airblade/vim-gitgutter'
+		" Plug 'lewis6991/gitsigns.nvim'
     Plug 'junegunn/gv.vim'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-git'
