@@ -128,7 +128,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     Plug 'psliwka/vim-smoothie'       " Smooth scrolling
-    Plug 'scrooloose/nerdtree'        " Filesystem tree
+    " Plug 'scrooloose/nerdtree'        " Filesystem tree
     Plug 'kyazdani42/nvim-tree.lua', {'commit': '82b20f5b'}
 " Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python -m chadtree deps'}
     Plug 'sheerun/vim-polyglot'       " Syntax files
@@ -442,9 +442,9 @@ nnoremap <silent> <leader>bf :Format<cr>
 let g:startify_custom_header = 'startify#pad(startify#fortune#boxed())'
 
 " nerdtree
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let NERDTreeWinSize = 39
+" let NERDTreeMinimalUI = 1
+" let NERDTreeDirArrows = 1
+" let NERDTreeWinSize = 39
 " nnoremap <silent> ` :NERDTreeToggle<cr>
 
 
@@ -760,7 +760,7 @@ nmap <leader>; :
 set complete+=kspell
 
 
-let g:webdevicons_enable_nerdtree           = 1
+" let g:webdevicons_enable_nerdtree           = 1
 "" let g:webdevicons_enable_airline_tabline    = 1
 " let g:webdevicons_enable_airline_statusline = 1
 let g:webdevicons_enable_startify           = 1
