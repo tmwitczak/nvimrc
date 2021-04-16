@@ -71,7 +71,8 @@ vimp.nnoremap({'silent'}, '`', function ()
 end)
 
 -- Telescope
-local tb = require("telescope.builtin")
+local t = require('telescope')
+local tb = require('telescope.builtin')
 
 vimp.nnoremap({'silent'}, '<leader>lf', function ()
   tb.find_files()
@@ -105,6 +106,10 @@ end)
 
 vimp.nnoremap({'silent'}, '<leader>a', function ()
   tb.lsp_code_actions()
+end)
+
+vimp.nnoremap({'silent'}, '<leader>ld', function ()
+	t.extensions.vimspector.configurations()
 end)
 
 -- vimp.nnoremap({'silent'}, '<leader>lr', function ()

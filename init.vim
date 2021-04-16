@@ -72,6 +72,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-lua/telescope.nvim'
     Plug 'nvim-telescope/telescope-fzy-native.nvim'
+		Plug 'nvim-telescope/telescope-vimspector.nvim'
 
     Plug 'svermeulen/vimpeccable'
 
