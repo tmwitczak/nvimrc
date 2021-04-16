@@ -157,9 +157,6 @@ EOF
 
 " autocmd FocusGained,BufEnter * :checktime
 
-" nnoremap <silent> j gj
-" nnoremap <silent> k gk
-
 " set fileformats=dos
 
 " tnoremap <Esc> <C-\><C-n>
