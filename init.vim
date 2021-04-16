@@ -1142,16 +1142,20 @@ augroup END
 
 function! FugitiveDiff()
 	silent wincmd o
+	vsplit
   normal dv
-  wincmd k
-  wincmd L
+	wincmd w
+	wincmd R
   vertical resize 40
   setlocal winfixwidth
-  wincmd h
-  wincmd h
+  wincmd w
   wincmd =
   diffupdate
-  wincmd l
+	update
+  wincmd w
+	update
+  windo setlocal winfixwidth
+  wincmd W
   normal gg
 endfunction
 
