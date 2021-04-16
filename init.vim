@@ -19,8 +19,8 @@ call plug#begin(stdpath('data') . '/plugged')
 
     " Statusline "
     " Plug 'enricobacis/vim-airline-clock' " Breaks Goyo, disabled for now
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+    " Plug 'vim-airline/vim-airline'
+    " Plug 'vim-airline/vim-airline-themes'
     " Plug 'datwaft/bubbly.nvim'
     Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
@@ -195,50 +195,50 @@ let g:goyo_linenr=0
 " set renderoptions=type:directx
 
 "colorscheme gruvbox
-let g:airline#extensions#coc#enabled = 1
-" let g:airline#extensions#tabline#enabled = 0
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
-" let g:airline#extensions#tabline#left_sep      = "\ue0b4"
-" let g:airline#extensions#tabline#left_alt_sep  = "\ue0b5"
-" let g:airline#extensions#tabline#right_sep     = "\ue0b6"
-" let g:airline#extensions#tabline#right_alt_sep = "\ue0b7"
-" let g:airline#extensions#tabline#formatter = 'default'
-let g:airline_powerline_fonts = 1
-let g:airline_left_sep      = ""
-let g:airline_left_alt_sep  = ""
-let g:airline_right_sep     = ""
-let g:airline_right_alt_sep = ""
-" let g:airline_left_sep      = "\ue0b4"
-" let g:airline_left_alt_sep  = "\ue0b5"
-" let g:airline_right_sep     = "\ue0b6"
-" let g:airline_right_alt_sep = "\ue0b7"
-  let g:airline_mode_map = {
-      \ '__'     : '-',
-      \ 'c'      : 'C',
-      \ 'i'      : 'I',
-      \ 'ic'     : 'I',
-      \ 'ix'     : 'I',
-      \ 'n'      : 'N',
-      \ 'multi'  : 'M',
-      \ 'ni'     : 'N',
-      \ 'no'     : 'N',
-      \ 'R'      : 'R',
-      \ 'Rv'     : 'R',
-      \ 's'      : 'S',
-      \ 'S'      : 'S',
-      \ ''     : 'S',
-      \ 't'      : 'T',
-      \ 'v'      : 'V',
-      \ 'V'      : 'V',
-      \ ''     : 'V',
-      \ }
-" highlight link airline_tab MoreMsg
-let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " " . "\uE0A3" . '%{col(".")}'])
-"let g:airline_left_sep=' '
-"let g:airline_left_alt_sep='|'
-"AirlineTheme gruvbox
-"colorscheme gruvbox
+"let g:airline#extensions#coc#enabled = 1
+"" let g:airline#extensions#tabline#enabled = 0
+"" let g:airline#extensions#tabline#left_sep = ' '
+"" let g:airline#extensions#tabline#left_alt_sep = '|'
+"" let g:airline#extensions#tabline#left_sep      = "\ue0b4"
+"" let g:airline#extensions#tabline#left_alt_sep  = "\ue0b5"
+"" let g:airline#extensions#tabline#right_sep     = "\ue0b6"
+"" let g:airline#extensions#tabline#right_alt_sep = "\ue0b7"
+"" let g:airline#extensions#tabline#formatter = 'default'
+"let g:airline_powerline_fonts = 1
+"let g:airline_left_sep      = ""
+"let g:airline_left_alt_sep  = ""
+"let g:airline_right_sep     = ""
+"let g:airline_right_alt_sep = ""
+"" let g:airline_left_sep      = "\ue0b4"
+"" let g:airline_left_alt_sep  = "\ue0b5"
+"" let g:airline_right_sep     = "\ue0b6"
+"" let g:airline_right_alt_sep = "\ue0b7"
+"  let g:airline_mode_map = {
+"      \ '__'     : '-',
+"      \ 'c'      : 'C',
+"      \ 'i'      : 'I',
+"      \ 'ic'     : 'I',
+"      \ 'ix'     : 'I',
+"      \ 'n'      : 'N',
+"      \ 'multi'  : 'M',
+"      \ 'ni'     : 'N',
+"      \ 'no'     : 'N',
+"      \ 'R'      : 'R',
+"      \ 'Rv'     : 'R',
+"      \ 's'      : 'S',
+"      \ 'S'      : 'S',
+"      \ ''     : 'S',
+"      \ 't'      : 'T',
+"      \ 'v'      : 'V',
+"      \ 'V'      : 'V',
+"      \ ''     : 'V',
+"      \ }
+"" highlight link airline_tab MoreMsg
+"let g:airline_section_z = airline#section#create(["\uE0A1" . '%{line(".")}' . " " . "\uE0A3" . '%{col(".")}'])
+""let g:airline_left_sep=' '
+""let g:airline_left_alt_sep='|'
+""AirlineTheme gruvbox
+""colorscheme gruvbox
 
 " let g:goyo_width=80
 " let g:airline#extensions#tabline#enabled=1
@@ -755,8 +755,8 @@ set complete+=kspell
 
 
 let g:webdevicons_enable_nerdtree           = 1
-" let g:webdevicons_enable_airline_tabline    = 1
-let g:webdevicons_enable_airline_statusline = 1
+"" let g:webdevicons_enable_airline_tabline    = 1
+" let g:webdevicons_enable_airline_statusline = 1
 let g:webdevicons_enable_startify           = 1
 
 
@@ -817,17 +817,17 @@ nmap <silent> <leader>gcg vac:diffget<cr>]czz
 "airline
 " augroup AIRLINE
     " autocmd!
-    let g:airline#extensions#branch#enabled = 0
-    let g:airline#extensions#hunks#enabled  = 0
-    let g:airline_section_y                 = ''
-    let g:airline_section_z                 = ''
-    let g:airline_section_y = airline#section#create([])
-    let g:airline_skip_empty_sections       = 1
+    " let g:airline#extensions#branch#enabled = 0
+    " let g:airline#extensions#hunks#enabled  = 0
+    " let g:airline_section_y                 = ''
+    " let g:airline_section_z                 = ''
+    " let g:airline_section_y = airline#section#create([])
+    " let g:airline_skip_empty_sections       = 1
 
-let g:airline#extensions#default#layout = [ [ 'a', 'c' ], [ 'x', 'error', 'warning' ] ]
-" let g:airline_statusline_ontop = 1
-" autocmd BufEnter <buffer> laststatus=0 noshowmode noruler
-" augroup END
+" let g:airline#extensions#default#layout = [ [ 'a', 'c' ], [ 'x', 'error', 'warning' ] ]
+" " let g:airline_statusline_ontop = 1
+" " autocmd BufEnter <buffer> laststatus=0 noshowmode noruler
+" " augroup END
 
 "neovide
 if has('termguicolors')
@@ -889,9 +889,9 @@ let g:gruvbox_material_palette = {
 " let g:airline_theme='gruvbox_material'
 " colorscheme gruvbox-material
 " let g:airline_theme='gruvbox_material'
-let g:airline#extensions#tabline#enabled = 0
+" let g:airline#extensions#tabline#enabled = 0
 " let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_skip_empty_sections = 1
+" let g:airline_skip_empty_sections = 1
 " AirlineRefresh
 function! FullscreenToggleNeovide()
     let g:neovide_fullscreen = 1 - g:neovide_fullscreen
@@ -944,7 +944,7 @@ require"bufferline".setup{
     }
 }
 EOF
-let g:airline#extensions#tabline#enabled = 0
+" let g:airline#extensions#tabline#enabled = 0
 " AirlineToggle
 " AirlineRefresh
 " AirlineToggle
@@ -1049,7 +1049,7 @@ let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_install_gadgets = [ 'debugpy' ]
 
 
-let g:airline#extensions#whitespace#enabled = 0
+" let g:airline#extensions#whitespace#enabled = 0
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
@@ -1059,13 +1059,13 @@ augroup folding
         autocmd BufReadPost,BufNewFile *.py,*.lua setlocal foldmethod=indent
 augroup end
 
-let g:airline_highlighting_cache = 1
+" let g:airline_highlighting_cache = 1
 
 " let g:minimap_width = 10
 " let g:minimap_auto_start = 1
 " let g:minimap_auto_start_win_enter = 1
 
-let g:airline_disable_statusline = 1
+" let g:airline_disable_statusline = 1
 
 " set colorcolumn=81
 " let &colorcolumn=join(range(81,999),",")
