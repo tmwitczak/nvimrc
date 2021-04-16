@@ -1025,9 +1025,15 @@ let g:vimspector_install_gadgets = [ 'debugpy' ]
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
+function! ChangeFolding()
+	if &l:foldmethod !=? 'diff'
+		setlocal foldmethod=indent
+	endif
+endfunction
+
 augroup folding
         autocmd!
-        autocmd BufReadPost,BufNewFile,WinEnter *.py,*.lua setlocal foldmethod=indent
+        autocmd BufReadPost,BufNewFile,WinEnter *.py,*.lua call ChangeFolding()
 augroup end
 
 " let g:airline_highlighting_cache = 1
