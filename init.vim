@@ -23,6 +23,7 @@ call plug#begin(stdpath('data') . '/plugged')
     " Plug 'vim-airline/vim-airline-themes'
     " Plug 'datwaft/bubbly.nvim'
     Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+		" Plug 'famiu/feline.nvim'
 
     " Bufferline "
     Plug 'kyazdani42/nvim-web-devicons'

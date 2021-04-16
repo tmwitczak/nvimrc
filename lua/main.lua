@@ -199,6 +199,7 @@ require('mappings')
 -- cmd('highlight StatusLineNC guibg=#0f1112')
 -- cmd('highlight! StatusLineNC gui=underline guibg=NONE guifg=anycolor')
 require('statusline')
+-- require('feline-statusline')
 
 require'colorizer'.setup()
 
