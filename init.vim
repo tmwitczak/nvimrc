@@ -27,7 +27,10 @@ call plug#begin(stdpath('data') . '/plugged')
 
     " Bufferline "
     Plug 'kyazdani42/nvim-web-devicons'
-    Plug 'akinsho/nvim-bufferline.lua'
+
+		" if exists('g:started_by_firenvim')
+		Plug 'akinsho/nvim-bufferline.lua'
+		" endif
 
     " Movement "
     " Plug 'easymotion/vim-easymotion'
@@ -53,6 +56,9 @@ call plug#begin(stdpath('data') . '/plugged')
     "
     Plug 'nacro90/numb.nvim'
     Plug 'romainl/vim-cool'
+
+		" Plug 'subnut/nvim-ghost.nvim' ", {'do': ':call nvim_ghost#installer#install()'}
+		Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
     " ................................................................ Tabs .. "
     " Plug 'gcmt/taboo.vim'
@@ -1191,3 +1197,32 @@ augroup FUGITIVE_MAP
   autocmd FileType fugitive map <buffer><silent> dd :call FugitiveDiff()<cr>
 	autocmd FileType fugitive map <buffer><silent> q gq:set nu rnu<cr>
 augroup END
+
+if exists('g:started_by_firenvim')
+	set noshowmode
+	set noruler
+	set noshowcmd
+	set laststatus=0
+	set showtabline=0
+	set nonumber norelativenumber
+	set guifont=Iosevka:h10
+	let g:startify_disable_at_vimenter=1
+	let g:firenvim_config = { 
+			\ 'globalSettings': {
+					\ 'alt': 'all',
+			\  },
+			\ 'localSettings': {
+					\ '.*': {
+							\ 'cmdline': 'neovim',
+							\ 'content': 'text',
+							\ 'priority': 0,
+							\ 'selector': 'textarea',
+							\ 'takeover': 'never',
+					\ },
+			\ }
+	\ }
+	let fc = g:firenvim_config['localSettings']
+	" let fc['https://todoist.com'] = { 'takeover': 'never', 'priority': 1 }
+	" finish
+endif
+
