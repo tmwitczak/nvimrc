@@ -1177,9 +1177,9 @@ endfunction
 
 augroup FUGITIVE_MAP
   autocmd!
-	autocmd FileType fugitive set nonumber norelativenumber
+	autocmd FileType fugitive setlocal nonumber norelativenumber
   autocmd FileType fugitive map <buffer><silent> dd :call FugitiveDiff()<cr>
-	autocmd FileType fugitive map <buffer><silent> q gq:set nu rnu<cr>
+	autocmd FileType fugitive map <buffer><silent> q gq
 augroup END
 
 if exists('g:started_by_firenvim')
