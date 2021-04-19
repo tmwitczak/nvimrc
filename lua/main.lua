@@ -125,7 +125,7 @@ require"bufferline".setup{
         -- separator_style = "thick",
         -- enforce_regular_tabs = false,
         -- always_show_bufferline = true | false,
-        sort_by = "directory",
+        -- sort_by = "directory",
         -- sort_by = "extension" | "relative_directory" | "directory" | function(buffer_a, buffer_b)
         -- -- add custom logic
         -- return buffer_a.modified > buffer_b.modified
