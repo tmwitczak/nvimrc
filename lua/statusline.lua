@@ -1,3 +1,5 @@
+local vim = vim
+
 local function rgb_highlight(group, mode)
 	return vim.api.nvim_exec([[echo synIDattr(synIDtrans(hlID("]]..group..[[")), "]]..mode..[[")]], true)
 end
@@ -35,10 +37,10 @@ gl.short_line_list = {'startify', 'vim-plug', 'nerdtree','NvimTree','vista','dbu
 
 -- local diagnostic = require('galaxyline.provider_diagnostic')
 local vcs = require('galaxyline.provider_vcs')
-local fileinfo = require('galaxyline.provider_fileinfo')
-local extension = require('galaxyline.provider_extensions')
+-- local fileinfo = require('galaxyline.provider_fileinfo')
+-- local extension = require('galaxyline.provider_extensions')
 -- local colors = require('galaxyline.colors')
-local buffer = require('galaxyline.provider_buffer')
+-- local buffer = require('galaxyline.provider_buffer')
 -- local whitespace = require('galaxyline.provider_whitespace')
 -- local lspclient = require('galaxyline.provider_lsp')
 

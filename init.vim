@@ -1217,7 +1217,7 @@ augroup NVIM_TREE
 augroup END
 
 function! TreeGetOut()
-	wincmd w
+	silent! wincmd w
 endfunction
 
 highlight link FloatermBorder TelescopeBorder

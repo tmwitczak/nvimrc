@@ -96,7 +96,7 @@ g.gruvbox_material_palette = 'material'
 
 -- cmd('colorscheme gruvbox-material')
 -- g.airline_theme='gruvbox_material'
-cmd('colorscheme gruvbox-material')
+cmd('colorscheme everforest')
 -- g.airline_theme='edge'
 
 o.termguicolors = true
