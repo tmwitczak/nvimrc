@@ -1219,3 +1219,17 @@ augroup END
 function! TreeGetOut()
 	wincmd w
 endfunction
+
+" Manage coc
+let s:coc_blacklist = ['cpp', 'c', 'python']
+function! s:disable_coc_for_type()
+	if index(s:coc_blacklist, &filetype) != -1
+		silent! CocDisable
+	else
+		silent! CocEnable
+	endif
+endfunction
+augroup COC_DISABLE
+	autocmd!
+	autocmd BufNew,BufEnter * call s:disable_coc_for_type()
+augroup END

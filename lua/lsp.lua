@@ -120,9 +120,6 @@ require('lspkind').init({})
 
 vim.o.pumheight = 15
 
--- Disable completion for python
-vim.cmd('autocmd FileType python let b:coc_suggest_disable = 1')
-
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
