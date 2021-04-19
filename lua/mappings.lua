@@ -152,7 +152,7 @@ vimp.rbind('nvo', {'silent'}, 'g*', '<Plug>(asterisk-gz*)')
 vimp.rbind('nvo', {'silent'}, 'g#', '<Plug>(asterisk-gz#)')
 
 -- Movement
-vimp.bind('nvo', {'silent'}, 'j', 'gj')
-vimp.bind('nvo', {'silent'}, 'k', 'gk')
+vimp.bind('nv', {'silent'}, 'j', 'gj')
+vimp.bind('nv', {'silent'}, 'k', 'gk')
 
 vimp.add_chord_cancellations('n', '<leader>')
