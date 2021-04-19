@@ -10,6 +10,23 @@ local function rgb_bg(group)
 	return rgb_highlight(group, "bg#")
 end
 
+vim.cmd('highlight! StatusLine'
+	..' guifg='..rgb_fg('BufferLineTab')
+	..' guibg='..rgb_bg('BufferLineTab'))
+
+local statusline_fg = rgb_fg('BufferLineTab')
+local statusline_bg = rgb_bg('BufferLineTab')
+
+local buffer_fg = rgb_fg('BufferLineBufferSelected')
+local buffer_bg = rgb_bg('BufferLineBufferSelected')
+
+local theme = {
+	diff_add = rgb_fg('Green'),
+	diff_modify = rgb_fg('Orange'),
+	diff_delete = rgb_fg('Red'),
+}
+
+
 local gl = require('galaxyline')
 local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
@@ -29,7 +46,7 @@ gls.left[1] = {
   FillLeft = {
     provider = function() return '▎' end,
     -- separator = '▎ ',
-    -- highlight = {colors.fg,colors.bg,'bold'}
+		highlight = {statusline_fg, statusline_bg}
   },
 }
 gls.left[2] = {
@@ -45,11 +62,15 @@ gls.left[2] = {
                           rm = colors.cyan, ['r?'] = colors.cyan,
                           ['!']  = colors.red,t = colors.red}
       vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()])
-      return '⫼ '
+      return '⫼  '
     end,
-    -- highlight = {colors.red,colors.bg,'bold'},
+		-- highlight = {rgb_bg('StatusLine'), rgb_bg('StatusLine'), 'bold'}
+		highlight = {statusline_fg, statusline_bg},
+    separator = '▎  ',
+		separator_highlight = {buffer_fg, buffer_bg}
   },
 }
+
 -- gls.left[3] = {
 --   FileSize = {
 --     provider = 'FileSize',
@@ -57,29 +78,58 @@ gls.left[2] = {
 --     highlight = {colors.fg,colors.bg}
 --   }
 -- }
-gls.mid[1] ={
+gls.left[3] ={
   FileIcon = {
     provider = 'FileIcon',
     condition = condition.buffer_not_empty,
-    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color},
-    separator = '▎ ',
-    -- separator_highlight = {'NONE',colors.bg},
+    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color, buffer_bg},
   },
 }
 
-gls.mid[2] = {
+local function file_readonly()
+  if vim.bo.filetype == 'help' then
+    return ''
+  end
+  local icon = ''
+  if vim.bo.readonly == true then
+    return icon
+  end
+  return ''
+end
+
+local function get_current_file_name()
+  local file = vim.fn.expand('%')
+  if vim.fn.empty(file) == 1 then return '' end
+  if string.len(file_readonly()) ~= 0 then
+    return file..' '..file_readonly()..' '
+  end
+  local icon = ''
+  if vim.bo.modifiable then
+    if vim.bo.modified then
+      return file..' '..icon..' '
+    end
+  end
+  return file..' '..' '..' '
+end
+
+
+gls.left[4] = {
   FileName = {
-    provider = 'FileName',
+    provider = get_current_file_name,
     condition = condition.buffer_not_empty,
     -- highlight = {colors.fg,colors.bg,'bold'},
+		-- highlight = {statusline_fg, statusline_bg, 'bold'}
+		highlight = {buffer_fg, buffer_bg, 'bold'}
   }
 }
 
-gls.mid[3] = {
+
+gls.mid[1] = {
   FillMid = {
-    provider = function() return ' ' end,
+    provider = function() return '' end,
     condition = condition.buffer_not_empty,
     -- highlight = {colors.fg,colors.bg,'bold'}
+		highlight = {buffer_fg, buffer_bg}
   },
 }
 
@@ -187,30 +237,30 @@ gls.mid[3] = {
 -- }
 
 
--- gls.right[4] = {
---   DiffAdd = {
---     provider = 'DiffAdd',
---     condition = condition.hide_in_width,
---     icon = '  ',
---     highlight = {colors.green,colors.bg},
---   }
--- }
--- gls.right[5] = {
---   DiffModified = {
---     provider = 'DiffModified',
---     condition = condition.hide_in_width,
---     icon = ' 柳',
---     highlight = {colors.orange,colors.bg},
---   }
--- }
--- gls.right[6] = {
---   DiffRemove = {
---     provider = 'DiffRemove',
---     condition = condition.hide_in_width,
---     icon = '  ',
---     highlight = {colors.red,colors.bg},
---   }
--- }
+gls.right[3] = {
+  DiffAdd = {
+    provider = 'DiffAdd',
+    -- condition = condition.hide_in_width,
+    icon = '  ',
+    highlight = {theme.diff_add, statusline_bg},
+  }
+}
+gls.right[4] = {
+  DiffModified = {
+    provider = 'DiffModified',
+    -- condition = condition.hide_in_width,
+    icon = ' 柳',
+    highlight = {theme.diff_modify, statusline_bg},
+  }
+}
+gls.right[5] = {
+  DiffRemove = {
+    provider = 'DiffRemove',
+    -- condition = condition.hide_in_width,
+    icon = '  ',
+    highlight = {theme.diff_delete, statusline_bg},
+  }
+}
 
 -- gls.right[7] = {
 --   FillDiff2 = {
@@ -227,6 +277,8 @@ gls.right[8] = {
             return ' ' .. os.date('%H:%M') .. ' '
         end,
         separator = '▎ ',
+				highlight = {statusline_fg, statusline_bg},
+				separator_highlight = {statusline_fg, statusline_bg}
         -- highlight = {colors.fg, colors.bg, 'bold'},
         -- separator_highlight = {colors.lightBackground, colors.lightBackground}
     }
@@ -408,10 +460,10 @@ gls.short_line_right[1] = {
 -- -- }
 
 
-gls.right[7] = {
-  ShowGitBranch = {
-    provider = 'GitBranch',
-    -- condition = condition.check_git_workspace,
-    -- highlight = {colors.violet,colors.bg,'bold'},
-  }
-}
+-- gls.right[1] = {
+--   ShowGitBranch = {
+--     provider = vcs.get_git_branch
+--     -- condition = condition.check_git_workspace,
+--     -- highlight = {colors.violet,colors.bg,'bold'},
+--   }
+-- }
