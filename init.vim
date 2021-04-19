@@ -1220,6 +1220,13 @@ function! TreeGetOut()
 	wincmd w
 endfunction
 
+highlight link FloatermBorder TelescopeBorder
+let g:floaterm_title=''
+nnoremap <silent> <space>tt :FloatermToggle<cr>
+let g:floaterm_width=0.8
+let g:floaterm_height=0.8
+let g:floaterm_autoinsert=0
+
 " Manage coc
 let s:coc_blacklist = ['cpp', 'c', 'python']
 function! s:disable_coc_for_type()
