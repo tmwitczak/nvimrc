@@ -258,7 +258,6 @@ g.nvim_tree_icons = {
     symlink_open = "",
   }
 }
-vim.cmd([[autocmd FileType NvimTree VimadeWinDisable]])
 
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 vim.g.nvim_tree_bindings = {

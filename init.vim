@@ -1209,3 +1209,12 @@ if exists('g:started_by_firenvim')
 	" finish
 endif
 
+augroup NVIM_TREE
+	autocmd!
+	autocmd BufEnter NvimTree VimadeWinDisable
+	autocmd BufEnter NvimTree nnoremap <buffer><silent> <tab> :call TreeGetOut()<cr>
+augroup END
+
+function! TreeGetOut()
+	wincmd w
+endfunction
