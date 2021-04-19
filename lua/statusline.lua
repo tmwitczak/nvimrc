@@ -99,28 +99,29 @@ local function file_readonly()
   return ''
 end
 
-local function get_current_file_name()
-  local file = vim.fn.expand('%')
-  if vim.fn.empty(file) == 1 then return '' end
+local function current_buffer_filename()
+  local filename = vim.fn.expand('%')
+
+  if vim.fn.empty(filename) == 1 then
+		filename = '…'
+	end
+
   if string.len(file_readonly()) ~= 0 then
-    return file..' '..file_readonly()..' '
+    return filename..' '..file_readonly()..' '
   end
-  local icon = ''
-  if vim.bo.modifiable then
-    if vim.bo.modified then
-      return file..' '..icon..' '
-    end
+
+  if vim.bo.modifiable and vim.bo.modified then
+		return filename..' '..''..' '
   end
-  return file..' '..' '..' '
+
+  return filename..' '..' '..' '
 end
 
 
 gls.left[4] = {
   FileName = {
-    provider = get_current_file_name,
-    condition = condition.buffer_not_empty,
-    -- highlight = {colors.fg,colors.bg,'bold'},
-		-- highlight = {statusline_fg, statusline_bg, 'bold'}
+    provider = current_buffer_filename,
+    -- condition = condition.buffer_not_empty,
 		highlight = {buffer_fg, buffer_bg, 'bold'}
   }
 }
@@ -129,7 +130,7 @@ gls.left[4] = {
 gls.mid[1] = {
   FillMid = {
     provider = function() return '' end,
-    condition = condition.buffer_not_empty,
+    -- condition = condition.buffer_not_empty,
     -- highlight = {colors.fg,colors.bg,'bold'}
 		highlight = {buffer_fg, buffer_bg}
   },
