@@ -88,7 +88,7 @@ vimp.nnoremap({'silent'}, '<leader>lg', function ()
   tb.git_files()
 end)
 
-vimp.nnoremap({'silent'}, '<leader>lb', function ()
+vimp.nnoremap({'silent'}, '<leader>bb', function ()
   tb.buffers {
     show_all_buffers = true
   }

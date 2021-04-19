@@ -777,7 +777,7 @@ let g:clap_search_box_border_style = 'nil'
 
 let g:livepreview_previewer = 'texworks'
 
-nnoremap <silent> <leader>bb :BufferPick<cr>
+" nnoremap <silent> <leader>bb :BufferPick<cr>
 
 " change font size
 nnoremap <silent> <space>vk :silent! let &guifont = substitute(
