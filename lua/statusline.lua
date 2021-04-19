@@ -1,3 +1,15 @@
+local function rgb_highlight(group, mode)
+	return vim.api.nvim_exec([[echo synIDattr(synIDtrans(hlID("]]..group..[[")), "]]..mode..[[")]], true)
+end
+
+local function rgb_fg(group)
+	return rgb_highlight(group, "fg#")
+end
+
+local function rgb_bg(group)
+	return rgb_highlight(group, "bg#")
+end
+
 local gl = require('galaxyline')
 local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
