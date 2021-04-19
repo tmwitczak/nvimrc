@@ -239,25 +239,25 @@ g.nvim_tree_hide_dotfiles = 1
 g.nvim_tree_git_hl = 1
 g.nvim_tree_follow = 1
 g.nvim_tree_icons = {
-    default = '',
-    symlink = '',
-    git = {
-      unstaged = "✗",
-      staged = "✓",
-      unmerged = "",
-      renamed = "➜",
-      untracked = "★",
-      deleted = ""
-      },
-    folder = {
-      default = "",
-      open = "",
-      empty = "",
-      empty_open = "",
-      symlink = "",
-      symlink_open = "",
-      }
-    }
+  default = '',
+  symlink = '',
+  git = {
+    unstaged = "✗",
+    staged = "✓",
+    unmerged = "",
+    renamed = "➜",
+    untracked = "★",
+    deleted = ""
+  },
+  folder = {
+    default = "",
+    open = "",
+    empty = "",
+    empty_open = "",
+    symlink = "",
+    symlink_open = "",
+  }
+}
 vim.cmd([[autocmd FileType NvimTree VimadeWinDisable]])
 
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
