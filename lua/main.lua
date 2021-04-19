@@ -42,13 +42,13 @@ o.background = 'dark'
 -- Syntax
 cmd('syntax enable')
 
-g.gruvbox_material_background = 'hard'
+g.gruvbox_material_background = 'soft'
 g.gruvbox_material_disable_italic_comment = 0
 g.gruvbox_material_enable_bold = 1
 g.gruvbox_material_enable_italic = 1
 g.gruvbox_material_cursor = 'auto'
 g.gruvbox_material_transparent_background = 0
-g.gruvbox_material_visual = 'grey background'
+g.gruvbox_material_visual = 'red background'
 g.gruvbox_material_menu_selection_background = 'grey'
 g.gruvbox_material_sign_column_background = 'none'
 g.gruvbox_material_diagnostic_text_highlight = 0
