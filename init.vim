@@ -56,6 +56,7 @@ call plug#begin(stdpath('data') . '/plugged')
     "
     Plug 'nacro90/numb.nvim'
     Plug 'romainl/vim-cool'
+		Plug 'voldikss/vim-floaterm'
 
 		" Plug 'subnut/nvim-ghost.nvim' ", {'do': ':call nvim_ghost#installer#install()'}
 		Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
