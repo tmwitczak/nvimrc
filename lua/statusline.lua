@@ -33,7 +33,7 @@ local gl = require('galaxyline')
 local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
 local gls = gl.section
-gl.short_line_list = {'startify', 'vim-plug', 'nerdtree','NvimTree','vista','dbui','packer', 'vista_kind'}
+gl.short_line_list = {'fugitive', 'startify', 'vim-plug', 'nerdtree','NvimTree','vista','dbui','packer', 'vista_kind'}
 
 -- local diagnostic = require('galaxyline.provider_diagnostic')
 local vcs = require('galaxyline.provider_vcs')
