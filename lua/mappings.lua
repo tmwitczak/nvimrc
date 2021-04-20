@@ -156,3 +156,12 @@ vimp.bind('nv', {'silent'}, 'j', 'gj')
 vimp.bind('nv', {'silent'}, 'k', 'gk')
 
 vimp.add_chord_cancellations('n', '<leader>')
+
+-- Surround
+vim.api.nvim_exec([[
+	nmap gs  <Plug>Ysurround
+	nmap gS  <Plug>YSurround
+	nmap gss <Plug>Yssurround
+	nmap gSs <Plug>YSsurround
+	nmap gSS <Plug>YSsurround
+]], false)
