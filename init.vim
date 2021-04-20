@@ -32,6 +32,8 @@ call plug#begin(stdpath('data') . '/plugged')
 		Plug 'akinsho/nvim-bufferline.lua'
 		" endif
 
+		Plug 'hkupty/iron.nvim'
+
     " Movement "
     " Plug 'easymotion/vim-easymotion'
     Plug 'justinmk/vim-sneak'
