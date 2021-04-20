@@ -947,33 +947,6 @@ if has('conceal')
   execute 'syntax match markdownCheckboxChecked "\([-\*] \[x\]\|++\)" contained conceal cchar='.s:checkbox_checked
 endif
 
-"telescope
-lua << EOF
-local actions = require('telescope.actions')
-require('telescope').setup{
-    defaults = {
-    mappings = {
-    i={
-        ["<esc>"] = actions.close
-    },
-    },
-        prompt_position = "top",
-        -- prompt_prefix = '> ',
-        sorting_strategy = "ascending",
-        layout_strategy = "flex",
-        -- generic_sorter = require'telescope.sorters'.get_fzy_sorter,
-        use_less = false,
-        -- set_env = { ['COLORTERM'] = 'truecolor' },
-        -- file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-        -- grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-        -- qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-    },
-}
-require('telescope').load_extension('fzy_native')
-EOF
-
-
-
    :map [[ ?{<CR>w99[{
    :map ][ /}<CR>b99]}
    :map ]] j0[[%/{<CR>

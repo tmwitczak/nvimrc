@@ -334,3 +334,30 @@ vim.cmd('let g:asterisk#keeppos = 1')
 --   -- use_decoration_api = true,
 --   -- use_internal_diff = true,  -- If luajit is present
 -- }
+
+
+-- Telescope
+local actions = require('telescope.actions')
+require('telescope').setup{
+	defaults = {
+		mappings = {
+			i={
+				["<esc>"] = actions.close,
+				-- ["<c-c>"] = function ()
+				-- 	vim.cmd('normal <c-c>')
+				-- end,
+			},
+		},
+		prompt_position = "top",
+		-- prompt_prefix = '> ',
+		sorting_strategy = "ascending",
+		layout_strategy = "flex",
+		-- generic_sorter = require'telescope.sorters'.get_fzy_sorter,
+		use_less = false,
+		-- set_env = { ['COLORTERM'] = 'truecolor' },
+		-- file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+		-- grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+		-- qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+	},
+}
+require('telescope').load_extension('fzy_native')
