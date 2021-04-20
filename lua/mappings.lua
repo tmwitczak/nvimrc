@@ -25,7 +25,7 @@ end)
 vimp.nnoremap({'silent'}, '<leader>vs', function ()
   vimp.unmap_all()
   -- TODO: Make reloading recursive
-  for _, module in ipairs({'main', 'mappings', 'statusline', 'lsp'}) do
+  for _, module in ipairs({'main', 'mappings', 'statusline', 'lsp', 'before', 'feline-statusline'}) do
     require("plenary.reload").reload_module(module, true)
   end
   vim.cmd('source '..configPath..'/init.vim')

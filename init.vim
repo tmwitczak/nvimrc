@@ -114,6 +114,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'junegunn/gv.vim'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-git'
+		Plug 'rbong/vim-flog'
 
     " Utilities "
     Plug 'TaDaa/vimade'
@@ -1240,3 +1241,6 @@ augroup COC_DISABLE
 	autocmd!
 	autocmd BufNew,BufEnter * call s:disable_coc_for_type()
 augroup END
+
+" highlight! link DiffText DiffChange
+" highlight DiffText ctermfg=NONE guifg=NONE gui=italic guisp=Orange cterm=underline guibg=Black
