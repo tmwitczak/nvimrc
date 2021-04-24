@@ -2,6 +2,10 @@ lua <<EOF
 require('before')
 EOF
 
+let g:gruvbox_material_better_performance = 1
+let g:loaded_python_provider = 0
+let g:python3_host_prog = 'python'
+
 call plug#begin(stdpath('data') . '/plugged')
     " Plugin management "
     Plug 'junegunn/vim-plug'
@@ -52,7 +56,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'puremourning/vimspector'
     Plug 'szw/vim-maximizer'
     Plug 'norcalli/nvim-colorizer.lua'
-    Plug 'psf/black', { 'branch': 'stable' }
+    Plug 'psf/black', { 'branch': 'stable', 'for': 'python'}
     " Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
     "
     "
