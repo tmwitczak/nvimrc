@@ -165,3 +165,6 @@ vim.api.nvim_exec([[
 	nmap gSs <Plug>YSsurround
 	nmap gSS <Plug>YSsurround
 ]], false)
+
+-- Zen
+vimp.nnoremap({'silent'}, '<leader><leader>', [[<cmd>TZAtaraxis<cr>]])

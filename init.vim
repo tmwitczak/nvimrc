@@ -124,6 +124,7 @@ call plug#begin(stdpath('data') . '/plugged')
     " Plug 'amix/vim-zenroom2'
     " Plug 'jbgutierrez/vim-better-comments'
     Plug 'junegunn/goyo.vim'          " Focus mode
+		Plug 'kdav5758/TrueZen.nvim'
     Plug 'junegunn/limelight.vim'     " Highlight only current paragraph
     Plug 'junegunn/vim-easy-align'    " Text alignment
     " Plug 'kien/rainbow_parentheses.vim'
