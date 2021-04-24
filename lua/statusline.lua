@@ -23,6 +23,7 @@ local buffer_fg = rgb_fg('BufferLineBufferSelected')
 local buffer_bg = rgb_bg('BufferLineBufferSelected')
 
 local theme = {
+	branch_name = rgb_fg('Aqua'),
 	diff_add = rgb_fg('Green'),
 	diff_modify = rgb_fg('Orange'),
 	diff_delete = rgb_fg('Red'),
@@ -100,7 +101,7 @@ local function file_readonly()
 end
 
 local function current_buffer_filename()
-  local filename = vim.fn.expand('%')
+  local filename = vim.fn.expand('%:t')
 
   if vim.fn.empty(filename) == 1 then
 		filename = '…'
@@ -240,6 +241,26 @@ gls.mid[1] = {
 -- }
 
 
+gls.right[6] = {
+  ShowGitBranch = {
+    provider = function()
+			local branch = vcs.get_git_branch()
+			if branch ~= nil then
+				branch = branch..' '
+			end
+			return branch
+		end,
+    condition = condition.check_git_workspace,
+    -- highlight = {colors.violet,colors.bg,'bold'},
+    icon = '  ',
+    -- highlight = {theme.diff_add, statusline_bg},
+    highlight = {theme.branch_name, statusline_bg, 'bold'},
+		-- separator = ' ',
+    -- separator_highlight = {theme.branch_name, statusline_bg, 'bold'},
+  }
+}
+
+
 gls.right[3] = {
   DiffAdd = {
     provider = 'DiffAdd',
@@ -279,7 +300,7 @@ gls.right[8] = {
         provider = function()
             return ' ' .. os.date('%H:%M') .. ' '
         end,
-        separator = '▎ ',
+        -- separator = '▎ ',
 				highlight = {statusline_fg, statusline_bg},
 				separator_highlight = {statusline_fg, statusline_bg}
         -- highlight = {colors.fg, colors.bg, 'bold'},
@@ -461,12 +482,3 @@ gls.short_line_right[1] = {
 -- --     separator_highlight = {colors.purple,colors.darkblue},
 -- --   }
 -- -- }
-
-
--- gls.right[1] = {
---   ShowGitBranch = {
---     provider = vcs.get_git_branch
---     -- condition = condition.check_git_workspace,
---     -- highlight = {colors.violet,colors.bg,'bold'},
---   }
--- }
