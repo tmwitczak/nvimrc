@@ -1224,3 +1224,17 @@ augroup END
 
 " highlight! link DiffText DiffChange
 " highlight DiffText ctermfg=NONE guifg=NONE gui=italic guisp=Orange cterm=underline guibg=Black
+
+function! ExtendHighlight(base, group, add)
+	redir => basehi
+	sil! exe 'highlight' a:base
+	redir END
+	let grphi = split(basehi, '\n')[0]
+	let grphi = substitute(grphi, '^'.a:base.'\s\+xxx', '', '')
+	sil exe 'highlight' a:group grphi a:add
+endfunction
+
+call ExtendHighlight('MoreMsg', 'HopNextKey', '')
+call ExtendHighlight('Constant', 'HopNextKey1', 'gui=italic')
+call ExtendHighlight('MoreMsg', 'HopNextKey2', 'gui=standout')
+call ExtendHighlight('NonText', 'HopUnmatched', '')
