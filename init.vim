@@ -64,6 +64,9 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'romainl/vim-cool'
 		Plug 'voldikss/vim-floaterm'
 
+		Plug 'tpope/vim-scriptease'
+		Plug 'kevinhwang91/nvim-bqf'
+
 		" Plug 'subnut/nvim-ghost.nvim' ", {'do': ':call nvim_ghost#installer#install()'}
 		Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
@@ -127,8 +130,10 @@ call plug#begin(stdpath('data') . '/plugged')
     " Plug 'Yggdroot/indentLine'
     " Plug 'amix/vim-zenroom2'
     " Plug 'jbgutierrez/vim-better-comments'
+		"
     Plug 'junegunn/goyo.vim'          " Focus mode
 		Plug 'kdav5758/TrueZen.nvim'
+
     Plug 'junegunn/limelight.vim'     " Highlight only current paragraph
     Plug 'junegunn/vim-easy-align'    " Text alignment
     " Plug 'kien/rainbow_parentheses.vim'
@@ -201,7 +206,7 @@ nnoremap <silent> <leader>wk <c-w>k<cr>
 nnoremap <silent> <leader>wh <c-w>h<cr>
 nnoremap <silent> <leader>wl <c-w>l<cr>
 
-nnoremap <silent> <leader><leader> :Goyo<cr>
+" nnoremap <silent> <leader><leader> :Goyo<cr>
 let g:goyo_width=100
 let g:goyo_height='62%'
 let g:goyo_linenr=0
@@ -701,7 +706,7 @@ let g:mapleader = "\<Space>"
 " let g:vista_cursor_delay = 0
 
 
-" let g:vista_sidebar_width = 60
+let g:vista_sidebar_width = 60
 let g:vista_echo_cursor = 0
 " let g:vista_echo_cursor_strategy = 'scroll'
 let g:vista_default_executive = 'coc'
@@ -958,7 +963,6 @@ endif
    :map ][ /}<CR>b99]}
    :map ]] j0[[%/{<CR>
    :map [] k$][%?}<CR>
-
 
 
 highlight link EasyMotionTarget        MoreMsg
