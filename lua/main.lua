@@ -8,6 +8,8 @@ local o, g, cmd = vim.o, vim.g, vim.cmd
 o.lazyredraw = true
 o.termguicolors = true
 
+o.colorcolumn = '1001'
+
 
 -- Spelling
 o.spelllang = 'en,pl'
