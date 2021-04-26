@@ -28,8 +28,8 @@ o.smartcase  = true
 o.ignorecase = true
 
 -- Line numbers
-o.number         = true
-o.relativenumber = true
+o.number         = false
+o.relativenumber = false
 
 o.linebreak = true -- ?
 
@@ -52,7 +52,7 @@ g.gruvbox_material_cursor = 'auto'
 g.gruvbox_material_transparent_background = 0
 g.gruvbox_material_visual = 'red background'
 g.gruvbox_material_menu_selection_background = 'grey'
-g.gruvbox_material_sign_column_background = 'none'
+g.gruvbox_material_sign_column_background = 'default'
 g.gruvbox_material_diagnostic_text_highlight = 0
 g.gruvbox_material_diagnostic_line_highlight = 0
 g.gruvbox_material_current_word = 'grey background'
@@ -396,8 +396,8 @@ true_zen.setup({
 		hidden_relativenumber = false,
 		hidden_signcolumn = "no",
 
-		shown_number = true,
-		shown_relativenumber = true,
+		shown_number = false,
+		shown_relativenumber = false,
 		shown_signcolumn = "yes"
 	},
 	ataraxis = {

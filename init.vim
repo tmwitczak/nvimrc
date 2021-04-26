@@ -578,6 +578,7 @@ let g:indent_blankline_char = '▏'
 let g:indent_blankline_filetype_exclude = ['help', 'startify', 'vista', 'vista_kind']
 let g:indent_blankline_context_patterns = ['class', 'function', 'method', 'if', 'for']
 let g:indent_blankline_context_highlight_list = ['Error', 'Warning']
+let g:indent_blankline_show_first_indent_level = v:false
 
 " set conceallevel=0
 

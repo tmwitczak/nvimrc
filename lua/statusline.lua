@@ -313,6 +313,14 @@ gls.right[8] = {
 --     highlight = {colors.blue,colors.bg}
 --   },
 -- }
+gls.left[6] = {
+  Scroll = {
+		provider = function()
+			return '  ⚌ '..vim.fn.line('.')..' '
+		end,
+		highlight = {statusline_fg, statusline_bg},
+  },
+}
 
 -- gls.short_line_left[1] = {
 --   BufferType = {
