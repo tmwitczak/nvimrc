@@ -31,9 +31,12 @@ local theme = {
 
 
 local gl = require('galaxyline')
+local fileinfo = require('galaxyline.provider_fileinfo')
+local buffer = require('galaxyline.provider_buffer')
 local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
 local gls = gl.section
+local extension = require('galaxyline.provider_extensions')
 gl.short_line_list = {'fugitive', 'startify', 'vim-plug', 'nerdtree','NvimTree','vista','dbui','packer', 'vista_kind'}
 
 -- local diagnostic = require('galaxyline.provider_diagnostic')
@@ -307,12 +310,20 @@ gls.right[8] = {
         -- separator_highlight = {colors.lightBackground, colors.lightBackground}
     }
 }
--- gls.right[8] = {
---   RainbowBlue = {
---     provider = function() return ' ▊' end,
---     highlight = {colors.blue,colors.bg}
---   },
--- }
+
+gls.left[5] = {
+  Type = {
+		provider = function()
+			return '  '..string.lower(buffer.get_buffer_filetype())
+		end,
+		condition = function()
+			local filetype = vim.bo.filetype
+			return filetype ~= nil and filetype ~= ''
+		end,
+		highlight = {statusline_fg, statusline_bg},
+  },
+}
+
 gls.left[6] = {
   Scroll = {
 		provider = function()
