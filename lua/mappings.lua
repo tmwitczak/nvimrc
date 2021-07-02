@@ -31,10 +31,10 @@ vimp.nnoremap({'silent'}, '<leader>vs', function ()
   vim.cmd('source '..configPath..'/init.vim')
 end)
 vimp.nnoremap({'silent'}, '<leader>ww', function ()
-	vim.cmd('update')
+	vim.cmd('noautocmd update')
 end)
 vimp.nnoremap({'silent'}, '<leader>wa', function ()
-	vim.cmd('wall')
+	vim.cmd('noautocmd wall')
 end)
 
 -- Git
@@ -106,9 +106,13 @@ vimp.nnoremap({'silent'}, '<leader>ls', function ()
   tb.lsp_document_symbols()
 end)
 
--- vimp.nnoremap({'silent'}, '<leader>lr', function ()
---   tb.lsp_references()
--- end)
+vimp.nnoremap({'silent'}, '<leader>lr', function ()
+  tb.live_grep()
+end)
+
+vimp.nnoremap({'silent'}, '<leader>le', function ()
+	vim.cmd('TroubleToggle')
+end)
 
 vimp.nnoremap({'silent'}, '<leader>a', function ()
   tb.lsp_code_actions()
@@ -131,7 +135,7 @@ end)
 -- nnoremap <silent> <leader>lf :Files<cr>
 -- nnoremap <silent> <leader>lg :GFiles<cr>
 -- nnoremap <silent> <leader>lb :Buffers<cr>
-vimp.nnoremap({'silent'}, '<leader>lr', ':Rg<cr>')
+-- vimp.nnoremap({'silent'}, '<leader>lr', ':Rg<cr>')
 -- vimp.nnoremap({'silent'}, '<leader>ll', ':BLines<cr>')
 -- vimp.nnoremap({'silent'}, '<leader>lc', ':Commits<cr>')
 vimp.nnoremap({'silent'}, '<leader>lm', ':Marks<cr>')
@@ -167,4 +171,5 @@ vim.api.nvim_exec([[
 ]], false)
 
 -- Zen
-vimp.nnoremap({'silent'}, '<leader><leader>', [[<cmd>TZAtaraxis<cr>]])
+-- vimp.nnoremap({'silent'}, '<leader><leader>', [[<cmd>TZAtaraxis<cr>]])
+vimp.nnoremap({'silent'}, '<leader><leader>', [[<cmd>ZenMode<cr>]])

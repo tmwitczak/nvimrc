@@ -37,7 +37,7 @@ o.linebreak = true -- ?
 o.clipboard = 'unnamed'
 
 
-o.guifont = 'Iosevka:h18'
+o.guifont = 'Iosevka:h14'
 
 o.background = 'dark'
 
@@ -195,6 +195,7 @@ g.startify_session_persistence = 1
 g.startify_change_to_dir       = 1
 g.startify_change_to_vcs_root  = 1
 
+-- require("which-key").setup{}
 require('mappings')
 
 -- cmd('highlight StatusLine guibg=#0f1112')
@@ -261,38 +262,84 @@ g.nvim_tree_icons = {
   }
 }
 
+      local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+      vim.g.nvim_tree_bindings = {
+        { key = {"<CR>", "o", "<2-LeftMouse>"}, cb = tree_cb("edit") },
+        { key = {"<2-RightMouse>", "<C-]>"},    cb = tree_cb("cd") },
+        { key = "<C-v>",                        cb = tree_cb("vsplit") },
+        { key = "<C-x>",                        cb = tree_cb("split") },
+        { key = "<C-t>",                        cb = tree_cb("tabnew") },
+        { key = "<",                            cb = tree_cb("prev_sibling") },
+        { key = ">",                            cb = tree_cb("next_sibling") },
+        { key = "P",                            cb = tree_cb("parent_node") },
+        { key = "<BS>",                         cb = tree_cb("close_node") },
+        { key = "<S-CR>",                       cb = tree_cb("close_node") },
+        { key = "<Tab>",                        cb = tree_cb("preview") },
+        { key = "K",                            cb = tree_cb("first_sibling") },
+        { key = "J",                            cb = tree_cb("last_sibling") },
+        { key = "I",                            cb = tree_cb("toggle_ignored") },
+        { key = "H",                            cb = tree_cb("toggle_dotfiles") },
+        { key = "R",                            cb = tree_cb("refresh") },
+        { key = "a",                            cb = tree_cb("create") },
+        { key = "d",                            cb = tree_cb("remove") },
+        { key = "r",                            cb = tree_cb("rename") },
+        { key = "<C-r>",                        cb = tree_cb("full_rename") },
+        { key = "x",                            cb = tree_cb("cut") },
+        { key = "c",                            cb = tree_cb("copy") },
+        { key = "p",                            cb = tree_cb("paste") },
+        { key = "y",                            cb = tree_cb("copy_name") },
+        { key = "Y",                            cb = tree_cb("copy_path") },
+        { key = "gy",                           cb = tree_cb("copy_absolute_path") },
+        { key = "[c",                           cb = tree_cb("prev_git_item") },
+        { key = "]c",                           cb = tree_cb("next_git_item") },
+        { key = "-",                            cb = tree_cb("dir_up") },
+        { key = "q",                            cb = tree_cb("close") },
+        { key = "g?",                           cb = tree_cb("toggle_help") },
+      }
+
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 vim.g.nvim_tree_bindings = {
     -- ["<CR>"] = ":YourVimFunction()<cr>",
     -- ["u"] = ":lua require'some_module'.some_function()<cr>",
   -- default mappings
-  ["<CR>"]           = tree_cb("edit"),
-  ["o"]              = tree_cb("edit"),
-  ["<2-LeftMouse>"]  = tree_cb("edit"),
-  ["<2-RightMouse>"] = tree_cb("cd"),
-  ["<C-]>"]          = tree_cb("cd"),
-  ["<C-v>"]          = tree_cb("vsplit"),
-  ["<C-x>"]          = tree_cb("split"),
-  ["<C-t>"]          = tree_cb("tabnew"),
-  ["<"]              = tree_cb("prev_sibling"),
-  [">"]              = tree_cb("next_sibling"),
-  ["<BS>"]           = tree_cb("close_node"),
-  ["<S-CR>"]         = tree_cb("close_node"),
-  ["<Tab>"]          = "",
-  ["I"]              = tree_cb("toggle_ignored"),
-  ["H"]              = tree_cb("toggle_dotfiles"),
-  ["R"]              = tree_cb("refresh"),
-  ["a"]              = tree_cb("create"),
-  ["d"]              = "",
-  ["r"]              = "",
-  ["<C-r>"]          = "",
-  ["x"]              = "",
-  ["c"]              = "",
-  ["p"]              = "",
-  ["[c"]             = tree_cb("prev_git_item"),
-  ["]c"]             = tree_cb("next_git_item"),
-  ["-"]              = tree_cb("dir_up"),
-  ["q"]              = tree_cb("close"),
+        { key = {"<CR>", "o", "<2-LeftMouse>"}, cb = tree_cb("edit") },
+        { key = {"<2-RightMouse>", "<C-]>"},    cb = tree_cb("cd") },
+        { key = "<C-v>",                        cb = tree_cb("vsplit") },
+        { key = "<C-x>",                        cb = tree_cb("split") },
+        { key = "<C-t>",                        cb = tree_cb("tabnew") },
+        { key = "<",                            cb = tree_cb("prev_sibling") },
+        { key = ">",                            cb = tree_cb("next_sibling") },
+        { key = "P",                            cb = tree_cb("parent_node") },
+        { key = "<BS>",                         cb = tree_cb("close_node") },
+        { key = "<S-CR>",                       cb = tree_cb("close_node") },
+        { key = "<Tab>",                        cb = "" }, --tree_cb("preview") },
+        { key = "K",                            cb = tree_cb("first_sibling") },
+        { key = "J",                            cb = tree_cb("last_sibling") },
+        { key = "I",                            cb = tree_cb("toggle_ignored") },
+        { key = "H",                            cb = tree_cb("toggle_dotfiles") },
+        { key = "R",                            cb = tree_cb("refresh") },
+        { key = "a",                            cb = tree_cb("create") },
+        { key = "d",                            cb = "" }, --tree_cb("remove") },
+        { key = "r",                            cb = tree_cb("rename") },
+        { key = "<C-r>",                        cb = tree_cb("full_rename") },
+        { key = "x",                            cb = "" }, --tree_cb("cut") },
+        { key = "c",                            cb = tree_cb("copy") },
+        { key = "p",                            cb = tree_cb("paste") },
+        { key = "y",                            cb = tree_cb("copy_name") },
+        { key = "Y",                            cb = tree_cb("copy_path") },
+        { key = "gy",                           cb = tree_cb("copy_absolute_path") },
+        { key = "[c",                           cb = tree_cb("prev_git_item") },
+        { key = "]c",                           cb = tree_cb("next_git_item") },
+        { key = "-",                            cb = tree_cb("dir_up") },
+        { key = "q",                            cb = tree_cb("close") },
+        { key = "g?",                           cb = tree_cb("toggle_help") },
+  --["<Tab>"]          = "",
+  --["d"]              = "",
+  --["r"]              = "",
+  --["<C-r>"]          = "",
+  --["x"]              = "",
+  --["c"]              = "",
+  --["p"]              = "",
 }
 
 vim.cmd('let g:asterisk#keeppos = 1')
@@ -350,7 +397,9 @@ require('telescope').setup{
 				-- end,
 			},
 		},
-		prompt_position = "top",
+		layout_config = {
+			prompt_position = "top",
+		},
 		-- prompt_prefix = '> ',
 		sorting_strategy = "ascending",
 		layout_strategy = "flex",
@@ -361,18 +410,23 @@ require('telescope').setup{
 		-- grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
 		-- qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
 	},
+	-- extensions = {
+	-- 	fzf = {
+	-- 		override_generic_sorter = true,  -- override the generic sorter
+	-- 		override_file_sorter = true,     -- override the file sorter
+	-- 		case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+	-- 		-- the default case_mode is "smart_case"
+	-- 	}
+	-- }
 }
 require('telescope').load_extension('fzy_native')
+-- require('telescope').load_extension('fzf')
 
 -- setup for TrueZen.nvim
 local true_zen = require("true-zen")
 true_zen.setup({
 	true_false_commands = false,
 	cursor_by_mode = false,
-	before_minimalist_mode_shown = true,
-	before_minimalist_mode_hidden = true,
-	after_minimalist_mode_shown = true,
-	after_minimalist_mode_hidden = true,
 	bottom = {
 		hidden_laststatus = 0,
 		hidden_ruler = false,
@@ -401,11 +455,27 @@ true_zen.setup({
 		shown_signcolumn = "yes"
 	},
 	ataraxis = {
+		ideal_writing_area_width = 0,
 		just_do_it_for_me = true,
 		left_padding = 40,
 		right_padding = 40,
-		top_padding = 1,
-		bottom_padding = 1
+		top_padding = 0,
+		bottom_padding = 0,
+		custome_bg = "",
+		disable_bg_configuration = false,
+		disable_fillchars_configuration = false,
+		force_when_plus_one_window = true,
+		force_hide_statusline = true
+	},
+	focus = {
+		margin_of_error = 5,
+		focus_method = "experimental"
+	},
+	events = {
+		before_minimalist_mode_shown = false,
+		before_minimalist_mode_hidden = false,
+		after_minimalist_mode_shown = false,
+		after_minimalist_mode_hidden = false
 	},
 	integrations = {
 		integration_galaxyline = true,
@@ -415,7 +485,9 @@ true_zen.setup({
 		integration_express_line = false,
 		integration_gitgutter = true,
 		integration_vim_signify = false,
-		integration_limelight = true
+		integration_limelight = false,
+		integration_tzfocus_tzataraxis = true,
+		integration_gitsigns = false
 	}
 })
 
@@ -431,3 +503,6 @@ end
 
 true_zen.before_minimalist_mode_shown = function ()
 end
+
+require("todo-comments").setup{}
+require("zen-mode").setup{}

@@ -36,7 +36,7 @@ call plug#begin(stdpath('data') . '/plugged')
 		Plug 'akinsho/nvim-bufferline.lua'
 		" endif
 
-		Plug 'hkupty/iron.nvim'
+		" Plug 'hkupty/iron.nvim'
 
     " Movement "
     " Plug 'easymotion/vim-easymotion'
@@ -64,6 +64,8 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'romainl/vim-cool'
 		Plug 'voldikss/vim-floaterm'
 
+		Plug 'kdav5758/HighStr.nvim'
+
 		Plug 'tpope/vim-scriptease'
 		Plug 'kevinhwang91/nvim-bqf'
 
@@ -81,7 +83,9 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-lua/telescope.nvim'
+		" Plug 'camspiers/snap'
     Plug 'nvim-telescope/telescope-fzy-native.nvim'
+		" Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 		Plug 'nvim-telescope/telescope-vimspector.nvim'
 
     Plug 'svermeulen/vimpeccable'
@@ -91,18 +95,26 @@ call plug#begin(stdpath('data') . '/plugged')
 
     " LSP "
     Plug 'neovim/nvim-lspconfig'
-    " Plug 'kabouzeid/nvim-lspinstall'
+    Plug 'kabouzeid/nvim-lspinstall'
     Plug 'nvim-lua/completion-nvim'
     Plug 'hrsh7th/nvim-compe'
     Plug 'kosayoda/nvim-lightbulb'
     Plug 'onsails/lspkind-nvim'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+		" Plug 'ray-x/lsp_signature.nvim'
+		Plug 'folke/trouble.nvim'
+		Plug 'folke/todo-comments.nvim'
+		Plug 'folke/zen-mode.nvim'
+
+		" Plug 'folke/which-key.nvim'
 
     " ............................................................ Markdown .. "
     Plug 'iamcco/markdown-preview.nvim', {
                 \ 'do': { -> mkdp#util#install() },
                 \ 'for': ['markdown', 'vim-plug']}
     " Plug 'jkramer/vim-checkbox'
+
+		Plug 'ggandor/lightspeed.nvim'
 
     " Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
@@ -124,6 +136,9 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-git'
 		Plug 'rbong/vim-flog'
+		Plug 'sindrets/diffview.nvim'
+
+		Plug 'simeji/winresizer'
 
     " Utilities "
     Plug 'TaDaa/vimade'
@@ -190,8 +205,8 @@ nnoremap <silent> ]e :cn<cr>
 
 " nnoremap <silent> <leader>bh :bp<cr>
 " nnoremap <silent> <leader>bl :bn<cr>
-nnoremap <silent> <leader>bd :BD<cr>
-nnoremap <silent> <leader>bf :Format<cr>
+" nnoremap <silent> <leader>bd :BD<cr>
+" nnoremap <silent> <leader>bf :Format<cr>
 
 nnoremap <silent> <leader>tn :tabnew<cr>
 nnoremap <silent> <leader>tc :tabclose<cr>
@@ -354,27 +369,27 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gd <Plug>(coc-definition)
 " nmap <silent> gy <Plug>(coc-type-definition)
 " nmap <silent> gi <Plug>(coc-implementation)
 " nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+" nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
 " xmap <leader>f  <Plug>(coc-format-selected)
@@ -383,9 +398,9 @@ nmap <leader>rn <Plug>(coc-rename)
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  " autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Applying codeAction to the selected region.
@@ -396,7 +411,7 @@ augroup end
 " Remap keys for applying codeAction to the current line.
 " nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+" nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Introduce function text object
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -408,22 +423,22 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 " Use <TAB> for selections ranges.
 " NOTE: Requires 'textDocument/selectionRange' support from the language server.
 " coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
+" nmap <silent> <TAB> <Plug>(coc-range-select)
+" xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
+" command! -nargs=0 Format :call CocAction('format')
 
 " Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+" command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings using CoCList:
 " Show all diagnostics.
@@ -431,7 +446,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Manage extensions.
 " nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 " nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " nnoremap <silent> <space>ls  :<C-u>Vista finder coc<cr>
@@ -451,7 +466,7 @@ nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 
 let g:netrw_liststyle=3
 """""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <leader>bf :Format<cr>
+" nnoremap <silent> <leader>bf :Format<cr>
 
 let g:startify_custom_header = 'startify#pad(startify#fortune#boxed())'
 
@@ -1145,7 +1160,7 @@ function! FugitiveDiff()
 	vsplit
   normal dv
 	wincmd w
-	wincmd R
+	" wincmd R
   vertical resize 40
   setlocal winfixwidth
   wincmd w
@@ -1213,19 +1228,19 @@ let g:floaterm_width=0.8
 let g:floaterm_height=0.8
 let g:floaterm_autoinsert=0
 
-" Manage coc
-let s:coc_blacklist = ['cpp', 'c', 'python']
-function! s:disable_coc_for_type()
-	if index(s:coc_blacklist, &filetype) != -1
-		silent! CocDisable
-	else
-		silent! CocEnable
-	endif
-endfunction
-augroup COC_DISABLE
-	autocmd!
-	autocmd BufNew,BufEnter * call s:disable_coc_for_type()
-augroup END
+" " Manage coc
+" let s:coc_blacklist = ['cpp', 'c', 'python', 'py']
+" function! s:disable_coc_for_type()
+" 	if index(s:coc_blacklist, &filetype) != -1
+" 		silent! CocDisable
+" 	else
+" 		silent! CocEnable
+" 	endif
+" endfunction
+" augroup COC_DISABLE
+" 	autocmd!
+" 	autocmd BufNew,BufEnter * call s:disable_coc_for_type()
+" augroup END
 
 " highlight! link DiffText DiffChange
 " highlight DiffText ctermfg=NONE guifg=NONE gui=italic guisp=Orange cterm=underline guibg=Black
@@ -1243,3 +1258,37 @@ call ExtendHighlight('MoreMsg', 'HopNextKey', '')
 call ExtendHighlight('Constant', 'HopNextKey1', 'gui=italic')
 call ExtendHighlight('MoreMsg', 'HopNextKey2', 'gui=standout')
 call ExtendHighlight('NonText', 'HopUnmatched', '')
+
+augroup ActiveWindowCursorline
+	autocmd!
+	autocmd WinEnter * set cursorline
+	autocmd WinLeave * set nocursorline
+augroup END
+
+
+let g:winresizer_start_key    = '<leader>we'
+let g:winresizer_vert_resize  = 1
+let g:winresizer_horiz_resize = 1
+
+set signcolumn=auto
+
+xmap <space>rr *:%s//
+
+" nmap s <Plug>Lightspeed_s
+" nmap S <Plug>Lightspeed_S
+" nmap f <Plug>Lightspeed_f
+" nmap F <Plug>Lightspeed_F
+" nmap t <Plug>Lightspeed_t
+" nmap T <Plug>Lightspeed_T
+
+" lua <<EOF
+" local snap = require'snap'
+" snap.register.map({'n'}, {'<leader>lf'}, function ()
+" 	snap.run {
+" 		producer = snap.get'consumer.fzf'(snap.get'producer.vim.buffer'),
+" 		select = snap.get'select.file'.select,
+" 		multiselect = snap.get'select.file'.multiselect,
+" 		views = {snap.get'preview.file'}
+" 	}
+" end)
+" EOF

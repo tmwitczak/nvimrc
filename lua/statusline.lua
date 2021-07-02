@@ -37,7 +37,7 @@ local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
 local gls = gl.section
 local extension = require('galaxyline.provider_extensions')
-gl.short_line_list = {'fugitive', 'startify', 'vim-plug', 'nerdtree','NvimTree','vista','dbui','packer', 'vista_kind'}
+gl.short_line_list = {'fugitive', 'startify', 'vim-plug', 'nerdtree','NvimTree','vista','dbui','packer', 'vista_kind', 'LspTrouble'}
 
 -- local diagnostic = require('galaxyline.provider_diagnostic')
 local vcs = require('galaxyline.provider_vcs')
@@ -314,7 +314,8 @@ gls.right[8] = {
 gls.left[5] = {
   Type = {
 		provider = function()
-			return '  '..string.lower(buffer.get_buffer_filetype())
+			local filetype = vim.bo.filetype
+			return '  '..filetype
 		end,
 		condition = function()
 			local filetype = vim.bo.filetype
@@ -332,6 +333,35 @@ gls.left[6] = {
 		highlight = {statusline_fg, statusline_bg},
   },
 }
+
+gls.mid[1] = {
+	Spell = {
+		provider = function()
+			if vim.api.nvim_exec([[echo &spell]], true) == '1' then
+				return 'λ'
+			end
+		end,
+		highlight = {statusline_fg, statusline_bg},
+	},
+}
+
+-- gls.mid[2] = {
+-- 	WordCount = {
+-- 		provider = function()
+-- 			return vim.fn.wordcount().words
+-- 		end,
+-- 		highlight = {statusline_fg, statusline_bg},
+-- 	},
+-- }
+-- require('galaxyline').section.mid[2] = {
+-- 	WordCount = {
+-- 		provider = function()
+-- 			return tostring(vim.fn.wordcount().visual_words)..' '..tostring(vim.fn.wordcount().words)
+-- 		end
+-- 	}
+-- }
+
+
 
 -- gls.short_line_left[1] = {
 --   BufferType = {

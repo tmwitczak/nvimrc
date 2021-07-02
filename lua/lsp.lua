@@ -1,18 +1,18 @@
 local vim = vim
+
+-- require'lspinstall'.setup()
+
 -- local function setup_servers()
---   require'lspinstall'.setup()
---   local servers = require'lspinstall'.installed_servers()
---   for _, server in pairs(servers) do
---     require'lspconfig'[server].setup{}
---   end
+-- 	local servers = require'lspinstall'.installed_servers()
+-- 	for _, server in pairs(servers) do
+-- 		require'lspconfig'[server].setup{}
+-- 	end
 -- end
---
--- setup_servers()
---
+
 -- -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
 -- require'lspinstall'.post_install_hook = function ()
---   setup_servers() -- reload installed servers
---   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+--  setup_servers() -- reload installed servers
+--  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 -- end
 --
 -- lua require'lspconfig'.clangd.setup{on_attach=require'completion'.on_attach}
@@ -47,6 +47,8 @@ local on_attach = function(client, bufnr)
       nvim_treesitter = false;
     };
   }, 0)
+
+	-- require'lsp_signature'.on_attach()
   
 
   -- Mappings.
@@ -96,6 +98,7 @@ local servers = { "clangd", "pyright" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
+-- setup_servers()
 
 vim.api.nvim_exec([[
     augroup lsp
@@ -136,3 +139,5 @@ vim.loop.spawn = (function ()
     return spawn(full_path, options, on_exit)
   end
 end)()
+
+require("trouble").setup {}
