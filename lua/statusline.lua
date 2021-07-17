@@ -88,7 +88,7 @@ gls.left[3] ={
   FileIcon = {
     provider = 'FileIcon',
     condition = condition.buffer_not_empty,
-    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color, buffer_bg},
+    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color, buffer_bg, 'bold'},
   },
 }
 
@@ -269,7 +269,7 @@ gls.right[3] = {
     provider = 'DiffAdd',
     -- condition = condition.hide_in_width,
     icon = '  ',
-    highlight = {theme.diff_add, statusline_bg},
+    highlight = {theme.diff_add, statusline_bg, 'bold'},
   }
 }
 gls.right[4] = {
@@ -277,7 +277,7 @@ gls.right[4] = {
     provider = 'DiffModified',
     -- condition = condition.hide_in_width,
     icon = ' 柳',
-    highlight = {theme.diff_modify, statusline_bg},
+    highlight = {theme.diff_modify, statusline_bg, 'bold'},
   }
 }
 gls.right[5] = {
@@ -285,7 +285,7 @@ gls.right[5] = {
     provider = 'DiffRemove',
     -- condition = condition.hide_in_width,
     icon = '  ',
-    highlight = {theme.diff_delete, statusline_bg},
+    highlight = {theme.diff_delete, statusline_bg, 'bold'},
   }
 }
 

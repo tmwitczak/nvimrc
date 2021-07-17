@@ -154,7 +154,7 @@ call plug#begin(stdpath('data') . '/plugged')
     " Plug 'kien/rainbow_parentheses.vim'
     " Plug 'lambdalisue/vim-fullscreen' " GUI fullscreen
     Plug 'liuchengxu/vista.vim'
-    Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
+    Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'master'}
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     Plug 'psliwka/vim-smoothie'       " Smooth scrolling
     " Plug 'scrooloose/nerdtree'        " Filesystem tree
@@ -169,6 +169,7 @@ call plug#begin(stdpath('data') . '/plugged')
     " Plug 'jiangmiao/auto-pairs'
     "
 
+		Plug 'kristijanhusak/orgmode.nvim'
 
 call plug#end()
 
